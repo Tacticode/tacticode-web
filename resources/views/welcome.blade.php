@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Tacticode</title>
 
         <!-- Jquery -->
         <script src="/js/jquery-2.1.4.min.js"></script>
