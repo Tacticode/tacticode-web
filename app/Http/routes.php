@@ -27,12 +27,12 @@ Route::get('/logout', function() {
 
 Route::get('/register', function() {
 
-	return view('welcome/register', ['formError' => ['login' => 'lol'], 'fields' => ['login' => 'toto']]);
+	return view('welcome/register');
 });
 
 Route::post('/register', function() {
 
-	return view('welcome/register', ['error' => 'Cannot register, method is not implemented']);
+	return view('welcome/register', ['error' => 'Cannot register, method is not implemented', 'formError' => ['login' => 'lol'], 'fields' => ['login' => 'toto']]);
 });
 
 Route::get('/dashboard', function () {

@@ -30,7 +30,7 @@
 
                 <div class="form-group has-feedback @if (isset($formError['email'])) has-error @elseif (isset($fields['email'])) has-success @endif" id="email-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" data-placement="right" @if (isset($fields['login'])) value="{{$fields['login']}}" @endif>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" data-placement="right" @if (isset($fields['email'])) value="{{$fields['email']}}" @endif>
                     <span class="help-block" id="email-error">
                         @if (isset($formError['email']))
                             {{$formError['email']}}
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group has-feedback @if (isset($formError['password'])) has-error @endif" id="password-group">
-                    <label for="email">Password</label>
+                    <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" data-placement="right">
                     <span class="help-block" id="password-error">
                         @if (isset($formError['password']))
