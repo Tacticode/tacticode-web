@@ -1,7 +1,6 @@
 @extends('layouts.home')
 
 @section('jumbotron')
-    <div class="container">
         <h1>Tacticode</h1>
         <p>Developers, discover a game who is so fun, you're gonna love it.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
@@ -26,8 +25,4 @@
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; Tacticode 2015</p>
-    </footer>
 @endsection

@@ -12,7 +12,27 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome/welcome');
+});
+
+Route::post('/login', function() {
+
+	return view('welcome/welcome', ['error' => 'Cannot login, method is not implemented']);
+});
+
+Route::get('/logout', function() {
+
+	return redirect('/');
+});
+
+Route::get('/register', function() {
+
+	return view('welcome/register', ['formError' => ['login' => 'lol'], 'fields' => ['login' => 'toto']]);
+});
+
+Route::post('/register', function() {
+
+	return view('welcome/register', ['error' => 'Cannot register, method is not implemented']);
 });
 
 Route::get('/dashboard', function () {

@@ -32,6 +32,7 @@
                             <li><a href="#">Help</a></li>
                             <li><a href="#">Chat</a></li>
                             <li><a href="#">Forum</a></li>
+                            <li><a href="/logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
