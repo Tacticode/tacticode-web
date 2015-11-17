@@ -51,7 +51,7 @@ class UsersController extends Controller
         $data['group_id'] = $g->id;
         User::create($data);
 
-        return redirect('dashboard');
+        return redirect('/');
     }
 
     /**
