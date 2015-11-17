@@ -11,30 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome/welcome');
-});
+Route::get('/', 'AppController@index');
 
-Route::post('/login', function() {
+Route::post('/login', 'UsersController@login');
 
-	return view('welcome/welcome', ['error' => 'Cannot login, method is not implemented']);
-});
+Route::get('/logout', 'UsersController@logout');
 
-Route::get('/logout', function() {
+Route::get('/register', 'UsersController@create');
+Route::post('/register', 'UsersController@store');
+Route::get('/dashboard', 'UsersController@index');
 
-	return redirect('/');
-});
-
-Route::get('/register', function() {
-
-	return view('welcome/register');
-});
-
-Route::post('/register', function() {
-
-	return view('welcome/register', ['error' => 'Cannot register, method is not implemented', 'formError' => ['login' => 'lol'], 'fields' => ['login' => 'toto']]);
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('checkloginexists/{login}', 'UsersController@loginexists');
+Route::get('checkemailexists/{email}', 'UsersController@emailexists');
