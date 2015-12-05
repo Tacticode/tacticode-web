@@ -117,7 +117,7 @@ class UsersController extends Controller
     {
         $user = User::where('login', 'like', $login)->first();
         $res = var_export($user != null, true);
-        return "{status: 'ok', exists: ".$res."}";
+        return response()->json(['status' => 'ok', 'exists' => $res]);
     }
 
     /**
@@ -128,9 +128,9 @@ class UsersController extends Controller
      */
     public function emailexists($email)
     {
-        $user = User::where('login', 'like', $email)->first();
+        $user = User::where('email', 'like', $email)->first();
         $res = var_export($user != null, true);
-        return "{status: 'ok', exists: ".$res."}";
+        return response()->json(['status' => 'ok', 'exists' => $res]);
     }
 
     /**
