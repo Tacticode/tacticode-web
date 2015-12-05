@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Group;
+use App\Http\Models\User;
+use App\Http\Models\Group;
 use App\Http\Requests\CreateUserRequest;
 use Auth;
 

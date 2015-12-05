@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
-use App\Group;
+use App\Http\Models\Group;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
