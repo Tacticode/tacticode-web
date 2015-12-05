@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\User;
 use App\Http\Models\Group;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -43,7 +45,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(UserRequest $request)
     {
         $data = $request->all();
         $g = Group::where('name', 'like', 'USER')->firstOrFail();
@@ -71,25 +73,42 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $user = User::findOrFail($id);
-        //return view(..., compact('user'));
+        //return view(...);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the login and username in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request)
     {
-        $user = User::findOrFail($id);
-        //
+        $user = Auth::user();
+        $data = $request->all();
+
+        $user->login = $data->login;
+        $user->email = $data->email;
         $user->save();
-        //return redirect(...);
+        return redirect('/edit');
+    }
+
+    /**
+     * Update the password in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $data = $request->all();
+        
+        $user->password = \Hash::make($data->newpassword);
+        $user->save();
+        return redirect('/edit');
     }
 
     /**
