@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Models\User;
 use App\Http\Models\Group;
 use App\Http\Requests\CreateUserRequest;
-use Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -131,35 +130,5 @@ class UsersController extends Controller
         $user = User::where('email', 'like', $email)->first();
         $res = var_export($user != null, true);
         return response()->json(['status' => 'ok', 'exists' => $res]);
-    }
-
-    /**
-     * Check the authentication of the user
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function login(Request $request)
-    {
-        $data = $request->all();
-        $data['remember_me'] = false;
-        if (Auth::attempt(['login' => $data['login'], 'password' => $data['password']], $data['remember_me']))
-        {
-            return redirect()->intended('dashboard');
-        }
-        return \Redirect::to('/')
-            ->with('error', "Login or password invalid.")
-            ->with('fields', $data);
-    }
-
-    /**
-     * Allow the user to logout
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/');
     }
 }

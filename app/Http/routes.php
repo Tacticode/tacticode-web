@@ -13,9 +13,9 @@
 
 Route::get('/', 'AppController@index');
 
-Route::post('/login', 'UsersController@login');
+Route::post('/login', 'AuthController@login');
 
-Route::get('/logout', 'UsersController@logout');
+Route::get('/logout', 'AuthController@logout');
 
 Route::get('/register', 'UsersController@create');
 Route::post('/register', 'UsersController@store');
