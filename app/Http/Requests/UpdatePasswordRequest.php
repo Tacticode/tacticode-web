@@ -25,7 +25,7 @@ class UpdatePasswordRequest extends Request
     {
         return [
             'password' => 'required|auth_password',
-            'newpassword' => 'required|min:3|max:50|confirmed'
+            'new_password' => 'required|min:3|max:50|confirmed'
         ];
     }
 }

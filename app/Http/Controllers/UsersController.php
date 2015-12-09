@@ -106,7 +106,7 @@ class UsersController extends Controller
         $user = Auth::user();
         $data = $request->all();
         
-        $user->password = \Hash::make($data->newpassword);
+        $user->password = \Hash::make($data->new_password);
         $user->save();
         return redirect('/edit');
     }
