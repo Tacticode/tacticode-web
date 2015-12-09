@@ -13,13 +13,17 @@
 
 Route::get('/', 'AppController@index');
 
-Route::post('/login', 'UsersController@login');
+Route::post('/login', 'AuthController@login');
 
-Route::get('/logout', 'UsersController@logout');
+Route::get('/logout', 'AuthController@logout');
 
 Route::get('/register', 'UsersController@create');
 Route::post('/register', 'UsersController@store');
 Route::get('/dashboard', 'UsersController@index');
+
+Route::get('/edit', 'UsersController@edit');
+Route::post('/edit', 'UsersController@update');
+Route::post('/changepassword', 'UsersController@updatePassword');
 
 Route::get('checkloginexists/{login}', 'UsersController@loginexists');
 Route::get('checkemailexists/{email}', 'UsersController@emailexists');
