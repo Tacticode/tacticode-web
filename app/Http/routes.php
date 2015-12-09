@@ -34,3 +34,15 @@ Route::get('/user', function() {
 Route::post('/user/', function() {
 	return view('user.index');
 });
+
+Route::get('/characters', function() {
+	return view('characters.index');
+});
+
+Route::get('/characters/{id}', function() {
+	return view('characters.view');
+});
+
+Route::post('/characters/{id}', function() {
+	return view('characters.view');
+});

@@ -12,10 +12,10 @@
     <div class="row">
         <div class="col-md-4">
     
-            {!! Form::open(['url' => '/user']) !!}
+            {!! Form::open() !!}
 
                 <div class="form-group has-feedback @if ($errors->has('login')) has-error @endif" id="login-group">
-                    {!! Form::label('login', 'Login :') !!}
+                    {!! Form::label('login', 'Login') !!}
                     {!! Form::text('login', Auth::user()->login, ['class' => 'form-control']) !!}
                     <span class="help-block" id="login-error">
                         @if ($errors->has('login'))
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group has-feedback @if ($errors->has('email')) has-error @endif">
-                    {!! Form::label('email', 'Email :') !!}
+                    {!! Form::label('email', 'Email') !!}
                     {!! Form::email('email', Auth::user()->email, ['class' => 'form-control']) !!}
                     <span class="help-block" id="email-error">
                         @if ($errors->has('email'))
@@ -50,21 +50,21 @@
     <div class="row">
         <div class="col-md-4">
 
-            {!! Form::open(['url' => '/user']) !!}
+            {!! Form::open() !!}
 
                 <div class="form-group">
-                    {!! Form::label('password', 'Password :') !!}
+                    {!! Form::label('password', 'Password') !!}
                     {!! Form::text('password', null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('new-password', 'New password :') !!}
+                    {!! Form::label('new-password', 'New password') !!}
                     {!! Form::text('new-password', null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('confirm-new-password', 'Confirm new password :') !!}
-                    {!! Form::text('confirm-new-password', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('new_password_confirm', 'Confirm new password') !!}
+                    {!! Form::text('new_password_confirm', null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
