@@ -1,3 +1,4 @@
+{{--*/ $nav = 'dashboard' /*--}}
 @extends('layouts.dashboard')
 
 @section('content')

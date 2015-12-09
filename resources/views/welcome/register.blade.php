@@ -1,6 +1,7 @@
 @extends('layouts.home')
 
 @section('page-scripts')
+    <script src="/js/form-validator.js"></script>
     <script src="/js/register.js"></script>
 @endsection
 
@@ -14,8 +15,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
-            <form method="post" action="/register">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            {!! Form::open(['url' => '/register']) !!}
                 
                 <div class="form-group has-feedback @if ($errors->has('login')) has-error @elseif (isset($fields['login'])) has-success @endif" id="login-group">
                     <label for="login">Login</label>
@@ -51,7 +51,8 @@
                 </div>
                 <p class="help-block">By clicking on the register button, you accept the <a href="/terms" target="_blank">terms of use</a>.</p>
                 <button type="submit" class="btn btn-primary">Register</button>
-            </form>
+            
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection

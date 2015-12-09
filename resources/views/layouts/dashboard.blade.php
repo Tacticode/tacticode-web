@@ -1,3 +1,7 @@
+@if (!isset($nav))
+    {{--*/ $nav = null /*--}}
+@endif
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,9 +10,16 @@
         <!-- Jquery -->
         <script src="/js/jquery-2.1.4.min.js"></script>
 
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+
         <!-- Bootstrap -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <script src="/js/bootstrap.min.js"></script>
+
+        <!-- Page scripts -->
+        @section('page-scripts')
+        @show
 
         <link rel="stylesheet" href="/css/dashboard.css">
     </head>
@@ -29,10 +40,11 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Chat</a></li>
-                            <li><a href="#">Forum</a></li>
-                            <li><a href="/logout">Logout</a></li>
+                            <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>
+                            <li class="@if ($nav == 'help') active @endif"><a href="#">Help</a></li>
+                            <li class="@if ($nav == 'chat') active @endif"><a href="#">Chat</a></li>
+                            <li class="@if ($nav == 'forum') active @endif"><a href="#">Forum</a></li>
+                            <li class="@if ($nav == 'logout') active @endif"><a href="/logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,11 +56,11 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     @section('sidebar')
                         <ul class="nav nav-sidebar">
-                            <li class="active"><a href="#">Dashboard <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Script Editor</a></li>
-                            <li><a href="#">Characters</a></li>
-                            <li><a href="#">Arena</a></li>
-                            <li><a href="#">Leaderboard</a></li>
+                            <li class="@if ($nav == 'dashboard') active @endif"><a href="/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
+                            <li class="@if ($nav == 'script') active @endif"><a href="#">Script Editor</a></li>
+                            <li class="@if ($nav == 'characters') active @endif"><a href="#">Characters</a></li>
+                            <li class="@if ($nav == 'arena') active @endif"><a href="#">Arena</a></li>
+                            <li class="@if ($nav == 'leaderboard') active @endif"><a href="#">Leaderboard</a></li>
                         </ul>
                     @show
                 </div>

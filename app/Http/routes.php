@@ -25,5 +25,12 @@ Route::get('/edit', 'UsersController@edit');
 Route::post('/edit', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
 
-Route::get('checkloginexists/{login}', 'UsersController@loginexists');
-Route::get('checkemailexists/{email}', 'UsersController@emailexists');
+Route::get('/checkloginexists/{login}', 'UsersController@loginexists');
+Route::get('/checkemailexists/{email}', 'UsersController@emailexists');
+
+Route::get('/user', function() {
+	return view('user.index');
+});
+Route::post('/user/', function() {
+	return view('user.index');
+});
