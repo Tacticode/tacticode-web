@@ -21,8 +21,6 @@ Route::get('/register', 'UsersController@create');
 Route::post('/register', 'UsersController@store');
 Route::get('/dashboard', 'UsersController@index');
 
-Route::post('/changepassword', 'UsersController@updatePassword');
-
 Route::get('/checkloginexists/{login}', 'UsersController@loginexists');
 Route::get('/checkemailexists/{email}', 'UsersController@emailexists');
 

@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
                 $unique = \DB::table('users')->where($attribute, $value)->first() == null;
                 if (!Auth::check())
                 {
-                    return $exist;
+                    return $unique;
                 }
                 $user = Auth::user();
                 return ($user[$attribute] == $value) || $unique;

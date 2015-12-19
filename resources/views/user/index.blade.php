@@ -50,21 +50,39 @@
     <div class="row">
         <div class="col-md-4">
 
-            {!! Form::open() !!}
+            {!! Form::open(['url' => '/changepassword']) !!}
 
                 <div class="form-group">
                     {!! Form::label('password', 'Password') !!}
                     {!! Form::text('password', null, ['class' => 'form-control']) !!}
+                    <span class="help-block" id="password-error">
+                        @if ($errors->has('password'))
+                            {{$errors->first('password')}}
+                        @endif
+                    </span>
+                    <span id="password-icon" class="fa form-control-feedback" aria-hidden="true"></span>
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('new-password', 'New password') !!}
                     {!! Form::text('new-password', null, ['class' => 'form-control']) !!}
+                    <span class="help-block" id="new-password-error">
+                        @if ($errors->has('new-password'))
+                            {{$errors->first('new-password')}}
+                        @endif
+                    </span>
+                    <span id="new-password-icon" class="fa form-control-feedback" aria-hidden="true"></span>
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('new_password_confirm', 'Confirm new password') !!}
-                    {!! Form::text('new_password_confirm', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('new-password_confirmation', 'Confirm new password') !!}
+                    {!! Form::text('new-password_confirmation', null, ['class' => 'form-control']) !!}
+                    <span class="help-block" id="new-password_confirmation-error">
+                        @if ($errors->has('new-password_confirmation'))
+                            {{$errors->first('new-password_confirmation')}}
+                        @endif
+                    </span>
+                    <span id="new-password_confirmation-icon" class="fa form-control-feedback" aria-hidden="true"></span>
                 </div>
 
                 <div class="form-group">
