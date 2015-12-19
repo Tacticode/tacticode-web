@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use App\Http\Models\Group;
+use App\Http\Models\Character;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -53,5 +54,16 @@ class User extends Model implements AuthenticatableContract,
     public function group()
     {
         return $this->belongsTo('Group');
+    }
+
+    /**
+    * A user has many character.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function character()
+    {
+        return $this->hasMany('Character');
     }
 }
