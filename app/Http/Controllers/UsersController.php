@@ -61,10 +61,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $users = User::all();
-        //return view(..., compact('users');
+        
     }
 
     /**
@@ -75,7 +74,7 @@ class UsersController extends Controller
      */
     public function edit()
     {
-        //return view(...);
+        return view('user.index');
     }
 
     /**
@@ -86,11 +85,16 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request)
     {
+        die();
+        echo 'lol';
+        return;
         $user = Auth::user();
         $data = $request->all();
 
-        $user->login = $data->login;
-        $user->email = $data->email;
+        if ($data->login != Auth::user()->login)
+            $user->login = $data->login;
+        if ($data->email != Auth::user()->email)
+            $user->email = $data->email;
         $user->save();
         return redirect('/edit');
     }

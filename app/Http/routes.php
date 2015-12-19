@@ -21,19 +21,13 @@ Route::get('/register', 'UsersController@create');
 Route::post('/register', 'UsersController@store');
 Route::get('/dashboard', 'UsersController@index');
 
-Route::get('/edit', 'UsersController@edit');
-Route::post('/edit', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
 
 Route::get('/checkloginexists/{login}', 'UsersController@loginexists');
 Route::get('/checkemailexists/{email}', 'UsersController@emailexists');
 
-Route::get('/user', function() {
-	return view('user.index');
-});
-Route::post('/user/', function() {
-	return view('user.index');
-});
+Route::get('/user', 'UsersController@edit');
+Route::post('/user', 'UsersController@update');
 
 Route::get('/characters', function() {
 	return view('characters.index');
@@ -45,4 +39,16 @@ Route::get('/characters/{id}', function() {
 
 Route::post('/characters/{id}', function() {
 	return view('characters.view');
+});
+
+Route::get('/scripts', function() {
+	return view('scripts.index');
+});
+
+Route::get('/scripts/{id}', function() {
+	return view('scripts.view');
+});
+
+Route::post('/scripts/{id}', function() {
+	return view('scripts.view');
 });
