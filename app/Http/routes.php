@@ -28,14 +28,10 @@ Route::get('/checkemailexists/{email}', 'UsersController@emailexists');
 
 Route::get('/user', 'UsersController@edit');
 Route::post('/user', 'UsersController@update');
+Route::post('/changepassword', 'UsersController@updatePassword');
 
-Route::get('/characters', function() {
-	return view('characters.index');
-});
-
-Route::get('/characters/{id}', function() {
-	return view('characters.view');
-});
+Route::get('/characters', 'CharactersController@index');
+Route::get('/characters/{id}', 'CharactersController@view');
 
 Route::post('/characters/{id}', function() {
 	return view('characters.view');

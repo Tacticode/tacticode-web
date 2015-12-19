@@ -24,14 +24,14 @@ class UserRequest extends Request
     public function rules()
     {
         $rules = [
-            'login' => 'required|min:3|max:20|unique:users|alpha_dash',
-            'email' => 'required|email|unique:users',
+            'login' => 'required|min:3|max:20|unique_if_different_than_user|alpha_dash',
+            'email' => 'required|email|unique_if_different_than_user',
             'password' => 'required|min:3|max:50'
         ];
 
-        if (Request::segment(1) == 'edit')
+        if (Request::segment(1) == 'user')
         {
-            unset($array['password']);
+            unset($rules['password']);
         }
 
         return $rules;

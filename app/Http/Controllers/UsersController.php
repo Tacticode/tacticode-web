@@ -85,18 +85,15 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request)
     {
-        die();
-        echo 'lol';
-        return;
         $user = Auth::user();
         $data = $request->all();
 
-        if ($data->login != Auth::user()->login)
-            $user->login = $data->login;
-        if ($data->email != Auth::user()->email)
-            $user->email = $data->email;
+        if ($data['login'] != $user->login)
+            $user->login = $data['login'];
+        if ($data['email'] != $user->email)
+            $user->email = $data['email'];
         $user->save();
-        return redirect('/edit');
+        return redirect('/user');
     }
 
     /**
@@ -110,9 +107,9 @@ class UsersController extends Controller
         $user = Auth::user();
         $data = $request->all();
         
-        $user->password = \Hash::make($data->new_password);
+        $user->password = \Hash::make($data['new_password']);
         $user->save();
-        return redirect('/edit');
+        return redirect('/user');
     }
 
     /**

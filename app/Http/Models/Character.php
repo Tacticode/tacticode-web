@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Http\Models\User;
-use App\Http\Models\Class;
+use App\Http\Models\Classe;
 use App\Http\Models\Script;
 
 use Illuminate\Database\Eloquent\Model;

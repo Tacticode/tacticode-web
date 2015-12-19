@@ -6,7 +6,7 @@ use App\Http\Models\Character;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Class extends Model
+class Classe extends Model
 {
      /**
      * The database table used by the model.
