@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
                     return false;
                 }
                 $user = Auth::user();
-                return (\DB::table('scripts')->where(['user_id' => $user['id'], 'id' => $value]) != null);
+                return ($value == 0 || \DB::table('scripts')->where(['user_id' => $user['id'], 'id' => $value]) != null);
             }
         );
     }

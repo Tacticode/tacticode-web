@@ -27,17 +27,7 @@ class CharactersController extends Controller
      */
     public function index()
     {
-        return view('characters.index');
-    }
-
-    /**
-     * Add the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function add()
-    {
-        return view('characters.add');
+        return view('characters.index', Auth::user()->character);
     }
 
     /**
@@ -48,7 +38,7 @@ class CharactersController extends Controller
      */
     public function view($id)
     {
-        $character = Auth::user()->character->where('id', $id)->first();
+        $character = Auth::user()->character->find($id);
         if ($character == null)
         {
             return redirect('/characters');
@@ -70,6 +60,53 @@ class CharactersController extends Controller
      */
     public function update($id, CharacterRequest $request)
     {
+        $character = Auth::user()->character->find($id);
+        if ($character == null)
+        {
+            return redirect('/characters');
+        }
+
+        $req = $request->all();
+
+        if ($req['name'] != $character->name)
+            $character->name = $req['name'];
+        if ($req['script'] != $character->script_id)
+            $character->script_id = $req['script'];
+        $character->save();
         return redirect()->action('CharactersController@view', [$id]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $datas = [
+            'classes' => Classe::all(),
+            'scripts' => Auth::user()->script
+        ];
+        return view('characters.add', $datas);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CharacterRequest $request)
+    {
+        $req = $request->all();
+        $data = [
+            'name' => $req['name'],
+            'class_id' => $req['class'],
+            'user_id' => Auth::user()->id,
+            'script_id' => $req['script']
+        ];
+        Character::create($data);
+
+        return redirect('/characters');
     }
 }
