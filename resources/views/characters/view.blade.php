@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     {!! Form::label('class', 'Class') !!}
-                    {!! Form::select('class', ['Warrior', 'Archer', 'Wizzard'], 2, ['class' => 'form-control']) !!}
+                    {!! Form::select('class', ['Warrior', 'Archer', 'Wizzard'], 2, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                 </div>
 
                 <div class="form-group">
