@@ -29,6 +29,8 @@ Route::post('/user', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
 
 Route::get('/characters', 'CharactersController@index');
+Route::get('/characters/add', 'CharactersController@add');
+Route::post('/characters/add', 'CharactersController@add');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
 

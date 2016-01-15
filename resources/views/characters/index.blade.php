@@ -48,4 +48,8 @@
             </tbody>
         </table>
     </div>
+
+    <div class="row">
+        <a class="btn btn-success" href="/characters/add">Add a character</a>
+    </div>
 @endsection
