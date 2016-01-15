@@ -31,7 +31,7 @@ class CharactersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show the specified character.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

@@ -34,14 +34,6 @@ Route::post('/characters/add', 'CharactersController@store');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
 
-Route::get('/scripts', function() {
-	return view('scripts.index');
-});
-
-Route::get('/scripts/{id}', function() {
-	return view('scripts.view');
-});
-
-Route::post('/scripts/{id}', function() {
-	return view('scripts.view');
-});
+Route::get('/scripts', 'ScriptsController@index');
+Route::get('/scripts/{id}', 'ScriptsController@view');
+Route::post('/scripts/{id}', 'ScriptsController@update');
