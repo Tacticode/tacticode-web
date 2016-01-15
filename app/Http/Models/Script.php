@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
 use App\Http\Models\Character;
 
@@ -16,6 +16,17 @@ class Script extends Model
     protected $table = 'scripts';
 
     /**
+    * A script belongs to a user.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    *
+    */
+    public function user()
+    {
+        return $this->belongsTo('App\Http\Models\User');
+    }
+
+    /**
     * A script has many character.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -23,6 +34,6 @@ class Script extends Model
     */
     public function character()
     {
-        return $this->hasMany('Character');
+        return $this->hasMany('App\Http\Models\Character');
     }
 }

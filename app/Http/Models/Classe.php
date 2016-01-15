@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
 use App\Http\Models\Character;
 
@@ -23,6 +23,6 @@ class Classe extends Model
     */
     public function character()
     {
-        return $this->hasMany('Character');
+        return $this->hasMany('App\Http\Models\Character');
     }
 }

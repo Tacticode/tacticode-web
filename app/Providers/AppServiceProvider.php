@@ -39,6 +39,18 @@ class AppServiceProvider extends ServiceProvider
                 return ($user[$attribute] == $value) || $unique;
             }
         );
+
+        Validator::extend(
+            'script_from_user', function($attribute, $value, $parameters)
+            {
+                if (!Auth::check())
+                {
+                    return false;
+                }
+                $user = Auth::user();
+                return (\DB::table('scripts')->where(['user_id' => $user['id'], 'id' => $value]) != null);
+            }
+        );
     }
 
     /**

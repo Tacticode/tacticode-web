@@ -8,6 +8,7 @@ use App\Http\Models\Script;
 use App\Http\Models\Classe;
 use Auth;
 
+use App\Http\Requests\CharacterRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -37,7 +38,18 @@ class CharactersController extends Controller
      */
     public function view($id)
     {
-        return view('characters.view');
+        $character = Auth::user()->character->where('id', $id)->first();
+        if ($character == null)
+        {
+            return redirect('/characters');
+        }
+        $datas = [
+            'classes' => Classe::all(),
+            'scripts' => Auth::user()->script,
+            'character' => $character
+        ];
+
+        return view('characters.view', $datas);
     }
 
     /**
@@ -46,7 +58,7 @@ class CharactersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update($id, CharacterRequest $request)
     {
         return redirect()->action('CharactersController@view', [$id]);
     }

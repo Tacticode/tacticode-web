@@ -53,17 +53,28 @@ class User extends Model implements AuthenticatableContract,
     */
     public function group()
     {
-        return $this->belongsTo('Group');
+        return $this->belongsTo('App\Http\Models\Group');
     }
 
     /**
-    * A user has many character.
+    * A user has many characters.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
     *
     */
     public function character()
     {
-        return $this->hasMany('Character');
+        return $this->hasMany('App\Http\Models\Character');
+    }
+
+    /**
+    * A user has many scripts.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function script()
+    {
+        return $this->hasMany('App\Http\Models\Script');
     }
 }

@@ -10,6 +10,6 @@ class Group extends Model
 
     public function user()
     {
-    	return $this->hasMany('User');
+    	return $this->hasMany('App\Http\Models\User');
     }
 }

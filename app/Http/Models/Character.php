@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
 use App\Http\Models\User;
 use App\Http\Models\Classe;
@@ -32,7 +32,7 @@ class Character extends Model
     */
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('App\Http\Models\User');
     }
 
     /**
@@ -41,9 +41,9 @@ class Character extends Model
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     *
     */
-    public function class()
+    public function classe()
     {
-        return $this->belongsTo('Class');
+        return $this->belongsTo('App\Http\Models\Classe');
     }
 
     /**
@@ -54,6 +54,6 @@ class Character extends Model
     */
     public function script()
     {
-        return $this->hasMany('Script');
+        return $this->hasMany('App\Http\Models\Script');
     }
 }
