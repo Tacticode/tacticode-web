@@ -30,10 +30,7 @@ Route::post('/changepassword', 'UsersController@updatePassword');
 
 Route::get('/characters', 'CharactersController@index');
 Route::get('/characters/{id}', 'CharactersController@view');
-
-Route::post('/characters/{id}', function() {
-	return view('characters.view');
-});
+Route::post('/characters/{id}', 'CharactersController@update');
 
 Route::get('/scripts', function() {
 	return view('scripts.index');

@@ -39,4 +39,15 @@ class CharactersController extends Controller
     {
         return view('characters.view');
     }
+
+    /**
+     * Update the information of a character in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id, Request $request)
+    {
+        return redirect()->action('CharactersController@view', [$id]);
+    }
 }
