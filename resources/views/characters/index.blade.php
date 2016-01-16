@@ -22,7 +22,6 @@
                 <tbody>
                     @foreach (Auth::user()->character as $character)
                         <tr>
-                            <?php dd($character->script); ?>
                             <td>{{ $character->name }}</td>
                             <td></td>
                             <td><i>Pas de script associé</i></td>
@@ -31,7 +30,7 @@
                             <td class="danger">2</td>
                             <td class="warning">0</td>
                             <td>
-                                <a href="/characters/1" class="btn btn-primary">More</a>
+                                <a href="/characters/{{ $character->id }}" class="btn btn-primary">More</a>
                                 <a class="btn btn-danger">Delete</a>
                             </td>
                         </tr>

@@ -2,7 +2,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">Bob</h1>
+    <h1 class="page-header">$character->name</h1>
 
     <div class="row">
         <div class="col-md-4">
@@ -11,17 +11,17 @@
 
                 <div class="form-group">
                     {!! Form::label('name', 'Name') !!}
-                    {!! Form::text('name', 'Bob', ['class' => 'form-control']) !!}
+                    {!! Form::text('name', $character->name, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('class', 'Class') !!}
-                    {!! Form::select('class', ['Warrior', 'Archer', 'Wizzard'], 2, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                    {!! Form::select('class', $classes, $character->class_id, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('script', 'Script') !!}
-                    {!! Form::select('script', ['Script1', 'Script2', 'rush'], 2, ['class' => 'form-control']) !!}
+                    {!! Form::select('script', $scripts, $character->script_id, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">

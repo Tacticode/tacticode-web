@@ -15,7 +15,7 @@
 
     {!! Form::open() !!}
 
-    	<textarea id="codemirror" style="display:none" name="script">{{ $script->content }}</textarea>
+    	<textarea id="codemirror" style="display:none" name="content">{{ $script->content }}</textarea>
 
     	<div class="spacer"></div>
 

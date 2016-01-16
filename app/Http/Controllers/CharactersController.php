@@ -44,8 +44,8 @@ class CharactersController extends Controller
             return redirect('/characters');
         }
         $datas = [
-            'classes' => Classe::all(),
-            'scripts' => Auth::user()->script,
+            'classes' => Classe::lists('name'),
+            'scripts' => Auth::user()->script->lists('name'),
             'character' => $character
         ];
 
