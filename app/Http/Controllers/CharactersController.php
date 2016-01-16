@@ -71,7 +71,7 @@ class CharactersController extends Controller
         if ($req['name'] != $character->name)
             $character->name = $req['name'];
         if ($req['script'] != $character->script_id)
-            $character->script_id = $req['script'];
+            $character->script_id = $req['script'] != 0 ? $req['script'] : null;
         $character->save();
         return redirect()->action('CharactersController@view', [$id]);
     }
@@ -103,7 +103,7 @@ class CharactersController extends Controller
             'name' => $req['name'],
             'class_id' => $req['class'],
             'user_id' => Auth::user()->id,
-            'script_id' => $req['script']
+            'script_id' => $req['script'] != 0 ? $req['script'] : null
         ];
         Character::create($data);
 

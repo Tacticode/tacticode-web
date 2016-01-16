@@ -88,7 +88,8 @@ class ScriptsController extends Controller
         $req = $request->all();
         $data = [
             'name' => $req['name'],
-            'content' => ''
+            'content' => '',
+            'user_id' => Auth::user()->id
         ];
         $id = Script::create($data)->id;
 
