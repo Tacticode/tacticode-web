@@ -18,12 +18,12 @@
 
                 <div class="form-group">
                     {!! Form::label('class', 'Class') !!}
-                    {!! Form::select('class', ['Warrior', 'Archer', 'Wizzard'], null, ['class' => 'form-control']) !!}
+                    {!! Form::select('class', $classes, null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('script', 'Script') !!}
-                    {!! Form::select('script', [0 => '<i>Aucun script</i>', 'Script1', 'Script2', 'rush'], null, ['class' => 'form-control']) !!}
+                    {!! Form::select('script', $scripts, null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">

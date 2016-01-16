@@ -84,9 +84,10 @@ class CharactersController extends Controller
     public function create()
     {
         $datas = [
-            'classes' => Classe::all(),
+            'classes' => Classe::lists('name'),
             'scripts' => Auth::user()->script
         ];
+        $datas['scripts'] = [0 => 'Aucun script'];
         return view('characters.add', $datas);
     }
 

@@ -22,6 +22,7 @@
                 <tbody>
                     @foreach (Auth::user()->character as $character)
                         <tr>
+                            <?php dd($character->script); ?>
                             <td>{{ $character->name }}</td>
                             <td></td>
                             <td><i>Pas de script associé</i></td>
