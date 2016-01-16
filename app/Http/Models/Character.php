@@ -47,12 +47,23 @@ class Character extends Model
     }
 
     /**
-    * A character has many scripts.
+    * A character has one script.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    *
+    */
+    public function script()
+    {
+        return $this->hasOne('App\Http\Models\Script');
+    }
+
+    /**
+    * A character has many power.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
     *
     */
-    public function script()
+    public function power()
     {
         return $this->hasMany('App\Http\Models\Script');
     }
