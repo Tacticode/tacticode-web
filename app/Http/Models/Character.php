@@ -22,7 +22,7 @@ class Character extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'class_id', 'script_id'];
+    protected $fillable = ['name', 'class_id', 'script_id', 'user_id'];
 
     /**
     * A character belong to a user.

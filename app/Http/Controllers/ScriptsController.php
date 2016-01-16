@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Models\Script;
 use Auth;
 
 use App\Http\Requests\ScriptRequest;
@@ -88,11 +89,11 @@ class ScriptsController extends Controller
         $req = $request->all();
         $data = [
             'name' => $req['name'],
-            'content' => '',
+            'content' => $req['content'],
             'user_id' => Auth::user()->id
         ];
         $id = Script::create($data)->id;
 
-        return redirect()->action('ScriptsController@view', [$id]);
+        return redirect()->action('ScriptsController@index', [$id]);
     }
 }

@@ -4,6 +4,8 @@
 @section('content')
     <h1 class="page-header">Add a character</h1>
 
+    <?php //dd($errors); ?>
+
     <div class="row">
         <div class="col-md-4">
 
@@ -21,7 +23,7 @@
 
                 <div class="form-group">
                     {!! Form::label('script', 'Script') !!}
-                    {!! Form::select('script', ['Script1', 'Script2', 'rush'], null, ['class' => 'form-control']) !!}
+                    {!! Form::select('script', [0 => '<i>Aucun script</i>', 'Script1', 'Script2', 'rush'], null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">

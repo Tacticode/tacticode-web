@@ -10,17 +10,24 @@
     <link rel="stylesheet" href="/css/codemirror.css">
 @endsection
 
+<?php dd($errors); ?>
+
 @section('content')
-    <h1 class="page-header">{{ $script->name }}</h1>
+    <h1 class="page-header">Add a script</h1>
 
     {!! Form::open() !!}
 
-    	<textarea id="codemirror" style="display:none" name="script">{{ $script->content }}</textarea>
+        <div class="form-group">
+            {!! Form::label('name', 'Name') !!}
+            {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        </div>
+
+    	<textarea id="codemirror" style="display:none" name="content"></textarea>
 
     	<div class="spacer"></div>
 
     	<div class="form-group">
-            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit('Add', ['class' => 'btn btn-primary form-control']) !!}
         </div>
 
     {!! Form::close() !!}

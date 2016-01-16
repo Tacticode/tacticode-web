@@ -105,6 +105,7 @@ class CharactersController extends Controller
             'user_id' => Auth::user()->id,
             'script_id' => $req['script'] != 0 ? $req['script'] : null
         ];
+
         Character::create($data);
 
         return redirect('/characters');

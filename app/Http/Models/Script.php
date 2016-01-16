@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Script extends Model
 {
-     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
+    /**
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'scripts';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'content', 'user_id'];
 
     /**
     * A script belongs to a user.
