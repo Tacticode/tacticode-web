@@ -17,6 +17,7 @@
         @section('page-scripts')
         @show
 
+        <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/welcome.css">
     </head>
 

@@ -31,11 +31,13 @@ Route::post('/changepassword', 'UsersController@updatePassword');
 Route::get('/characters', 'CharactersController@index');
 Route::get('/characters/add', 'CharactersController@create');
 Route::post('/characters/add', 'CharactersController@store');
+Route::get('/characters/delete/{id}', 'CharactersController@delete');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');
 Route::post('/scripts/add', 'ScriptsController@store');
+Route::get('/scripts/delete/{id}', 'ScriptsController@delete');
 Route::get('/scripts/{id}', 'ScriptsController@view');
 Route::post('/scripts/{id}', 'ScriptsController@update');

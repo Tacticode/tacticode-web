@@ -11,19 +11,34 @@
 
             {!! Form::open() !!}
 
-                <div class="form-group">
+                <div class="form-group @if ($errors->has('name')) has-error @endif">
                     {!! Form::label('name', 'Name') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                    <div class="help-block">
+                        @foreach ($errors->get('name') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group @if ($errors->has('class')) has-error @endif">
                     {!! Form::label('class', 'Class') !!}
                     {!! Form::select('class', $classes, null, ['class' => 'form-control']) !!}
+                    <div class="help-block">
+                        @foreach ($errors->get('class') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group @if ($errors->has('script')) has-error @endif">
                     {!! Form::label('script', 'Script') !!}
                     {!! Form::select('script', $scripts, null, ['class' => 'form-control']) !!}
+                    <div class="help-block">
+                        @foreach ($errors->get('script') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="form-group">

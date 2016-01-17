@@ -10,18 +10,29 @@
     <link rel="stylesheet" href="/css/codemirror.css">
 @endsection
 
-<?php dd($errors); ?>
 
 @section('content')
     <h1 class="page-header">Add a script</h1>
 
     {!! Form::open() !!}
 
-        <div class="form-group">
+        <div class="form-group @if ($errors->has('name')) has-error @endif">
             {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', null, ['class' => 'form-control']) !!}
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+            <div class="help-block">
+                @foreach ($errors->get('name') as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
         </div>
 
+        <div class="form-group has-error">
+            <div class="help-block">
+                @foreach ($errors->get('content') as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        </div>
     	<textarea id="codemirror" style="display:none" name="content"></textarea>
 
     	<div class="spacer"></div>

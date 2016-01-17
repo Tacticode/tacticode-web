@@ -21,7 +21,7 @@
                             <td>1</td>
                             <td>
                                 <a href="/scripts/{{ $script->id }}" class="btn btn-primary">Edit</a>
-                                <a class="btn btn-danger">Delete</a>
+                                <a class="btn btn-danger" href="/scripts/delete/{{ $script->id }}" onclick="if (!confirm('Are you sure you want to delete this script ?')) return false">Delete</a>
                             </td>
                         </tr>
                     @endforeach

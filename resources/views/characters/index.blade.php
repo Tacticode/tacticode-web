@@ -31,7 +31,7 @@
                             <td class="warning">0</td>
                             <td>
                                 <a href="/characters/{{ $character->id }}" class="btn btn-primary">More</a>
-                                <a class="btn btn-danger">Delete</a>
+                                <a class="btn btn-danger" href="/characters/delete/{{ $character->id }}" onclick="if (!confirm('Are you sure you want to delete this character ?')) return false">Delete</a>
                             </td>
                         </tr>
                     @endforeach

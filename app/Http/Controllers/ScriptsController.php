@@ -45,6 +45,23 @@ class ScriptsController extends Controller
     }
 
     /**
+     * Delete the specified script.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $script = Auth::user()->script->find($id);
+        if ($script == null)
+        {
+            return redirect('/scripts');
+        }
+
+        return redirect('/scripts');
+    }
+
+    /**
      * Update the information of a script in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -63,7 +80,7 @@ class ScriptsController extends Controller
         if ($req['name'] != $script->name)
             $script->name = $req['name'];
         if ($req['content'] != $script->content)
-            $script->script_id = $req['content'];
+            $script->content = $req['content'];
         $script->save();
         return redirect()->action('ScriptsController@view', [$id]);
     }

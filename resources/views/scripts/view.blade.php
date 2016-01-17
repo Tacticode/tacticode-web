@@ -11,9 +11,14 @@
 @endsection
 
 @section('content')
-    <h1 class="page-header">{{ $script->name }}</h1>
+    {!! Form::open(['url' => '/scripts/' . $script->id]) !!}
 
-    {!! Form::open() !!}
+        <h1 class="clickable page-header">{{ $script->name }}</h1>
+        <div class="page-header row" style="display: none">
+            <div class="col-md-4">
+                {!! Form::text('name', $script->name, ['class' => 'form-control']) !!}
+            </div>
+        </div>
 
     	<textarea id="codemirror" style="display:none" name="content">{{ $script->content }}</textarea>
 
@@ -33,6 +38,12 @@
     			mode: "javascript",
     			matchBrackets: true
 			});
+
+            $('h1').click(function() {
+
+                $(".page-header").show();
+                $('h1').hide();
+            });
     	});
     </script>
 @endsection

@@ -5,14 +5,18 @@
     <h1 class="page-header">Dashboard</h1>
 
     <div class="row placeholders">
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <h4>Bob</h4>
-            <span class="text-muted"><a href="/characters/1">See more</a></span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <h4>Warrior1</a></h4>
-            <span class="text-muted"><a href="#">See more</a></span>
-        </div>
+        @if (Auth::user()->character)
+            @foreach (Auth::user()->character as $character)
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <h4>{{ $character->name }}</h4>
+                    <span class="text-muted"><a href="/characters/{{ $character->id }}">See more</a></span>
+                </div>
+            @endforeach
+        @else
+            <div class="col-xs-12">
+                <i>You don't have any character for the moment.</i>
+            </div>
+        @endif
     </div>
 
     <h2 class="sub-header">Fighting history</h2>

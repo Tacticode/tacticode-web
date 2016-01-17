@@ -44,12 +44,31 @@ class CharactersController extends Controller
             return redirect('/characters');
         }
         $datas = [
-            'classes' => Classe::lists('name'),
-            'scripts' => Auth::user()->script->lists('name'),
+            'classes' => Classe::lists('name', 'id'),
+            'scripts' => Auth::user()->script->lists('name', 'id')->all(),
             'character' => $character
         ];
+        $datas['scripts'][0] = 'Aucun script';
+        ksort($datas['scripts']);
 
         return view('characters.view', $datas);
+    }
+
+    /**
+     * Delete the specified character.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $character = Auth::user()->character->find($id);
+        if ($character == null)
+        {
+            return redirect('/characters');
+        }
+
+        return redirect('/characters');
     }
 
     /**
@@ -84,10 +103,11 @@ class CharactersController extends Controller
     public function create()
     {
         $datas = [
-            'classes' => Classe::lists('name'),
-            'scripts' => Auth::user()->script
+            'classes' => Classe::lists('name', 'id'),
+            'scripts' => Auth::user()->script->lists('name', 'id')->all()
         ];
-        $datas['scripts'] = [0 => 'Aucun script'];
+        $datas['scripts'][0] = 'Aucun script';
+        ksort($datas['scripts']);
         return view('characters.add', $datas);
     }
 
