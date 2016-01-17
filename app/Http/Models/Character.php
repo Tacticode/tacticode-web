@@ -43,18 +43,18 @@ class Character extends Model
     */
     public function classe()
     {
-        return $this->belongsTo('App\Http\Models\Classe');
+        return $this->belongsTo('App\Http\Models\Classe', 'class_id');
     }
 
     /**
-    * A character has one script.
+    * A character belong to a script.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasOne
     *
     */
     public function script()
     {
-        return $this->hasOne('App\Http\Models\Script');
+        return $this->belongsTo('App\Http\Models\Script');
     }
 
     /**

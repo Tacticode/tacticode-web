@@ -23,8 +23,14 @@
                     @foreach (Auth::user()->character as $character)
                         <tr>
                             <td>{{ $character->name }}</td>
-                            <td></td>
-                            <td><i>Pas de script associé</i></td>
+                            <td>{{ $character->classe()->first()->name }}</td>
+                            <td>
+                                @if ($script = $character->script()->first())
+                                    {{ $script->name }}
+                                @else
+                                    <i>No script associated</i>
+                                @endif
+                            </td>
                             <td>10</td>
                             <td class="success">8</td>
                             <td class="danger">2</td>
