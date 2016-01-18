@@ -9,6 +9,8 @@
 
             {!! Form::open() !!}
 
+                {!! Form::hidden('class', $character->class_id) !!}
+
                 <div class="form-group @if ($errors->has('name')) has-error @endif">
                     {!! Form::label('name', 'Name') !!}
                     {!! Form::text('name', $character->name, ['class' => 'form-control']) !!}
@@ -21,7 +23,7 @@
 
                 <div class="form-group @if ($errors->has('class')) has-error @endif">
                     {!! Form::label('class', 'Class') !!}
-                    {!! Form::select('class', $classes, $character->class_id, ['class' => 'form-control', 'readonly' => 'readonly']) !!}
+                    {!! Form::select('class', $classes, $character->class_id, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                     <div class="help-block">
                         @foreach ($errors->get('class') as $error)
                             <div>{{ $error }}</div>
