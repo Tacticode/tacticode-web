@@ -68,6 +68,7 @@ class CharactersController extends Controller
             return redirect('/characters');
         }
 
+        $character->delete();
         return redirect('/characters');
     }
 

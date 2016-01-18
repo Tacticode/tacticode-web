@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Models\Script;
+use App\Http\Models\Character;
 use Auth;
 
 use App\Http\Requests\ScriptRequest;
@@ -58,6 +59,8 @@ class ScriptsController extends Controller
             return redirect('/scripts');
         }
 
+        Character::where('script_id', $id)->update(array('script_id' => null));
+        $script->delete();
         return redirect('/scripts');
     }
 
