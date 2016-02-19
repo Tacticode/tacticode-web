@@ -14,6 +14,8 @@ class CreateNodes extends Migration
     {
         Schema::create('nodes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('pos_x');
+            $table->integer('pos_y');
         });
     }
 
