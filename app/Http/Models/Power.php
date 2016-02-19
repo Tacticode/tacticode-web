@@ -23,4 +23,15 @@ class Power extends Model
     {
         return $this->BelongsToMany('App\Http\Models\Character');
     }
+
+    /**
+    * A power has many nodes.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function node()
+    {
+        return $this->HasMany('App\Http\Models\Node');
+    }
 }
