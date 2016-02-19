@@ -2,14 +2,14 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">{{ $character->name }}</h1>
+    <h1 class="page-header">{{ $character->name }} <a class="btn btn-primary" href="/characters/{{$character->id}}/powers">Manage powers</a></h1>
 
     <div class="row">
         <div class="col-md-4">
 
             {!! Form::open() !!}
 
-                {!! Form::hidden('class', $character->class_id) !!}
+                {!! Form::hidden('race', $character->race_id) !!}
 
                 <div class="form-group @if ($errors->has('name')) has-error @endif">
                     {!! Form::label('name', 'Name') !!}
@@ -21,11 +21,11 @@
                     </div>
                 </div>
 
-                <div class="form-group @if ($errors->has('class')) has-error @endif">
-                    {!! Form::label('class', 'Class') !!}
-                    {!! Form::select('class', $classes, $character->class_id, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                <div class="form-group @if ($errors->has('race')) has-error @endif">
+                    {!! Form::label('race', 'Race') !!}
+                    {!! Form::select('race', $races, $character->race_id, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                     <div class="help-block">
-                        @foreach ($errors->get('class') as $error)
+                        @foreach ($errors->get('race') as $error)
                             <div>{{ $error }}</div>
                         @endforeach
                     </div>

@@ -34,6 +34,14 @@ Route::post('/characters/add', 'CharactersController@store');
 Route::get('/characters/delete/{id}', 'CharactersController@delete');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
+Route::get('/characters/{id}/powers', function($id) {
+
+	$character = Auth::user()->character->find($id);
+    if ($character == null) {
+        return redirect('/characters');
+    }
+    return view('powers.manage', ['character' => $character]);
+});
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');

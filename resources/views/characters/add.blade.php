@@ -21,11 +21,11 @@
                     </div>
                 </div>
 
-                <div class="form-group @if ($errors->has('class')) has-error @endif">
-                    {!! Form::label('class', 'Class') !!}
-                    {!! Form::select('class', $classes, null, ['class' => 'form-control']) !!}
+                <div class="form-group @if ($errors->has('race')) has-error @endif">
+                    {!! Form::label('race', 'Race') !!}
+                    {!! Form::select('race', $races, null, ['class' => 'form-control']) !!}
                     <div class="help-block">
-                        @foreach ($errors->get('class') as $error)
+                        @foreach ($errors->get('race') as $error)
                             <div>{{ $error }}</div>
                         @endforeach
                     </div>
