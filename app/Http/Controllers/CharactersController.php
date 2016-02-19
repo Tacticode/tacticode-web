@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\Character;
 use App\Http\Models\User;
 use App\Http\Models\Script;
-use App\Http\Models\Classe;
+use App\Http\Models\Race;
 use Auth;
 
 use App\Http\Requests\CharacterRequest;
@@ -44,7 +44,7 @@ class CharactersController extends Controller
             return redirect('/characters');
         }
         $datas = [
-            'races' => Classe::lists('name', 'id'),
+            'races' => Race::lists('name', 'id'),
             'scripts' => Auth::user()->script->lists('name', 'id')->all(),
             'character' => $character
         ];
@@ -104,7 +104,7 @@ class CharactersController extends Controller
     public function create()
     {
         $datas = [
-            'races' => Classe::lists('name', 'id'),
+            'races' => Race::lists('name', 'id'),
             'scripts' => Auth::user()->script->lists('name', 'id')->all()
         ];
         $datas['scripts'][0] = 'Aucun script';
