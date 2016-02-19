@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Class</th>
+                        <th>Race</th>
                         <th>Script</th>
                         <th>Battles</th>
                         <th>Victories</th>
@@ -23,7 +23,7 @@
                     @foreach (Auth::user()->character as $character)
                         <tr>
                             <td>{{ $character->name }}</td>
-                            <td>{{ $character->classe()->first()->name }}</td>
+                            <td>{{ $character->race()->first()->name }}</td>
                             <td>
                                 @if ($script = $character->script()->first())
                                     {{ $script->name }}

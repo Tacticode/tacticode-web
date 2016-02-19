@@ -13,10 +13,6 @@
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <script src="/js/bootstrap.min.js"></script>
 
-        <!-- Page scripts -->
-        @section('page-scripts')
-        @show
-
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/welcome.css">
     </head>
@@ -71,6 +67,10 @@
                 <p>&copy; Tacticode 2015</p>
             </footer>
         </div>
+
+        <!-- Page scripts -->
+        @section('page-scripts')
+        @show
 
     </body>
 </html>

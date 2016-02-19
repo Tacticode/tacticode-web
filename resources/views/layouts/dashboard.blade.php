@@ -17,10 +17,6 @@
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <script src="/js/bootstrap.min.js"></script>
 
-        <!-- Page scripts -->
-        @section('page-scripts')
-        @show
-
         <!-- Page styles -->
         @section('page-styles')
         @show
@@ -74,6 +70,10 @@
                 </div>
             </div>
         </div>
+
+        <!-- Page scripts -->
+        @section('page-scripts')
+        @show
 
     </body>
 </html>
