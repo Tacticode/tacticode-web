@@ -21,7 +21,7 @@ class Power extends Model
     */
     public function character()
     {
-        return $this->BelongsToMany('App\Http\Models\Character');
+        return $this->belongsToMany('App\Http\Models\Character');
     }
 
     /**
@@ -32,6 +32,6 @@ class Power extends Model
     */
     public function node()
     {
-        return $this->HasMany('App\Http\Models\Node');
+        return $this->hasMany('App\Http\Models\Node');
     }
 }

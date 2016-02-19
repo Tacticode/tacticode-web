@@ -21,7 +21,17 @@ class Node extends Model
     */
     public function power()
     {
-        return $this->BelongsTo('App\Http\Models\Power');
+        return $this->belongsTo('App\Http\Models\Power');
     }
-}
+
+    /**
+    * A node belongs to multiple characters.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    *
+    */
+    public function character()
+    {
+        return $this->belongsToMany('App\Http\Models\Character');
+    }
 }

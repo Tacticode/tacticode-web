@@ -67,4 +67,15 @@ class Character extends Model
     {
         return $this->hasMany('App\Http\Models\Script');
     }
+
+    /**
+    * A character has multiple nodes.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    *
+    */
+    public function node()
+    {
+        return $this->belongsToMany('App\Http\Models\Node');
+    }
 }
