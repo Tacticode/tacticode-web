@@ -15,7 +15,7 @@ class RaceTableSeeder extends Seeder
         DB::table('races')->delete();
 
         Race::create(array('name' => 'Human'));
-        Race::create(array('name' => 'Gobelin'));
+        Race::create(array('name' => 'Goblin'));
         Race::create(array('name' => 'Orc'));
         Race::create(array('name' => 'Elf'));
 	}

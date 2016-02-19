@@ -34,4 +34,15 @@ class Node extends Model
     {
         return $this->belongsToMany('App\Http\Models\Character');
     }
+
+    /**
+    * A node has many paths.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function path()
+    {
+        return array($this->hasMany('App\Http\Models\Paths', 'node_from'), $this->hasMany('App\Http\Models\Paths', 'node_to'));
+    }
 }
