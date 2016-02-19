@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClasses extends Migration
+class CreateRaces extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateClasses extends Migration
      */
     public function up()
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('races', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 45)->unique();
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateClasses extends Migration
      */
     public function down()
     {
-        Schema::drop('classes');
+        Schema::drop('races');
     }
 }

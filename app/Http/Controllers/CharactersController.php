@@ -44,7 +44,7 @@ class CharactersController extends Controller
             return redirect('/characters');
         }
         $datas = [
-            'classes' => Classe::lists('name', 'id'),
+            'races' => Classe::lists('name', 'id'),
             'scripts' => Auth::user()->script->lists('name', 'id')->all(),
             'character' => $character
         ];
@@ -104,7 +104,7 @@ class CharactersController extends Controller
     public function create()
     {
         $datas = [
-            'classes' => Classe::lists('name', 'id'),
+            'races' => Classe::lists('name', 'id'),
             'scripts' => Auth::user()->script->lists('name', 'id')->all()
         ];
         $datas['scripts'][0] = 'Aucun script';
@@ -123,7 +123,7 @@ class CharactersController extends Controller
         $req = $request->all();
         $data = [
             'name' => $req['name'],
-            'class_id' => $req['class'],
+            'race_id' => $req['race'],
             'user_id' => Auth::user()->id,
             'script_id' => $req['script'] != 0 ? $req['script'] : null
         ];

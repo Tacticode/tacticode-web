@@ -6,14 +6,14 @@ use App\Http\Models\Character;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Classe extends Model
+class Race extends Model
 {
      /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'classes';
+    protected $table = 'races';
 
     /**
     * A class has many character.

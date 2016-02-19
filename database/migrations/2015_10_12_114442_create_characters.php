@@ -15,12 +15,12 @@ class CreateCharacters extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 45);
-            $table->integer('class_id')->unsigned();
+            $table->integer('race_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('script_id')->unsigned()->nullable()->default(NULL);
             $table->timestamps();
 
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->foreign('race_id')->references('id')->on('races');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('script_id')->references('id')->on('scripts');
         });

@@ -41,9 +41,9 @@ class Character extends Model
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     *
     */
-    public function classe()
+    public function race()
     {
-        return $this->belongsTo('App\Http\Models\Classe', 'class_id');
+        return $this->belongsTo('App\Http\Models\Race');
     }
 
     /**

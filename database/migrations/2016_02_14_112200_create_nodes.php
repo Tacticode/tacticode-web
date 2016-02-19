@@ -14,6 +14,7 @@ class CreateNodes extends Migration
     {
         Schema::create('nodes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('race_id')->unsigned()->nullable()->default(null);
             $table->integer('pos_x');
             $table->integer('pos_y');
         });

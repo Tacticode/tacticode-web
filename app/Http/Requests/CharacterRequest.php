@@ -25,7 +25,7 @@ class CharacterRequest extends Request
     {
         $rules = [
             'name' => 'required|min:3|max:20',
-            'class' => 'required|integer|exists:classes,id',
+            'race' => 'required|integer|exists:races,id',
             'script' => 'required|integer|script_from_user'
         ];
 

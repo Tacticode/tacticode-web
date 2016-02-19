@@ -14,12 +14,10 @@ class CreatePowers extends Migration
     {
         Schema::create('powers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('class_id')->unsigned();
             $table->string('name', 45)->unique();
             $table->longtext('description')->nullable();
+            $table->boolean('spell')->default(false);
             $table->timestamps();
-
-            $table->foreign('class_id')->references('id')->on('classes');
         });
     }
 

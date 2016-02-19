@@ -14,10 +14,11 @@ class CreateUsers extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('pseudo', 45)->unique();
+            $table->string('login', 45)->unique();
             $table->string('email', 255)->unique();
             $table->string('password', 255);
             $table->string('id_facebook', 255)->nullable()->default(null);
+            $table->rememberToken();
             $table->integer('group_id')->unsigned();
             $table->timestamps();
 
