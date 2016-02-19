@@ -1,6 +1,7 @@
 'use strict';
 
 var text = document.getElementById('selectedCircle');
+var powerLeft = 8;
 var c = document.getElementById("powers");
 var ctx = c.getContext("2d");
 var circles = [];
@@ -24,7 +25,7 @@ Circle.prototype.draw = function(ctx) {
 	ctx.lineWidth = 3;
 	ctx.beginPath();
 	ctx.strokeStyle = this.strokeStyle;
-	if (this.selected || (this.hover && this.type == 'power'))
+	if (this.selected || this.bought || (this.hover && this.type == 'power' && this.available))
 		ctx.fillStyle = this.strokeStyle;
 	else
 		ctx.fillStyle = this.fillStyle;
@@ -66,7 +67,7 @@ Link.prototype.draw = function(ctx) {
 
 function addRace(id, name, x, y) {
 
-	circles.push(new Circle(id, x, y, 20, name, "#AD7A76", "#D49692", 'race'));
+	circles.push(new Circle(id, x, y, 20, name, "#C25959", "#D49692", 'race'));
 }
 
 function addPower(id, name, x, y) {
@@ -99,6 +100,8 @@ function selectRace(race) {
 				if (links[linkId].circle1.id == circles[i].id || links[linkId].circle2.id == circles[i].id) {
 
 					links[linkId].available = true;
+					links[linkId].circle1.available = true;
+					links[linkId].circle2.available = true;
 				}
 			}
 		}
@@ -150,6 +153,7 @@ function drawAll() {
 	for (var i in circles) {
 		circles[i].draw(ctx);
 	}
+	document.getElementById('powerLeft').textContent = powerLeft;
 }
 
 addRaces();
@@ -176,7 +180,7 @@ function mousemovement(e) {
 			
 			circle.hover = true;
 			text.textContent = circle.name;
-			if (circle.type == 'power')
+			if (circle.type == 'power' && circle.available && (!circle.bought || circle.salable))
 				document.body.style.cursor = 'pointer';
 		} else if (circle.hover && !isInCircle(x, y, circle)) {
 			
@@ -189,6 +193,83 @@ function mousemovement(e) {
 	drawAll();
 }
 
+function makeLinkAvailable(link) {
+
+	if (link.circle1.type == 'race' && !link.circle1.selected)
+		return;
+	if (link.circle2.type == 'race' && !link.circle2.selected)
+		return;
+	link.available = true;
+}
+
+function buyPower(circle) {
+
+	if (powerLeft <= 0)
+		return;
+	powerLeft--;
+	circle.bought = true;
+	circle.salable = true;
+	var connections = [];
+	for (var linkId in links) {
+		
+		if (links[linkId].circle1.id == circle.id || links[linkId].circle2.id == circle.id) {
+
+			makeLinkAvailable(links[linkId]);
+			links[linkId].circle1.available = true;
+			links[linkId].circle2.available = true;
+			if (links[linkId].circle1.id == circle.id) {
+				
+				if (links[linkId].circle2.bought)
+					connections.push(links[linkId].circle2);
+			}
+			else if (links[linkId].circle1.bought)
+				connections.push(links[linkId].circle1);
+		}
+	}
+	for (var i in connections) {
+
+		if (connections.length > 1)
+			connections[i].salable = true;
+		else
+			connections[i].salable = false;
+	}
+}
+
+function makeLinkNotAvailable(link) {
+
+	if ((link.circle1.type == 'race' && link.circle1.selected) || link.circle1.bought)
+		return;
+	if ((link.circle2.type == 'race' && link.circle2.selected) || link.circle2.bought)
+		return;
+	link.available = false;
+}
+
+function sellPower(circle) {
+
+	powerLeft++;
+	circle.bought = false;
+	for (var linkId in links) {
+		if (links[linkId].circle1.id == circle.id || links[linkId].circle2.id == circle.id) {
+
+			makeLinkNotAvailable(links[linkId]);
+			if (links[linkId].circle1.id != circle.id && links[linkId].circle1.type == 'power') {
+
+				if (!links[linkId].circle1.bought)
+					links[linkId].circle1.available = false;
+				else
+					links[linkId].circle1.salable = true;
+			}
+			if (links[linkId].circle2.id != circle.id && links[linkId].circle2.type == 'power') {
+			
+				if (!links[linkId].circle2.bought)
+					links[linkId].circle2.available = false;
+				else
+					links[linkId].circle2.salable = true;
+			}
+		}
+	}
+}
+
 function mouseclick(e) {
 
 	var x = e.offsetX;
@@ -196,9 +277,12 @@ function mouseclick(e) {
 	for (var i in circles) {
 
 		var circle = circles[i];
-		if (circle.type == 'power' && isInCircle(x, y, circle)) {
+		if (circle.type == 'power' && circle.available && isInCircle(x, y, circle)) {
 			
-			console.log('power');
+			if (!circle.bought)
+				buyPower(circle);
+			else if (circle.salable)
+				sellPower(circle);
 		}
 	}
 	drawAll();
