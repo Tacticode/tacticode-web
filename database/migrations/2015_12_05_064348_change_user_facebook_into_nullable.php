@@ -25,8 +25,8 @@ class ChangeUserFacebookIntoNullable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            DB::statement('UPDATE `users` SET `id_facebook` = 0 WHERE `id_facebook` IS NULL;');
-            DB::statement('ALTER TABLE `users` MODIFY `id_facebook` INTEGER UNSIGNED NOT NULL;');
+            //DB::statement('UPDATE `users` SET `id_facebook` = 0 WHERE `id_facebook` IS NULL;');
+            //DB::statement('ALTER TABLE `users` MODIFY `id_facebook` INTEGER UNSIGNED NOT NULL;');
         });
     }
 }

@@ -17,7 +17,7 @@ class CreateUsers extends Migration
             $table->string('pseudo', 45)->unique();
             $table->string('email', 255)->unique();
             $table->string('password', 255);
-            $table->string('id_facebook', 255)->unique();
+            $table->string('id_facebook', 255)->nullable()->default(null);
             $table->integer('group_id')->unsigned();
             $table->timestamps();
 

@@ -12,6 +12,7 @@ class DropCharacterPower extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('character_power');
     }
 
     /**
@@ -21,6 +22,5 @@ class DropCharacterPower extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('character_power');
     }
 }

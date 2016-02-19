@@ -37,6 +37,6 @@ class SeedClasses extends Migration
      */
     public function down()
     {
-        DB::table('classes')->delete();
+        //DB::table('classes')->delete();
     }
 }
