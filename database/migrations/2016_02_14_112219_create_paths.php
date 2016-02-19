@@ -16,7 +16,8 @@ class CreatePaths extends Migration
             $table->increments('id');
             $table->integer('node_from')->unsigned();
             $table->integer('node_to')->unsigned();
-
+            $table->timestamps();
+            
             $table->foreign('node_from')->references('id')->on('nodes');
             $table->foreign('node_to')->references('id')->on('nodes');
         });

@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(GroupTableSeeder::class);
         $this->call(RaceTableSeeder::class);
 
+        $this->call(PowerTableSeeder::class);
+        $this->call(NodeTableSeeder::class);
+        $this->call(PathTableSeeder::class);
+
         Model::reguard();
     }
 }

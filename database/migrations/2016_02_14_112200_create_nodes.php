@@ -18,7 +18,8 @@ class CreateNodes extends Migration
             $table->integer('power_id')->unsigned()->nullable()->default(null);
             $table->integer('pos_x');
             $table->integer('pos_y');
-
+            $table->timestamps();
+            
             $table->foreign('race_id')->references('id')->on('races');
             $table->foreign('power_id')->references('id')->on('powers');
         });
