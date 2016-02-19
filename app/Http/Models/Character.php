@@ -3,7 +3,7 @@
 namespace App\Http\Models;
 
 use App\Http\Models\User;
-use App\Http\Models\Classe;
+use App\Http\Models\Race;
 use App\Http\Models\Script;
 
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +22,7 @@ class Character extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'class_id', 'script_id', 'user_id'];
+    protected $fillable = ['name', 'race_id', 'script_id', 'user_id'];
 
     /**
     * A character belong to a user.
