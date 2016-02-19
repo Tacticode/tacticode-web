@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCharacterPower extends Migration
+class CreateNodePower extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateCharacterPower extends Migration
      */
     public function up()
     {
-        Schema::create('character_power', function (Blueprint $table) {
+        Schema::create('node_power', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('node_id')->unsigned();
             $table->integer('power_id')->unsigned();
-            $table->integer('character_id')->unsigned();
-            $table->timestamps();
 
+            $table->foreign('node_id')->references('id')->on('nodes');
             $table->foreign('power_id')->references('id')->on('powers');
-            $table->foreign('character_id')->references('id')->on('characters');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateCharacterPower extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('character_power');
+        Schema::dropIfExists('node_power');
     }
 }
