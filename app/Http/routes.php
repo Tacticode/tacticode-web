@@ -37,6 +37,7 @@ Route::post('/characters/sellnode', 'PowersController@sellNode');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
 Route::get('/characters/{id}/powers', 'PowersController@view');
+Route::get('/characters/{id}/powersinfos', 'PowersController@powersInfos');
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');

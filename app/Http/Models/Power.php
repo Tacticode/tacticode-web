@@ -14,6 +14,13 @@ class Power extends Model
     protected $table = 'powers';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'description', 'spell'];
+
+    /**
     * A power belongs to many characters.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

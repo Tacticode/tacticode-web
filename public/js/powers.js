@@ -1,5 +1,6 @@
 'use strict';
 
+var characterid = document.getElementById('characterid').value;
 var text = document.getElementById('selectedCircle');
 var powerLeft = 8;
 var c = document.getElementById("powers");
@@ -30,7 +31,7 @@ Circle.prototype.draw = function(ctx) {
 	else
 		ctx.fillStyle = this.fillStyle;
 	ctx.beginPath();
-	ctx.arc(this.x,this.y,this.radius,0,Math.PI*2,true);
+	ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
 	ctx.fill();
 	ctx.stroke();
 }
@@ -108,42 +109,6 @@ function selectRace(race) {
 	}
 }
 
-function addPowers() {
-
-	addPower(5, 'Stats 1', 350, 300);
-	addPower(6, 'Stats 2', 450, 300);
-	addPower(7, 'Stats 3', 400, 250);
-	addPower(8, 'Stats 4', 400, 350);
-	addPower(9, 'Stats 5', 375, 325);
-	addPower(10, 'Stats 6', 425, 325);
-	addPower(11, 'Stats 7', 375, 275);
-	addPower(12, 'Stats 8', 425, 275);
-	addPower(13, 'Stats 9', 300, 300);
-	addPower(14, 'Stats 10', 500, 300);
-	addPower(15, 'Stats 11', 400, 200);
-	addPower(16, 'Stats 12', 400, 400);
-}
-
-function addLinks() {
-
-	addLink(1, 11);
-	addLink(2, 12);
-	addLink(3, 9);
-	addLink(4, 10);
-	addLink(11, 7);
-	addLink(7, 12);
-	addLink(12, 6);
-	addLink(6, 10);
-	addLink(10, 8);
-	addLink(8, 9);
-	addLink(9, 5);
-	addLink(5, 11);
-	addLink(7, 15);
-	addLink(5, 13);
-	addLink(6, 14);
-	addLink(8, 16);
-}
-
 function drawAll() {
 
 	ctx.clearRect(0, 0, c.width, c.height);
@@ -155,14 +120,6 @@ function drawAll() {
 	}
 	document.getElementById('powerLeft').textContent = powerLeft;
 }
-
-addRaces();
-addPowers();
-addLinks();
-
-selectRace('Humain');
-
-drawAll();
 
 function isInCircle(x, y, circle) {
 
@@ -288,6 +245,38 @@ function mouseclick(e) {
 	drawAll();
 }
 
-c.addEventListener('mousemove', mousemovement, false);
-c.addEventListener('mousedown', mouseclick, false);
-c.addEventListener('selectstart', function(e) { e.preventDefault(); return false; }, false);
+function loading() {
+
+	ctx.fillText('loading', 0, 10);
+}
+
+function init() {
+
+	loading();
+	$.getJSON('/characters/' + characterid + '/powersinfos', function(data) {
+		
+		for (var i in data.nodes) {
+
+			var node = data.nodes[i];
+			if (node.race)
+				addRace(node.id, node.race.name, node.pos_x, node.pos_y);
+			else if (node.power)
+				addPower(node.id, node.power.name, node.pos_x, node.pos_y);
+		}
+
+		for (var i in data.paths) {
+
+			addLink(data.paths[i].node_from, data.paths[i].node_to);
+		}
+
+		selectRace('Human');
+
+		drawAll();
+
+		c.addEventListener('mousemove', mousemovement, false);
+		c.addEventListener('mousedown', mouseclick, false);
+		c.addEventListener('selectstart', function(e) { e.preventDefault(); return false; }, false);
+	});
+}
+
+init();

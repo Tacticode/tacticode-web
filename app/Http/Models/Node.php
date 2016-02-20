@@ -14,6 +14,13 @@ class Node extends Model
     protected $table = 'nodes';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['race_id', 'power_id', 'pos_x', 'pos_y'];
+
+    /**
     * A node belongs to a power.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -22,6 +29,17 @@ class Node extends Model
     public function power()
     {
         return $this->belongsTo('App\Http\Models\Power');
+    }
+
+    /**
+    * A node belongs to a race.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    *
+    */
+    public function race()
+    {
+        return $this->belongsTo('App\Http\Models\Race');
     }
 
     /**

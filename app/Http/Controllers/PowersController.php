@@ -28,7 +28,18 @@ class PowersController extends Controller
             return redirect('/characters');
         }
 
-        return view('powers.manage', ['character' => $character, 'nodes' => Node::all(), 'paths' => Path::all()]);
+        return view('powers.manage', ['character' => $character]);
+    }
+
+    public function powersInfos($id) {
+
+        $character = Auth::user()->character->find($id);
+        if ($character == null)
+        {
+            return redirect('/characters');
+        }
+
+        return response()->json(['nodes' => Node::with('race', 'power')->get(), 'paths' => Path::all()]);
     }
 
     public function buyNode(Request $request)
