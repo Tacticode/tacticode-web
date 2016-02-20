@@ -19,8 +19,19 @@ class Path extends Model
     * @return array
     *
     */
-    public function nodes()
+    public function node_f()
     {
-        return array('from' => $this->belongsTo('App\Http\Models\Node', 'node_from'), 'to' => $this->belongsTo('App\Http\Models\Node', 'node_to'));
+        return $this->belongsTo('App\Http\Models\Node', 'node_from');
+    }
+
+    /**
+    * A path contains two nodes.
+    *
+    * @return array
+    *
+    */
+    public function node_t()
+    {
+        return $this->belongsTo('App\Http\Models\Node', 'node_to');
     }
 }

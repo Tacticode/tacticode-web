@@ -6,6 +6,7 @@ use App\Http\Models\Character;
 use App\Http\Models\User;
 use App\Http\Models\Script;
 use App\Http\Models\Race;
+use App\Http\Models\Node;
 use Auth;
 
 use App\Http\Requests\CharacterRequest;
@@ -128,7 +129,10 @@ class CharactersController extends Controller
             'script_id' => $req['script'] != 0 ? $req['script'] : null
         ];
 
-        Character::create($data);
+        $character = Character::create($data);
+
+        $node = Node::where('race_id', $req['race'])->first();
+        $character->node()->sync([$node->id]);
 
         return redirect('/characters');
     }

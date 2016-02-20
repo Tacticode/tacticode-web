@@ -18,7 +18,7 @@ class CreateCharacterNode extends Migration
             $table->integer('node_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('character_id')->references('id')->on('characters');
+            $table->foreign('character_id')->references('id')->on('characters')->onDelete('cascade');
             $table->foreign('node_id')->references('id')->on('nodes');
         });
     }
