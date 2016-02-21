@@ -18,5 +18,6 @@
             Your browser doesn't support canvas
         </canvas>
         <div><span id="selectedCircle"></span></div>
+        <div><i id="selectedCircleDesc"></i></div>
     </div>
 @endsection
