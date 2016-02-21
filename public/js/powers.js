@@ -1,6 +1,8 @@
 'use strict';
 
+var token = document.getElementById('token').value;
 var characterid = document.getElementById('characterid').value;
+var raceid = document.getElementById('raceid').value;
 var text = document.getElementById('selectedCircle');
 var powerLeft = 8;
 var c = document.getElementById("powers");
@@ -68,12 +70,12 @@ Link.prototype.draw = function(ctx) {
 
 function addRace(id, name, x, y) {
 
-	circles.push(new Circle(id, x, y, 20, name, "#C25959", "#D49692", 'race'));
+	circles[id] = new Circle(id, x, y, 20, name, "#C25959", "#D49692", 'race');
 }
 
 function addPower(id, name, x, y) {
 
-	circles.push(new Circle(id, x, y, 10, name, "#7FAD76", "#9DD492", 'power'));
+	circles[id] = new Circle(id, x, y, 10, name, "#7FAD76", "#9DD492", 'power');
 }
 
 function addLink(id1, id2) {
@@ -93,7 +95,7 @@ function selectRace(race) {
 
 	for (var i in circles) {
 
-		if (circles[i].type == 'race' && circles[i].name == race) {
+		if (circles[i].type == 'race' && circles[i].id == race) {
 
 			circles[i].selected = true;
 			for (var linkId in links) {
@@ -159,10 +161,30 @@ function makeLinkAvailable(link) {
 	link.available = true;
 }
 
-function buyPower(circle) {
+function buyPower(circle, withoutAjax) {
 
 	if (powerLeft <= 0)
 		return;
+
+	if (!withoutAjax) {
+
+		$.ajax({
+			type: 'post',
+			url: '/characters/buynode',
+			headers: {'X-XSRF-TOKEN' : token},
+			data: {
+				'character_id': characterid,
+				'node_id': circle.id
+			}, success: function(data) {
+
+				if (data.result != 'success') {
+					sellPower(circle, true);
+					alert('You could not buy this node !');
+				}
+			}
+		}, 'json');
+	}
+
 	powerLeft--;
 	circle.bought = true;
 	circle.salable = true;
@@ -201,7 +223,26 @@ function makeLinkNotAvailable(link) {
 	link.available = false;
 }
 
-function sellPower(circle) {
+function sellPower(circle, withoutAjax) {
+
+	if (!withoutAjax) {
+
+		$.ajax({
+			type: 'post',
+			url: '/characters/sellnode',
+			headers: {'X-XSRF-TOKEN' : token},
+			data: {
+				'character_id': characterid,
+				'node_id': circle.id
+			}, success: function(data) {
+
+				if (data.result != 'success') {
+					buyPower(circle, true);
+					alert('You could not sell this node !');
+				}
+			}
+		}, 'json');
+	}
 
 	powerLeft++;
 	circle.bought = false;
@@ -245,6 +286,26 @@ function mouseclick(e) {
 	drawAll();
 }
 
+function resetPowers() {
+
+	if (!(confirm('Are you sure ?')))
+		return;
+	for (var i in circles) {
+
+		var circle = circles[i];
+		circle.bought = false;
+		circle.salable = false;
+		circle.available = false;
+		circle.selected = false;
+	}
+	for (var i in links) {
+
+		var link = links[i];
+		link.available = false;
+	}
+	selectRace(raceid);
+}
+
 function loading() {
 
 	ctx.fillText('loading', 0, 10);
@@ -269,7 +330,14 @@ function init() {
 			addLink(data.paths[i].node_from, data.paths[i].node_to);
 		}
 
-		selectRace('Human');
+		selectRace(raceid);
+
+		for (var i in data.bought) {
+
+			var circle = circles[data.bought[i].id];
+			if (circle.type == 'power')
+				buyPower(circle, true);
+		}
 
 		drawAll();
 

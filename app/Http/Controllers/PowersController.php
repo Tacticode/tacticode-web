@@ -28,7 +28,10 @@ class PowersController extends Controller
             return redirect('/characters');
         }
 
-        return view('powers.manage', ['character' => $character]);
+        $encrypter = app('Illuminate\Encryption\Encrypter');
+        $encrypted_token = $encrypter->encrypt(csrf_token());
+
+        return view('powers.manage', ['character' => $character, 'token' => $encrypted_token]);
     }
 
     public function powersInfos($id) {
@@ -39,7 +42,7 @@ class PowersController extends Controller
             return redirect('/characters');
         }
 
-        return response()->json(['nodes' => Node::with('race', 'power')->get(), 'paths' => Path::all()]);
+        return response()->json(['nodes' => Node::with('race', 'power')->get(), 'paths' => Path::all(), 'bought' => $character->node]);
     }
 
     public function buyNode(Request $request)
