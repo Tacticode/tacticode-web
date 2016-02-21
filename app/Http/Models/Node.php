@@ -74,4 +74,26 @@ class Node extends Model
     {
         return $this->hasMany('App\Http\Models\Path', 'node_to');
     }
+
+    /**
+    * Get the nodes linked to the one passed as parameter
+    *
+    * @param \app\Http\Models\Node
+    *
+    * @return array
+    *
+    */
+    public static function getAdjacentNodes($node)
+    {
+        $ret = [];
+
+        foreach ($node->path_to as $p) {
+            $ret[] = $p->node_f;
+        }
+        foreach ($node->path_from as $p) {
+            $ret[] = $p->node_t;
+        }
+
+        return $ret;
+    }
 }

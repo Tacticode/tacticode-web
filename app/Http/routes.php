@@ -34,6 +34,7 @@ Route::post('/characters/add', 'CharactersController@store');
 Route::get('/characters/delete/{id}', 'CharactersController@delete');
 Route::post('/characters/buynode', 'PowersController@buyNode');
 Route::post('/characters/sellnode', 'PowersController@sellNode');
+Route::post('/characters/resetpower', 'PowersController@resetPower');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
 Route::get('/characters/{id}/powers', 'PowersController@view');
