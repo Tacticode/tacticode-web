@@ -4,11 +4,12 @@ var token = document.getElementById('token').value;
 var characterid = document.getElementById('characterid').value;
 var raceid = document.getElementById('raceid').value;
 var text = document.getElementById('selectedCircle');
-var powerLeft = 8;
+var powerLeft = 7;
 var c = document.getElementById("powers");
 var ctx = c.getContext("2d");
 var circles = [];
 var links = [];
+var isLoading = false;
 
 function Circle(id, x, y, radius, name, strokeStyle, fillStyle, type) {
 
@@ -120,6 +121,8 @@ function drawAll() {
 	for (var i in circles) {
 		circles[i].draw(ctx);
 	}
+	if (isLoading)
+		loading();
 	document.getElementById('powerLeft').textContent = powerLeft;
 }
 
@@ -161,29 +164,7 @@ function makeLinkAvailable(link) {
 	link.available = true;
 }
 
-function buyPower(circle, withoutAjax) {
-
-	if (powerLeft <= 0)
-		return;
-
-	if (!withoutAjax) {
-
-		$.ajax({
-			type: 'post',
-			url: '/characters/buynode',
-			headers: {'X-XSRF-TOKEN' : token},
-			data: {
-				'character_id': characterid,
-				'node_id': circle.id
-			}, success: function(data) {
-
-				if (data.result != 'success') {
-					sellPower(circle, true);
-					alert('You could not buy this node !');
-				}
-			}
-		}, 'json');
-	}
+function frontBuyPower(circle) {
 
 	powerLeft--;
 	circle.bought = true;
@@ -212,6 +193,36 @@ function buyPower(circle, withoutAjax) {
 		else
 			connections[i].salable = false;
 	}
+	drawAll();
+}
+
+function buyPower(circle) {
+
+	if (powerLeft <= 0)
+		return;
+
+	loading();
+
+	$.ajax({
+		type: 'post',
+		url: '/characters/buynode',
+		headers: {'X-XSRF-TOKEN' : token},
+		data: {
+			'character_id': characterid,
+			'node_id': circle.id
+		}, success: function(data) {
+
+			isLoading = false;
+
+			if (data.result != 'success') {
+				frontSellPower(circle);
+				alert('You could not buy this node !');
+			} else {
+
+				frontBuyPower(circle);
+			}
+		}
+	}, 'json');
 }
 
 function makeLinkNotAvailable(link) {
@@ -223,26 +234,7 @@ function makeLinkNotAvailable(link) {
 	link.available = false;
 }
 
-function sellPower(circle, withoutAjax) {
-
-	if (!withoutAjax) {
-
-		$.ajax({
-			type: 'post',
-			url: '/characters/sellnode',
-			headers: {'X-XSRF-TOKEN' : token},
-			data: {
-				'character_id': characterid,
-				'node_id': circle.id
-			}, success: function(data) {
-
-				if (data.result != 'success') {
-					buyPower(circle, true);
-					alert('You could not sell this node !');
-				}
-			}
-		}, 'json');
-	}
+function frontSellPower(circle) {
 
 	powerLeft++;
 	circle.bought = false;
@@ -266,6 +258,33 @@ function sellPower(circle, withoutAjax) {
 			}
 		}
 	}
+	drawAll();
+}
+
+function sellPower(circle) {
+
+	loading();
+
+	$.ajax({
+		type: 'post',
+		url: '/characters/sellnode',
+		headers: {'X-XSRF-TOKEN' : token},
+		data: {
+			'character_id': characterid,
+			'node_id': circle.id
+		}, success: function(data) {
+
+			isLoading = false;
+
+			if (data.result != 'success') {
+				frontBuyPower(circle);
+				alert('You could not sell this node !');
+			} else {
+
+				frontSellPower(circle);
+			}
+		}
+	}, 'json');
 }
 
 function mouseclick(e) {
@@ -311,11 +330,15 @@ function resetPowers() {
 		var link = links[i];
 		link.available = false;
 	}
+	powerLeft = 7;
 	selectRace(raceid);
+	drawAll();
 }
 
 function loading() {
 
+	isLoading = true;
+	ctx.fillStyle = 'black';
 	ctx.fillText('loading', 0, 10);
 }
 
@@ -324,6 +347,8 @@ function init() {
 	loading();
 	$.getJSON('/characters/' + characterid + '/powersinfos', function(data) {
 		
+		isLoading = false;
+
 		for (var i in data.nodes) {
 
 			var node = data.nodes[i];
@@ -344,7 +369,7 @@ function init() {
 
 			var circle = circles[data.bought[i].id];
 			if (circle.type == 'power')
-				buyPower(circle, true);
+				frontBuyPower(circle);
 		}
 
 		drawAll();
