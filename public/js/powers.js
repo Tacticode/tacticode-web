@@ -290,6 +290,14 @@ function resetPowers() {
 
 	if (!(confirm('Are you sure ?')))
 		return;
+
+	$.ajax({
+		type: 'post',
+		url: '/characters/resetpower',
+		headers: {'X-XSRF-TOKEN' : token},
+		data: {'character_id': characterid}
+	});
+
 	for (var i in circles) {
 
 		var circle = circles[i];
