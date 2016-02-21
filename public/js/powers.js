@@ -4,6 +4,7 @@ var token = document.getElementById('token').value;
 var characterid = document.getElementById('characterid').value;
 var raceid = document.getElementById('raceid').value;
 var text = document.getElementById('selectedCircle');
+var textDesc = document.getElementById('selectedCircleDesc');
 var powerLeft = 7;
 var c = document.getElementById("powers");
 var ctx = c.getContext("2d");
@@ -11,7 +12,7 @@ var circles = [];
 var links = [];
 var isLoading = false;
 
-function Circle(id, x, y, radius, name, strokeStyle, fillStyle, type) {
+function Circle(id, x, y, radius, name, strokeStyle, fillStyle, type, description) {
 
 	this.id = id;
 	this.x = x;
@@ -21,6 +22,7 @@ function Circle(id, x, y, radius, name, strokeStyle, fillStyle, type) {
 	this.strokeStyle = strokeStyle;
 	this.fillStyle = fillStyle;
 	this.type = type;
+	this.description = description;
 	this.hover = false;
 }
 
@@ -74,9 +76,9 @@ function addRace(id, name, x, y) {
 	circles[id] = new Circle(id, x, y, 20, name, "#C25959", "#D49692", 'race');
 }
 
-function addPower(id, name, x, y) {
+function addPower(id, name, description, x, y) {
 
-	circles[id] = new Circle(id, x, y, 10, name, "#7FAD76", "#9DD492", 'power');
+	circles[id] = new Circle(id, x, y, 10, name, "#7FAD76", "#9DD492", 'power', description);
 }
 
 function addLink(id1, id2) {
@@ -142,12 +144,14 @@ function mousemovement(e) {
 			
 			circle.hover = true;
 			text.textContent = circle.name;
+			textDesc.textContent = circle.description;
 			if (circle.type == 'power' && circle.available && (!circle.bought || circle.salable))
 				document.body.style.cursor = 'pointer';
 		} else if (circle.hover && !isInCircle(x, y, circle)) {
 			
 			circle.hover = false;
 			text.textContent = '';
+			textDesc.textContent = '';
 			if (circle.type == 'power')
 				document.body.style.cursor = 'initial';
 		}
@@ -355,7 +359,7 @@ function init() {
 			if (node.race)
 				addRace(node.id, node.race.name, node.pos_x, node.pos_y);
 			else if (node.power)
-				addPower(node.id, node.power.name, node.pos_x, node.pos_y);
+				addPower(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);
 		}
 
 		for (var i in data.paths) {
