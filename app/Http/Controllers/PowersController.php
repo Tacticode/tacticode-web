@@ -85,15 +85,15 @@ class PowersController extends Controller
 
     private function checkPathStart($node, $nodes_id)
     {
+        if ($node->race_id != null)
+        {
+            return true;
+        }
         foreach (Node::getAdjacentNodes($node) as $adj_node)
         {
-            if (in_array($nodes_id, $adj_node->id))
+            if (in_array($adj_node->id, $nodes_id))
             {
-                if ($adj_node->race_id != null)
-                {
-                    return true;
-                }
-                return checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id]));
+                return $this->checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id]));
             }
         }
         return false;
@@ -130,7 +130,7 @@ class PowersController extends Controller
 
         foreach (Node::getAdjacentNodes($node_start) as $adj_node)
         {
-            if (!checkPathStart($adj_node, $nodes_id))
+            if (in_array($adj_node->id, $nodes_id) && !$this->checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id])))
             {
                 return response()->json(['result' => 'failure', 'description' => 'Node is not at the end.']);
             }
