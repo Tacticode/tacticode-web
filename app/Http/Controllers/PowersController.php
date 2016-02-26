@@ -83,6 +83,22 @@ class PowersController extends Controller
         return response()->json(['result' => 'failure', 'description' => 'Node cannot be reached.']);
     }
 
+    private function checkPathStart($node, $nodes_id)
+    {
+        if ($node->race_id != null)
+        {
+            return true;
+        }
+        foreach (Node::getAdjacentNodes($node) as $adj_node)
+        {
+            if (in_array($adj_node->id, $nodes_id))
+            {
+                return $this->checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id]));
+            }
+        }
+        return false;
+    }
+
     public function sellNode(Request $request)
     {
         $req = $request->all();
@@ -95,19 +111,32 @@ class PowersController extends Controller
 
         $nodes = $character->node;
         $nodes_id = [];
+        $node_start = null;
         foreach ($nodes as $n)
         {
-            $nodes_id[] = $n->id;
-        }
-
-        foreach ($nodes as $n) {
             if ($n->id == $req['node_id'] && $n->race_id == null)
             {
-                $character->node()->detach([$req['node_id']]);
-                return response()->json(['result' => 'success', 'description' => 'Node removed from character.']);
+                $node_start = $n;
+            }
+            else
+            {
+                $nodes_id[] = $n->id;
             }
         }
-        return response()->json(['result' => 'failure', 'description' => 'Node does not belong to the character.']);
+        if ($node_start == null)
+        {
+            return response()->json(['result' => 'failure', 'description' => 'Node does not belong to the character.']);            
+        }
+
+        foreach (Node::getAdjacentNodes($node_start) as $adj_node)
+        {
+            if (in_array($adj_node->id, $nodes_id) && !$this->checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id])))
+            {
+                return response()->json(['result' => 'failure', 'description' => 'Node is not at the end.']);
+            }
+        }
+        $character->node()->detach([$req['node_id']]);
+        return response()->json(['result' => 'success', 'description' => 'Node removed from character.']);
     }
 
     public function resetPower(Request $request)
