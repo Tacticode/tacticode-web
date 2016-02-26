@@ -28,7 +28,7 @@ class CharactersController extends Controller
      */
     public function index()
     {
-        return view('characters.index', Auth::user()->character);
+        return view('characters.index', ['characters' => Auth::user()->character]);
     }
 
     /**
@@ -108,7 +108,7 @@ class CharactersController extends Controller
             'races' => Race::lists('name', 'id'),
             'scripts' => Auth::user()->script->lists('name', 'id')->all()
         ];
-        $datas['scripts'][0] = 'Aucun script';
+        $datas['scripts'][0] = 'No script';
         ksort($datas['scripts']);
         return view('characters.add', $datas);
     }

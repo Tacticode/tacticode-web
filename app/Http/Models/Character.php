@@ -78,4 +78,15 @@ class Character extends Model
     {
         return $this->belongsToMany('App\Http\Models\Node');
     }
+
+    /**
+    * A character has multiple teams.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    *
+    */
+    public function team()
+    {
+        return $this->belongsToMany('App\Http\Models\Team');
+    }
 }

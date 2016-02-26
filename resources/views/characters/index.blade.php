@@ -2,9 +2,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">Characters</h1>
+    <h1 class="page-header">Characters <a class="btn btn-primary" href="/teams">Manage teams</a></h1>
 
-    @if (Auth::user()->character)
+    @if (count($characters))
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Auth::user()->character as $character)
+                    @foreach ($characters as $character)
                         <tr>
                             <td>{{ $character->name }}</td>
                             <td>{{ $character->race()->first()->name }}</td>

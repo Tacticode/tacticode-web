@@ -77,4 +77,15 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Http\Models\Script');
     }
+
+    /**
+    * A user has many teams.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function team()
+    {
+        return $this->hasMany('App\Http\Models\Team');
+    }
 }

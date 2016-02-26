@@ -4,8 +4,6 @@
 @section('content')
     <h1 class="page-header">Add a character</h1>
 
-    <?php //dd($errors); ?>
-
     <div class="row">
         <div class="col-md-4">
 

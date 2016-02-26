@@ -36,9 +36,16 @@ Route::post('/characters/buynode', 'PowersController@buyNode');
 Route::post('/characters/sellnode', 'PowersController@sellNode');
 Route::post('/characters/resetpower', 'PowersController@resetPower');
 Route::get('/characters/{id}', 'CharactersController@view');
+Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
 Route::get('/characters/{id}/powers', 'PowersController@view');
 Route::get('/characters/{id}/powersinfos', 'PowersController@powersInfos');
+
+Route::get('/teams', 'TeamsController@index');
+Route::get('/teams/add', 'TeamsController@create');
+Route::post('/teams/add', 'TeamsController@store');
+Route::get('/teams/{id}', 'TeamsController@view');
+Route::post('/teams/{id}', 'TeamsController@update');
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');
