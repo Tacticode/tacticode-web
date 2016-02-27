@@ -3,6 +3,8 @@
     <head>
         <title>Tacticode</title>
 
+        <link rel="icon" type="image/png" href="favicon.png" />
+
         <!-- Jquery -->
         <script src="/js/jquery-2.1.4.min.js"></script>
 
