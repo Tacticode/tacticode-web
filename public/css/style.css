@@ -22,6 +22,11 @@ body {
 	color: red;
 }
 
+.jumbotron {
+
+	background: url('/img/geometry2.png');
+}
+
 /***************
 ** Navigation **
 ****************/
@@ -116,9 +121,12 @@ body {
 }
 
 .sidebar li.active>a,
-.sidebar li.active>a:hover {
+.sidebar li.active>a:hover,
+.sidebar li.active>a:focus {
 
 	background: #667180;
+	border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid #2b333c;
 }
 
 /*

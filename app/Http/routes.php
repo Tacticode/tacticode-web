@@ -13,6 +13,10 @@
 
 Route::get('/', 'AppController@index');
 
+Route::get('/terms', function() {
+	return view('welcome.terms');
+});
+
 Route::post('/login', 'AuthController@login');
 
 Route::get('/logout', 'AuthController@logout');
@@ -51,7 +55,6 @@ Route::get('/teams/{id}', 'TeamsController@view');
 Route::post('/teams/{id}', 'TeamsController@update');
 
 Route::get('/arena', 'FightsController@arena');
-
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');

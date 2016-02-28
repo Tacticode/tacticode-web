@@ -60,7 +60,7 @@
                     @section('sidebar')
                         <ul class="nav nav-sidebar">
                             <li class="@if ($nav == 'dashboard') active @endif"><a href="/dashboard">
-                                <span class="fa fa-tachometer"></span>Dashboard <span class="sr-only">(current)</span>
+                                <span class="fa fa-tachometer"></span>Dashboard
                             </a></li>
                             <li class="@if ($nav == 'scripts') active @endif"><a href="/scripts">
                                 <span class="fa fa-file-o"></span>Scripts Editor
