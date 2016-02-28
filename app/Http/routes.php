@@ -53,6 +53,7 @@ Route::get('/teams/add', 'TeamsController@create');
 Route::post('/teams/add', 'TeamsController@store');
 Route::get('/teams/{id}', 'TeamsController@view');
 Route::post('/teams/{id}', 'TeamsController@update');
+Route::get('/teams/delete/{id}', 'TeamsController@delete');
 
 Route::get('/arena', 'FightsController@arena');
 

@@ -19,6 +19,10 @@
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <script src="/js/bootstrap.min.js"></script>
 
+        <!-- jQuery Growl -->
+        <link rel="stylesheet" href="/css/jquery.growl.css">
+        <script src="/js/jquery.growl.js"></script>
+        
         <!-- Page styles -->
         @section('page-styles')
         @show

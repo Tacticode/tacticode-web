@@ -34,6 +34,7 @@ function updateField(field) {
 		$('#' + field.name + '-icon').addClass('fa-spin fa-load fa-spinner');
 	}
 }
+
 function setError(field, message) {
 
 	field.status = 'error';

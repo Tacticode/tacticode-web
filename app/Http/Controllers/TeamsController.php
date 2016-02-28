@@ -35,14 +35,12 @@ class TeamsController extends Controller
      */
     public function view($id)
     {
-        $team = Auth::user()->team->find($id);
-        if ($team == null)
-        {
+        if (!($team = Auth::user()->team->find($id)))
             return redirect('/teams');
-        }
+
         $datas = [
             'team' => $team,
-            'characters' => $team->character
+            'characters' => Auth::user()->character->lists('name', 'id')->all()
         ];
 
         return view('teams.view', $datas);
@@ -56,16 +54,30 @@ class TeamsController extends Controller
      */
     public function update($id, TeamRequest $request)
     {
-        $team = Auth::user()->team->find($id);
-        if ($team == null)
-        {
-            return redirect('/team');
-        }
+        if (!($team = Auth::user()->team->find($id)))
+            return redirect('/teams');
 
         $req = $request->all();
 
         if ($req['name'] != $team->name)
             $team->name = $req['name'];
+
+        if (isset($req['characters'])) {
+
+            $playersCharacters = Auth::user()->character->lists('id')->all();
+
+            $characterIds = [];
+            foreach ($req['characters'] as $character) {
+
+                if ($character > 0 && !in_array($character, $characterIds) && in_array($character, $playersCharacters))
+                    $characterIds[] = $character;
+            }
+            $team->character()->sync($characterIds);
+        } else {
+            
+            $team->character()->detach();
+        }
+
         $team->save();
         return redirect()->action('TeamsController@view', [$id]);
     }
@@ -78,8 +90,6 @@ class TeamsController extends Controller
     public function create()
     {
         $datas = ['characters' => Auth::user()->character->lists('name', 'id')->all()];
-        $datas['characters'][0] = 'No character';
-        ksort($datas['characters']);
         return view('teams.add', $datas);
     }
 
@@ -111,6 +121,23 @@ class TeamsController extends Controller
             }
             $team->character()->sync($characterIds);
         }
+
+        return redirect('/teams');
+    }
+
+    /**
+     * Delete the specified team.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        if (!($team = Auth::user()->team->find($id)))
+            return redirect('/teams');
+
+        $team->character()->detach();
+        $team->delete();
 
         return redirect('/teams');
     }

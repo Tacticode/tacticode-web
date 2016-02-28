@@ -72,6 +72,15 @@ body {
 	-webkit-transition: 0.3s;
 }
 
+@media (max-width: 768px) {
+
+	.navbar-nav>li>a {
+		
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+
 .navbar-nav>li>a.logout:hover {
 
 	color: red;
@@ -114,7 +123,8 @@ body {
 	font-size: 17px;
 }
 
-.sidebar li>a:hover {
+.sidebar li>a:hover,
+.sidebar li>a:focus {
 
 	background: #485361;
 	color: white;

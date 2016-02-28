@@ -2,23 +2,33 @@
 
 var teams = {
 
-	characters: [],
 	charactersList: [],
+	charactersListLength: 0,
 
 	canAddCharacter: function() {
 
-		return (this.characters.length < 5 && this.characters.length < this.charactersList.length)
+		var length = $('.characters .form-group').length;
+		if (length >= 5) {
+
+			$.growl({message: "You can't add more than 5 characters in a team.", style: "warning", title: ""});
+			return false;
+		}
+		if (this.charactersListLength == 0) {
+
+			$.growl({message: "You don't have any character..", style: "warning", title: ""});
+			return false;
+		}
+		if (length >= this.charactersListLength) {
+
+			$.growl({message: "You only have " + this.charactersListLength + " differents characters", style: "warning", title: ""});
+			return false;
+		}
+		return true;
 	},
 
 	getMaxCharacterId: function() {
 
-		var maxId = 0;
-		for (var i in this.characters) {
-
-			if (i > maxId)
-				maxId = i;
-		}
-		return parseInt(maxId) + 1;
+		return $('.characters .form-group').length + 1;
 	},
 
 	addCharacter: function() {
@@ -27,8 +37,6 @@ var teams = {
 			return;
 		
 		var id = this.getMaxCharacterId();
-		
-		this.characters[id] = 0;
 		
 		var formGroup = ($('<div>', {
 			'class': 'form-group',
@@ -61,14 +69,42 @@ var teams = {
 
 	removeCharacter: function(id) {
 
-		$('.characters .form-group[rel=' + id + ']').remove();
-		this.characters.splice(id, 1);
+		var maxIndex = $('.characters .form-group').length;
+		$('.characters .form-group').each(function(index) {
+
+			if (index >= (id - 1) && index < maxIndex - 1) {
+
+				var value = $('.characters .form-group[rel=' + (index + 2) + '] select').val();
+				$('.characters .form-group[rel=' + (index + 1) + '] select').val(value);
+			}
+		});
+		$('.characters .form-group[rel=' + (maxIndex) + ']').remove();
 	},
 
 	loadCharactersList: function() {
 
 		this.charactersList = $.parseJSON($('#characters-list').text());
 		$('#characters-list').remove();
+		this.charactersListLength = 0;
+		for (var i in this.charactersList)
+			this.charactersListLength++;
+	},
+
+	checkSubmit: function(e) {
+
+		var ids = [];
+		$('.characters .form-group select').each(function(index) {
+
+			var value = $(this).val();
+			if (value > 0 && ids.indexOf(value) != -1) {
+
+				$.growl({message: "You can't duplicate a character !", style: "error", title: ""});
+				e.preventDefault();
+				return false;
+			}
+			if (value > 0)
+				ids.push(value);
+		});
 	}
 }
 
