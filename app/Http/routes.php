@@ -25,8 +25,11 @@ Route::get('/checkloginexists/{login}', 'UsersController@loginexists');
 Route::get('/checkemailexists/{email}', 'UsersController@emailexists');
 
 Route::get('/user', 'UsersController@edit');
+Route::get('/users/{id}', 'UsersController@show');
 Route::post('/user', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
+
+Route::get('/leaderboard', 'UsersController@leaderboard');
 
 Route::get('/characters', 'CharactersController@index');
 Route::get('/characters/add', 'CharactersController@create');
@@ -46,6 +49,9 @@ Route::get('/teams/add', 'TeamsController@create');
 Route::post('/teams/add', 'TeamsController@store');
 Route::get('/teams/{id}', 'TeamsController@view');
 Route::post('/teams/{id}', 'TeamsController@update');
+
+Route::get('/arena', 'FightsController@arena');
+
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');

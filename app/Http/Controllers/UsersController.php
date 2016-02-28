@@ -48,11 +48,22 @@ class UsersController extends Controller
     public function store(UserRequest $request)
     {
         $data = $request->all();
-        $g = Group::where('name', 'like', 'USER')->firstOrFail();
-        $data['group_id'] = $g->id;
+        $group = Group::where('name', 'like', 'USER')->firstOrFail();
+        $data['group_id'] = $group->id;
         User::create($data);
 
         return redirect('/');
+    }
+
+    /**
+     * Show the leaderboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function leaderboard()
+    {
+        $users = User::all();
+        return view('leaderboard.index', ['users' => $users]);
     }
 
     /**
@@ -61,9 +72,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        
+        if (!($user = User::find($id)))
+            return redirect('/');
+
+        return view('user.view', ['user' => $user]);
     }
 
     /**

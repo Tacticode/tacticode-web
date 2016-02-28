@@ -1,3 +1,12 @@
+/*
+** General
+*/
+
+body {
+
+	padding-top: 60px;
+}
+
 .clickable {
 	
 	cursor: pointer;
@@ -11,4 +20,112 @@
 .red:hover {
 
 	color: red;
+}
+
+/***************
+** Navigation **
+****************/
+
+/*
+** Navbar
+*/
+
+.navbar {
+
+	color: #6D7A8B;
+	background: #404852;
+	min-height: 60px;
+	border: 0;
+}
+
+.navbar .navbar-brand {
+
+	color: white;
+	background: #FF9F05;
+	transition: 0.3s;
+	-o-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-webkit-transition: 0.3s;
+	padding: 20px 20px;
+	height: 60px;
+}
+
+.navbar .navbar-form,
+.navbar .navbar-btn {
+
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+
+.navbar-nav>li>a {
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+	transition: 0.3s;
+	-o-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-webkit-transition: 0.3s;
+}
+
+.navbar-nav>li>a.logout:hover {
+
+	color: red;
+}
+
+.navbar .navbar-brand:hover {
+
+	background: #EB9409;
+}
+
+/*
+** Sidebar
+*/
+
+.sidebar {
+
+	background: #323a44;
+	top: 60px;
+	padding-top: 0;
+}
+
+.sidebar li>a {
+
+	height: 60px;
+	font-size: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: #939faf;
+	border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid #2b333c;
+    transition: 0.3s;
+	-o-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-webkit-transition: 0.3s;
+}
+
+.sidebar li>a span.fa {
+
+	margin-right: 15px;
+	font-size: 17px;
+}
+
+.sidebar li>a:hover {
+
+	background: #485361;
+	color: white;
+}
+
+.sidebar li.active>a,
+.sidebar li.active>a:hover {
+
+	background: #667180;
+}
+
+/*
+** Arena
+*/
+
+.arena .fight-type {
+
+	text-align: center;
 }

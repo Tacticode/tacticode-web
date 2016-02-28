@@ -23,8 +23,8 @@
         @section('page-styles')
         @show
 
-        <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/dashboard.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
 
     <body>
@@ -47,7 +47,7 @@
                             <li class="@if ($nav == 'help') active @endif"><a href="#">Help</a></li>
                             <li class="@if ($nav == 'chat') active @endif"><a href="#">Chat</a></li>
                             <li class="@if ($nav == 'forum') active @endif"><a href="#">Forum</a></li>
-                            <li class="@if ($nav == 'logout') active @endif"><a href="/logout">Logout</a></li>
+                            <li><a href="/logout" class="logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,12 +59,24 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     @section('sidebar')
                         <ul class="nav nav-sidebar">
-                            <li class="@if ($nav == 'dashboard') active @endif"><a href="/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
-                            <li class="@if ($nav == 'scripts') active @endif"><a href="/scripts">Scripts Editor</a></li>
-                            <li class="@if ($nav == 'characters') active @endif"><a href="/characters">Characters</a></li>
-                            <li class="@if ($nav == 'teams') active @endif"><a href="/teams">Teams</a></li>
-                            <li class="@if ($nav == 'arena') active @endif"><a href="#">Arena</a></li>
-                            <li class="@if ($nav == 'leaderboard') active @endif"><a href="#">Leaderboard</a></li>
+                            <li class="@if ($nav == 'dashboard') active @endif"><a href="/dashboard">
+                                <span class="fa fa-tachometer"></span>Dashboard <span class="sr-only">(current)</span>
+                            </a></li>
+                            <li class="@if ($nav == 'scripts') active @endif"><a href="/scripts">
+                                <span class="fa fa-file-o"></span>Scripts Editor
+                            </a></li>
+                            <li class="@if ($nav == 'characters') active @endif"><a href="/characters">
+                                <span class="fa fa-user"></span>Characters
+                            </a></li>
+                            <li class="@if ($nav == 'teams') active @endif"><a href="/teams">
+                                <span class="fa fa-users"></span>Teams
+                            </a></li>
+                            <li class="@if ($nav == 'arena') active @endif"><a href="/arena">
+                                <span class="fa fa-gavel"></span>Arena
+                            </a></li>
+                            <li class="@if ($nav == 'leaderboard') active @endif"><a href="/leaderboard">
+                                <span class="fa fa-line-chart"></span>Leaderboard
+                            </a></li>
                         </ul>
                     @show
                 </div>
