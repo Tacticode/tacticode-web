@@ -62,6 +62,7 @@
                             <li class="@if ($nav == 'dashboard') active @endif"><a href="/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
                             <li class="@if ($nav == 'scripts') active @endif"><a href="/scripts">Scripts Editor</a></li>
                             <li class="@if ($nav == 'characters') active @endif"><a href="/characters">Characters</a></li>
+                            <li class="@if ($nav == 'teams') active @endif"><a href="/teams">Teams</a></li>
                             <li class="@if ($nav == 'arena') active @endif"><a href="#">Arena</a></li>
                             <li class="@if ($nav == 'leaderboard') active @endif"><a href="#">Leaderboard</a></li>
                         </ul>

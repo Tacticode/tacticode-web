@@ -2,3 +2,13 @@
 	
 	cursor: pointer;
 }
+
+.red {
+
+	color: red;
+}
+
+.red:hover {
+
+	color: red;
+}

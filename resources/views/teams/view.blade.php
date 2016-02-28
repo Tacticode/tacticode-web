@@ -1,4 +1,4 @@
-{{--*/ $nav = 'characters' /*--}}
+{{--*/ $nav = 'teams' /*--}}
 @extends('layouts.dashboard')
 
 @section('content')
@@ -45,4 +45,6 @@
             </tbody>
         </table>
     </div>
+
+    <a class="btn btn-primary" href="/teams">Back to teams</a>
 @endsection

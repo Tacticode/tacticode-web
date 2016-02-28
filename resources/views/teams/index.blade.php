@@ -1,4 +1,4 @@
-{{--*/ $nav = 'characters' /*--}}
+{{--*/ $nav = 'teams' /*--}}
 @extends('layouts.dashboard')
 
 @section('content')

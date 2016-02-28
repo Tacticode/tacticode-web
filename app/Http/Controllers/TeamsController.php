@@ -77,7 +77,7 @@ class TeamsController extends Controller
      */
     public function create()
     {
-        $datas = ['characters' => Auth::user()->character->lists('name')->all()];
+        $datas = ['characters' => Auth::user()->character->lists('name', 'id')->all()];
         $datas['characters'][0] = 'No character';
         ksort($datas['characters']);
         return view('teams.add', $datas);
@@ -99,13 +99,18 @@ class TeamsController extends Controller
 
         $team = Team::create($data);
 
-        $characterIds = [];
-        for ($i = 0; $i < 5; $i++) {
+        if (isset($req['characters'])) {
 
-            if (isset($req['character' . $i]) && $req['character' . $i] != 0)
-                $characterIds[] = $req['character' . $i];
+            $playersCharacters = Auth::user()->character->lists('id')->all();
+
+            $characterIds = [];
+            foreach ($req['characters'] as $character) {
+
+                if ($character > 0 && !in_array($character, $characterIds) && in_array($character, $playersCharacters))
+                    $characterIds[] = $character;
+            }
+            $team->character()->sync($characterIds);
         }
-        $team->character()->sync($characterIds);
 
         return redirect('/teams');
     }
