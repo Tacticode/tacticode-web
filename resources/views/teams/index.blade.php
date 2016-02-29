@@ -2,19 +2,19 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">Teams <a class="btn btn-primary" href="/characters">Manage characters</a></h1>
+    <h1 class="page-header">@lang('teams.title') <a class="btn btn-primary" href="/characters">@lang('characters.manage')</a></h1>
 
     @if (count($teams))
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number of characters</th>
-                        <th>Battles</th>
-                        <th>Victories</th>
-                        <th>Defeats</th>
-                        <th>Draws</th>
+                        <th>@lang('teams.name')</th>
+                        <th>@lang('teams.characters')</th>
+                        <th>@lang('teams.battles')</th>
+                        <th>@lang('teams.victories')</th>
+                        <th>@lang('teams.defeats')</th>
+                        <th>@lang('teams.draws')</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -28,8 +28,8 @@
                             <td class="danger">2</td>
                             <td class="warning">0</td>
                             <td>
-                                <a href="/teams/{{ $team->id }}" class="btn btn-primary">More</a>
-                                <a class="btn btn-danger" href="/teams/delete/{{ $team->id }}" onclick="if (!confirm('Are you sure you want to delete this team ?')) return false">Delete</a>
+                                <a href="/teams/{{ $team->id }}" class="btn btn-primary">@lang('navigation.more')</a>
+                                <a class="btn btn-danger" href="/teams/delete/{{ $team->id }}" onclick="if (!confirm('@lang('teams.confirmDelete')')) return false">@lang('navigation.delete')</a>
                             </td>
                         </tr>
                     @endforeach
@@ -38,11 +38,11 @@
         </div>
     @else
         <div class="row">
-            <i>You have no team at this time. Do you want to <a href="/teams/add">add one</a>?</a>
+            <i>@lang('teams.noTeams', ['link' => '/teams/add'])</i>
         </div>
     @endif
 
     <div class="row">
-        <a class="btn btn-success" href="/teams/add">Add a team</a>
+        <a class="btn btn-success" href="/teams/add">@lang('teams.add')</a>
     </div>
 @endsection

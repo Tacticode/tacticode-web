@@ -2,26 +2,26 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">Scripts</h1>
+    <h1 class="page-header">@lang('scripts.title')</h1>
 
-    @if (Auth::user()->script)
+    @if (count($scripts))
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Lines</th>
+                        <th>@lang('scripts.name')</th>
+                        <th>@lang('scripts.lines')</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Auth::user()->script as $script)
+                    @foreach ($scripts as $script)
                         <tr>
                             <td>{{ $script->name }}</td>
                             <td>1</td>
                             <td>
-                                <a href="/scripts/{{ $script->id }}" class="btn btn-primary">Edit</a>
-                                <a class="btn btn-danger" href="/scripts/delete/{{ $script->id }}" onclick="if (!confirm('Are you sure you want to delete this script ?')) return false">Delete</a>
+                                <a href="/scripts/{{ $script->id }}" class="btn btn-primary">@lang('navigation.edit')</a>
+                                <a class="btn btn-danger" href="/scripts/delete/{{ $script->id }}" onclick="if (!confirm('@lang('scripts.confirmDelete')')) return false">@lang('navigation.delete')</a>
                             </td>
                         </tr>
                     @endforeach
@@ -30,11 +30,11 @@
         </div>
     @else
         <div class="row">
-            <i>You have no scripts at this time. Do you want to <a href="/scripts/add">add one</a>?</a>
+            <i>@lang('scripts.noScripts', ['link' => '/scripts/add'])</i>
         </div>
     @endif
 
     <div class="row">
-        <a class="btn btn-success" href="/scripts/add">Add a script</a>
+        <a class="btn btn-success" href="/scripts/add">@lang('scripts.add')</a>
     </div>
 @endsection

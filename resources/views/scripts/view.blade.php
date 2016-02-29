@@ -16,7 +16,7 @@
         <h1 class="clickable page-header">{{ $script->name }}</h1>
         <div class="page-header row" style="display: none">
             <div class="col-md-4">
-                {!! Form::text('name', $script->name, ['class' => 'form-control']) !!}
+                {!! Form::text('name', $script->name, ['class' => 'form-control', 'placeholder' => trans('scripts.name')]) !!}
             </div>
         </div>
 
@@ -25,7 +25,7 @@
     	<div class="spacer"></div>
 
     	<div class="form-group">
-            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit(trans('navigation.update'), ['class' => 'btn btn-primary form-control']) !!}
         </div>
 
     {!! Form::close() !!}

@@ -2,20 +2,20 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">Characters <a class="btn btn-primary" href="/teams">Manage teams</a></h1>
+    <h1 class="page-header">@lang('characters.title') <a class="btn btn-primary" href="/teams">@lang('teams.manage')</a></h1>
 
     @if (count($characters))
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Race</th>
-                        <th>Script</th>
-                        <th>Battles</th>
-                        <th>Victories</th>
-                        <th>Defeats</th>
-                        <th>Draws</th>
+                        <th>@lang('characters.name')</th>
+                        <th>@lang('characters.race')</th>
+                        <th>@lang('characters.script')</th>
+                        <th>@lang('characters.battles')</th>
+                        <th>@lang('characters.victories')</th>
+                        <th>@lang('characters.defeats')</th>
+                        <th>@lang('characters.draws')</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -28,7 +28,7 @@
                                 @if ($script = $character->script()->first())
                                     {{ $script->name }}
                                 @else
-                                    <i>No script associated</i>
+                                    <i>@lang('characters.noScript')</i>
                                 @endif
                             </td>
                             <td>10</td>
@@ -36,8 +36,8 @@
                             <td class="danger">2</td>
                             <td class="warning">0</td>
                             <td>
-                                <a href="/characters/{{ $character->id }}" class="btn btn-primary">More</a>
-                                <a class="btn btn-danger" href="/characters/delete/{{ $character->id }}" onclick="if (!confirm('Are you sure you want to delete this character ?')) return false">Delete</a>
+                                <a href="/characters/{{ $character->id }}" class="btn btn-primary">@lang('navigation.more')</a>
+                                <a class="btn btn-danger" href="/characters/delete/{{ $character->id }}" onclick="if (!confirm('@lang('characters.confirmDelete')')) return false">@lang('navigation.delete')</a>
                             </td>
                         </tr>
                     @endforeach
@@ -46,11 +46,11 @@
         </div>
     @else
         <div class="row">
-            <i>You have no characters at this time. Do you want to <a href="/characters/add">add one</a>?</a>
+            <i>@lang('characters.noCharacters', ['link' => '/characters/add'])</i>
         </div>
     @endif
 
     <div class="row">
-        <a class="btn btn-success" href="/characters/add">Add a character</a>
+        <a class="btn btn-success" href="/characters/add">@lang('characters.add')</a>
     </div>
 @endsection

@@ -5,6 +5,9 @@
 
         <link rel="icon" type="image/png" href="favicon.png" />
 
+        <!-- Lang -->
+        <script src="@lang('javascript.file')"></script>
+
         <!-- Jquery -->
         <script src="/js/jquery-2.1.4.min.js"></script>
 
@@ -34,16 +37,16 @@
                         <a class="navbar-brand" href="/">Tacticode</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
-                        <a href="/register" class="btn btn-primary navbar-btn navbar-right">Register</a>
+                        <a href="/register" class="btn btn-primary navbar-btn navbar-right">@lang('users.register')</a>
                         <form method="post" action="/login" class="navbar-form navbar-right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
-                                <input type="text" placeholder="Login" class="form-control" name="login">
+                                <input type="text" placeholder="@lang('users.login')" class="form-control" name="login">
                             </div>
                             <div class="form-group">
-                                <input type="password" placeholder="Password" class="form-control" name="password">
+                                <input type="password" placeholder="@lang('users.password')" class="form-control" name="password">
                             </div>
-                            <button type="submit" class="btn btn-success">Sign in</button>
+                            <button type="submit" class="btn btn-success">@lang('users.signIn')</button>
                         </form>
                     </div>
                 </div>

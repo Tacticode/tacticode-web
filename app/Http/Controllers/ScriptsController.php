@@ -25,7 +25,7 @@ class ScriptsController extends Controller
      */
     public function index()
     {
-        return view('scripts.index');
+        return view('scripts.index', ['scripts' => Auth::user()->script]);
     }
 
     /**

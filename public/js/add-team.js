@@ -6,7 +6,7 @@ fields = [
 		'status': 'empty',
 		'rules': [
 			{
-				'message': 'Name length should be between 3 and 20 characters.',
+				'message': lang.validation.addTeam.name.size,
 				'type': 'size',
 				'size-min': 3,
 				'size-max': 20

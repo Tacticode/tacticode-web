@@ -2,15 +2,15 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">Leaderboard</h1>
+    <h1 class="page-header">@lang('leaderboard.title')</h1>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Position</th>
-                    <th>Name</th>
-                    <th>Score</th>
+                    <th>@lang('leaderboard.position')</th>
+                    <th>@lang('leaderboard.name')</th>
+                    <th>@lang('leaderboard.score')</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,14 +20,14 @@
 		                    <td>?</td>
 		                    <td>{{ $user->login }}</td>
 		                    <td>?</td>
-		                    <td><a class="btn btn-primary" href="/user">My profile</a></td>
+		                    <td><a class="btn btn-primary" href="/user">@lang('leaderboard.myProfile')</a></td>
 		                </tr>
             	 	@else
 		                <tr>
 		                    <td>?</td>
 		                    <td>{{ $user->login }}</td>
 		                    <td>?</td>
-		                    <td><a class="btn btn-primary" href="/users/{{ $user->id }}">View</a></td>
+		                    <td><a class="btn btn-primary" href="/users/{{ $user->id }}">@lang('navigation.view')</a></td>
 		                </tr>
 	                @endif
 	            @endforeach

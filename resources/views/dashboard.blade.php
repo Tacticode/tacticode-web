@@ -2,32 +2,32 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">Dashboard</h1>
+    <h1 class="page-header">@lang('dashboard.title')</h1>
 
     <div class="row placeholders">
         @if (Auth::user()->character)
             @foreach (Auth::user()->character as $character)
                 <div class="col-xs-6 col-sm-3 placeholder">
                     <h4>{{ $character->name }}</h4>
-                    <span class="text-muted"><a href="/characters/{{ $character->id }}">See more</a></span>
+                    <span class="text-muted"><a href="/characters/{{ $character->id }}">@lang('navigation.seeMore')</a></span>
                 </div>
             @endforeach
         @else
             <div class="col-xs-12">
-                <i>You don't have any character for the moment.</i>
+                <i>@lang('dashboard.noCharacters')</i>
             </div>
         @endif
     </div>
 
-    <h2 class="sub-header">Fighting history</h2>
+    <h2 class="sub-header">@lang('fights.history')</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Character</th>
-                    <th>Enemy</th>
-                    <th>Victory</th>
+                    <th>@lang('fights.date')</th>
+                    <th>@lang('fights.character')</th>
+                    <th>@lang('fights.enemy')</th>
+                    <th>@lang('fights.victory')</th>
                 </tr>
             </thead>
             <tbody>

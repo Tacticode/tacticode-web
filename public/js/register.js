@@ -6,13 +6,13 @@ fields = [
 		'status': 'empty',
 		'rules': [
 			{
-				'message': 'Login length should be between 3 and 20 characters.',
+				'message': lang.validation.user.login.size,
 				'type': 'size',
 				'size-min': 3,
 				'size-max': 20
 			},
 			{
-				'message': 'The login has already been taken.',
+				'message': lang.validation.user.login.exists,
 				'type': 'ajax',
 				'url': '/checkloginexists/'
 			}
@@ -23,12 +23,12 @@ fields = [
 		'status': 'empty',
 		'rules': [
 			{
-				'message': 'Please enter a valid email.',
+				'message': lang.validation.user.email.format,
 				'type': 'regex',
 				'regex': /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i
 			},
 			{
-				'message': 'The email has already been taken.',
+				'message': lang.validation.user.email.exists,
 				'type': 'ajax',
 				'url': '/checkemailexists/'
 			}
@@ -39,7 +39,7 @@ fields = [
 		'status': 'empty',
 		'rules': [
 			{
-				'message': 'Password length should be between 3 and 50 characters.',
+				'message': lang.validation.user.password.size,
 				'type': 'size',
 				'size-min': 3,
 				'size-max': 20

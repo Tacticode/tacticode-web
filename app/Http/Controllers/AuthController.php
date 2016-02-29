@@ -29,7 +29,7 @@ class AuthController extends Controller
             return redirect()->intended('dashboard');
         }
         return \Redirect::to('/')
-            ->with('error', "Login or password invalid.")
+            ->with('error', trans('users.loginOrPasswordInvalid'))
             ->with('fields', $data);
     }
 

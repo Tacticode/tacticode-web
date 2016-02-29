@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <h1 class="page-header">Add a team</h1>
+    <h1 class="page-header">@lang('teams.add')</h1>
 
     <div class="row">
         <div class="col-md-4">
@@ -17,7 +17,7 @@
             {!! Form::open(['onsubmit' => 'teams.checkSubmit(event)']) !!}
 
                 <div class="form-group has-feedback @if ($errors->has('name')) has-error @endif" id="name-group">
-                    {!! Form::label('name', 'Name') !!}
+                    {!! Form::label('name', trans('teams.name')) !!}
                     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     <div class="help-block" id="name-error">
                         @foreach ($errors->get('name') as $error)
@@ -34,11 +34,11 @@
                 <div class="characters"></div>
 
                 <div class="form-group">
-                    <button class="btn btn-success" onclick="teams.addCharacter()" type="button">+ Add a character</button>
+                    <button class="btn btn-success" onclick="teams.addCharacter()" type="button">+ @lang('teams.addCharacter')</button>
                 </div>
 
                 <div class="form-group">
-                    {!! Form::submit('Add', ['class' => 'btn btn-primary form-control']) !!}
+                    {!! Form::submit(trans('navigation.add'), ['class' => 'btn btn-primary form-control']) !!}
                 </div>
 
             {!! Form::close() !!}

@@ -15,7 +15,7 @@
             {!! Form::open() !!}
 
                 <div class="form-group has-feedback @if ($errors->has('login')) has-error @endif" id="login-group">
-                    {!! Form::label('login', 'Login') !!}
+                    {!! Form::label('login', trans('users.login')) !!}
                     {!! Form::text('login', Auth::user()->login, ['class' => 'form-control']) !!}
                     <span class="help-block" id="login-error">
                         @if ($errors->has('login'))
@@ -25,8 +25,8 @@
                     <span id="login-icon" class="fa form-control-feedback" aria-hidden="true"></span>
                 </div>
 
-                <div class="form-group has-feedback @if ($errors->has('email')) has-error @endif">
-                    {!! Form::label('email', 'Email') !!}
+                <div class="form-group has-feedback @if ($errors->has('email')) has-error @endif" id="email-group">
+                    {!! Form::label('email', trans('users.email')) !!}
                     {!! Form::email('email', Auth::user()->email, ['class' => 'form-control']) !!}
                     <span class="help-block" id="email-error">
                         @if ($errors->has('email'))
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+                    {!! Form::submit(trans('navigation.update'), ['class' => 'btn btn-primary form-control']) !!}
                 </div>
 
             {!! Form::close() !!}
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <h2 class="sub-header">Update password</h2>
+    <h2 class="sub-header">@lang('users.updatePassword')</h2>
 
     <div class="row">
         <div class="col-md-4">
@@ -53,8 +53,8 @@
             {!! Form::open(['url' => '/changepassword']) !!}
 
                 <div class="form-group">
-                    {!! Form::label('password', 'Password') !!}
-                    {!! Form::text('password', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('password', trans('users.password')) !!}
+                    {!! Form::password('password', ['class' => 'form-control']) !!}
                     <span class="help-block" id="password-error">
                         @if ($errors->has('password'))
                             {{$errors->first('password')}}
@@ -64,8 +64,8 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('new-password', 'New password') !!}
-                    {!! Form::text('new-password', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('new-password', trans('users.newPassword')) !!}
+                    {!! Form::password('new-password', ['class' => 'form-control']) !!}
                     <span class="help-block" id="new-password-error">
                         @if ($errors->has('new-password'))
                             {{$errors->first('new-password')}}
@@ -75,8 +75,8 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('new-password_confirmation', 'Confirm new password') !!}
-                    {!! Form::text('new-password_confirmation', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('new-password_confirmation', trans('users.confirmNewPassword')) !!}
+                    {!! Form::password('new-password_confirmation', ['class' => 'form-control']) !!}
                     <span class="help-block" id="new-password_confirmation-error">
                         @if ($errors->has('new-password_confirmation'))
                             {{$errors->first('new-password_confirmation')}}
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::submit('Update', ['class' => 'btn btn-danger form-control']) !!}
+                    {!! Form::submit(trans('navigation.update'), ['class' => 'btn btn-danger form-control']) !!}
                 </div>
 
             {!! Form::close() !!}

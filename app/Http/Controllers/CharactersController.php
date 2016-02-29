@@ -49,7 +49,7 @@ class CharactersController extends Controller
             'scripts' => Auth::user()->script->lists('name', 'id')->all(),
             'character' => $character
         ];
-        $datas['scripts'][0] = 'Aucun script';
+        $datas['scripts'][0] = trans('characters.noScript');
         ksort($datas['scripts']);
 
         return view('characters.view', $datas);
@@ -108,7 +108,7 @@ class CharactersController extends Controller
             'races' => Race::lists('name', 'id'),
             'scripts' => Auth::user()->script->lists('name', 'id')->all()
         ];
-        $datas['scripts'][0] = 'No script';
+        $datas['scripts'][0] = trans('characters.noScript');
         ksort($datas['scripts']);
         return view('characters.add', $datas);
     }

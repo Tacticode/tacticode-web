@@ -17,7 +17,7 @@
             {!! Form::open(['onsubmit' => 'teams.checkSubmit(event)']) !!}
 
                 <div class="form-group has-feedback @if ($errors->has('name')) has-error @endif" id="name-group">
-                    {!! Form::label('name', 'Name') !!}
+                    {!! Form::label('name', trans('teams.name')) !!}
                     {!! Form::text('name', $team->name, ['class' => 'form-control', 'required' => 'required']) !!}
                     <div class="help-block" id="name-error">
                         @foreach ($errors->get('name') as $error)
@@ -34,19 +34,19 @@
                 <div class="characters">
                     @foreach ($team->character as $key => $character)
                         <div class="form-group" rel="{{$key + 1}}">
-                            {!! Form::label('character' . ($key + 1), 'Character ' . ($key + 1)) !!}
-                            - <a onclick="teams.removeCharacter({{ $key + 1}})" class="clickable red">Remove character</a>
+                            {!! Form::label(trans('teams.character') . ($key + 1), 'Character ' . ($key + 1)) !!}
+                            - <a onclick="teams.removeCharacter({{ $key + 1}})" class="clickable red">@lang('teams.removeCharacter')</a>
                             {!! Form::select('character' . ($key + 1), $characters, $character->id, ['class' => 'form-control', 'name' => 'characters[' . ($key + 1) .']']) !!}
                         </div>
                     @endforeach
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-success" onclick="teams.addCharacter()" type="button">+ Add a character</button>
+                    <button class="btn btn-success" onclick="teams.addCharacter()" type="button">+ @lang('teams.addCharacter')</button>
                 </div>
 
                 <div class="form-group">
-                    {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+                    {!! Form::submit(trans('navigation.update'), ['class' => 'btn btn-primary form-control']) !!}
                 </div>
 
             {!! Form::close() !!}

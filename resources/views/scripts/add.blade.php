@@ -12,13 +12,13 @@
 
 
 @section('content')
-    <h1 class="page-header">Add a script</h1>
+    <h1 class="page-header">@lang('scripts.add')</h1>
 
     {!! Form::open() !!}
 
         <div class="form-group @if ($errors->has('name')) has-error @endif">
-            {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+            {!! Form::label('name', trans('scripts.name')) !!}
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('scripts.name')]) !!}
             <div class="help-block">
                 @foreach ($errors->get('name') as $error)
                     <div>{{ $error }}</div>
@@ -38,7 +38,7 @@
     	<div class="spacer"></div>
 
     	<div class="form-group">
-            {!! Form::submit('Add', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit(trans('navigation.add'), ['class' => 'btn btn-primary form-control']) !!}
         </div>
 
     {!! Form::close() !!}

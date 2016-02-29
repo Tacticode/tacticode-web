@@ -6,16 +6,16 @@
 @endsection
 
 @section('content')
-    <h1 class="page-header">Manage powers of {{ $character->name }} <a class="btn btn-primary" href="/characters/{{$character->id}}">Back to character</a></h1>
+    <h1 class="page-header">@lang('powers.manageOf', ['name' => $character->name]) <a class="btn btn-primary" href="/characters/{{$character->id}}">@lang('powers.backToCharacter')</a></h1>
 
     <input type="hidden" id="characterid" value="{{ $character->id }}">
     <input type="hidden" id="raceid" value="{{ $character->race_id }}">
     <input type="hidden" id="token" value="{{ $token }}">
 
     <div class="row">
-        <div>You have <span id="powerLeft">8</span> powers point left. <button class="btn btn-danger" onclick="resetPowers()">Reset all</button></div>
+        <div>@lang('powers.left', ['number' => 8]) <button class="btn btn-danger" onclick="resetPowers()">@lang('powers.resetAll')</button></div>
         <canvas id="powers" width="800" height="600" style="border:1px solid #000000;">
-            Your browser doesn't support canvas
+            @lang('powers.noCanvas')
         </canvas>
         <div><span id="selectedCircle"></span></div>
         <div><i id="selectedCircleDesc"></i></div>

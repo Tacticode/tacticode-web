@@ -10,17 +10,17 @@ var teams = {
 		var length = $('.characters .form-group').length;
 		if (length >= 5) {
 
-			$.growl({message: "You can't add more than 5 characters in a team.", style: "warning", title: ""});
+			$.growl({message: lang.teams.maxCharacters(5), style: "warning", title: ""});
 			return false;
 		}
 		if (this.charactersListLength == 0) {
 
-			$.growl({message: "You don't have any character..", style: "warning", title: ""});
+			$.growl({message: lang.teams.noCharacters, style: "warning", title: ""});
 			return false;
 		}
 		if (length >= this.charactersListLength) {
 
-			$.growl({message: "You only have " + this.charactersListLength + " differents characters", style: "warning", title: ""});
+			$.growl({message: lang.teams.notEnoughCharacters(this.charactersListLength), style: "warning", title: ""});
 			return false;
 		}
 		return true;
@@ -45,11 +45,11 @@ var teams = {
 		
 		formGroup.append($('<label>', {
 			'for': 'character' + id,
-			'text': 'Character ' + id
+			'text': lang.teams.character + ' ' + id
 		})).append(' - ').append($('<a>', {
 			'onclick': 'teams.removeCharacter(' + id + ')',
 			'class': 'clickable red',
-			'text': 'Remove character'
+			'text': lang.teams.removeCharacter
 		}));
 
 		var select = $('<select>', {
@@ -98,7 +98,7 @@ var teams = {
 			var value = $(this).val();
 			if (value > 0 && ids.indexOf(value) != -1) {
 
-				$.growl({message: "You can't duplicate a character !", style: "error", title: ""});
+				$.growl({message: lang.teams.cantDuplicateCharacter, style: "error", title: ""});
 				e.preventDefault();
 				return false;
 			}

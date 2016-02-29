@@ -86,14 +86,6 @@ function addLink(id1, id2) {
 	links.push(new Link(id1, id2));
 }
 
-function addRaces() {
-
-	addRace(1, 'Humain', 320, 220);
-	addRace(2, 'Gobelin', 480, 220);
-	addRace(3, 'Orc', 320, 380);
-	addRace(4, 'Elfe', 480, 380);
-}
-
 function selectRace(race) {
 
 	for (var i in circles) {
@@ -220,7 +212,7 @@ function buyPower(circle) {
 
 			if (data.result != 'success') {
 				frontSellPower(circle);
-				alert('You could not buy this node !');
+				alert(lang.powers.cantBuy);
 			} else {
 
 				frontBuyPower(circle);
@@ -282,7 +274,7 @@ function sellPower(circle) {
 
 			if (data.result != 'success') {
 				frontBuyPower(circle);
-				alert('You could not sell this node !');
+				alert(lang.powers.cantSell);
 			} else {
 
 				frontSellPower(circle);
@@ -311,7 +303,7 @@ function mouseclick(e) {
 
 function resetPowers() {
 
-	if (!(confirm('Are you sure ?')))
+	if (!(confirm(lang.sure)))
 		return;
 
 	$.ajax({
@@ -387,4 +379,4 @@ function init() {
 $(document).ready(function() {
 
 	init();
-}
+});

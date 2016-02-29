@@ -39,7 +39,7 @@ class PowersController extends Controller
         $character = Auth::user()->character->find($id);
         if ($character == null)
         {
-            return response()->json(['result' => 'failure', 'description' => 'The character does not belong to the user.']);
+            return response()->json(['result' => 'failure', 'description' => trans('characters.doesNotBelongToTheUser')]);
         }
 
         return response()->json(['nodes' => Node::with('race', 'power')->get(), 'paths' => Path::all(), 'bought' => $character->node]);
@@ -52,20 +52,20 @@ class PowersController extends Controller
         $character = Auth::user()->character->find($req['character_id']);
         if ($character == null)
         {
-            return response()->json(['result' => 'failure', 'description' => 'The character does not belong to the user.']);
+            return response()->json(['result' => 'failure', 'description' => trans('characters.doesNotBelongToTheUser')]);
         }
 
         $nodes = $character->node;
         if ($nodes->count() >= 8)
         {
-            return response()->json(['result' => 'failure', 'description' => 'No talent point left.']);
+            return response()->json(['result' => 'failure', 'description' => trans('powers.noTalentPointLeft')]);
         }
 
         $canBuy = false;
         foreach ($nodes as $n) {
             if ($n->id == $req['node_id'])
             {
-                return response()->json(['result' => 'failure', 'description' => 'Talent already acquired.']);
+                return response()->json(['result' => 'failure', 'description' => trans('powers.talentAlreadyAcquired')]);
             }
             foreach (Node::getAdjacentNodes($n) as $adj_node)
             {
@@ -78,9 +78,9 @@ class PowersController extends Controller
         if ($canBuy)
         {
             $character->node()->attach([$req['node_id']]);
-            return response()->json(['result' => 'success', 'description' => 'Node added to character.']);
+            return response()->json(['result' => 'success', 'description' => trans('powers.nodeAddedToCharacter')]);
         }
-        return response()->json(['result' => 'failure', 'description' => 'Node cannot be reached.']);
+        return response()->json(['result' => 'failure', 'description' => trans('powers.nodeCannotBeReached')]);
     }
 
     private function checkPathStart($node, $nodes_id)
@@ -106,7 +106,7 @@ class PowersController extends Controller
         $character = Auth::user()->character->find($req['character_id']);
         if ($character == null)
         {
-            return response()->json(['result' => 'failure', 'description' => 'The character does not belong to the user.']);
+            return response()->json(['result' => 'failure', 'description' => trans('characters.doesNotBelongToTheUser')]);
         }
 
         $nodes = $character->node;
@@ -125,18 +125,18 @@ class PowersController extends Controller
         }
         if ($node_start == null)
         {
-            return response()->json(['result' => 'failure', 'description' => 'Node does not belong to the character.']);            
+            return response()->json(['result' => 'failure', 'description' => trans('powers.nodeDoesNotBelongToTheCharacter')]);            
         }
 
         foreach (Node::getAdjacentNodes($node_start) as $adj_node)
         {
             if (in_array($adj_node->id, $nodes_id) && !$this->checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id])))
             {
-                return response()->json(['result' => 'failure', 'description' => 'Node is not at the end.']);
+                return response()->json(['result' => 'failure', 'description' => trans('powers.nodeIsNotAtTheEnd')]);
             }
         }
         $character->node()->detach([$req['node_id']]);
-        return response()->json(['result' => 'success', 'description' => 'Node removed from character.']);
+        return response()->json(['result' => 'success', 'description' => trans('powers.nodeRemovedFromCharacter')]);
     }
 
     public function resetPower(Request $request)
@@ -146,11 +146,11 @@ class PowersController extends Controller
         $character = Auth::user()->character->find($req['character_id']);
         if ($character == null)
         {
-            return response()->json(['result' => 'failure', 'description' => 'The character does not belong to the user.']);
+            return response()->json(['result' => 'failure', 'description' => trans('characters.doesNotBelongToTheUser')]);
         }
 
         $start = Node::where('race_id', $character->race->id)->first();
         $character->node()->sync([$start->id]);
-        return response()->json(['result' => 'success', 'description' => 'Powers resetted.']);
+        return response()->json(['result' => 'success', 'description' => trans('powers.powersResetted')]);
     }
 }

@@ -9,6 +9,9 @@
 
         <link rel="icon" type="image/png" href="favicon.png" />
 
+        <!-- Lang -->
+        <script src="@lang('javascript.file')"></script>
+
         <!-- Jquery -->
         <script src="/js/jquery-2.1.4.min.js"></script>
 
@@ -48,10 +51,10 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>
-                            <li class="@if ($nav == 'help') active @endif"><a href="#">Help</a></li>
-                            <li class="@if ($nav == 'chat') active @endif"><a href="#">Chat</a></li>
-                            <li class="@if ($nav == 'forum') active @endif"><a href="#">Forum</a></li>
-                            <li><a href="/logout" class="logout">Logout</a></li>
+                            <li class="@if ($nav == 'help') active @endif"><a href="#">@lang('menu.help')</a></li>
+                            <li class="@if ($nav == 'chat') active @endif"><a href="#">@lang('menu.chat')</a></li>
+                            <li class="@if ($nav == 'forum') active @endif"><a href="#">@lang('menu.forum')</a></li>
+                            <li><a href="/logout" class="logout">@lang('menu.logout')</a></li>
                         </ul>
                     </div>
                 </div>
@@ -64,22 +67,22 @@
                     @section('sidebar')
                         <ul class="nav nav-sidebar">
                             <li class="@if ($nav == 'dashboard') active @endif"><a href="/dashboard">
-                                <span class="fa fa-tachometer"></span>Dashboard
+                                <span class="fa fa-tachometer"></span>@lang('menu.dashboard')
                             </a></li>
                             <li class="@if ($nav == 'scripts') active @endif"><a href="/scripts">
-                                <span class="fa fa-file-o"></span>Scripts Editor
+                                <span class="fa fa-file-o"></span>@lang('menu.scriptsEditor')
                             </a></li>
                             <li class="@if ($nav == 'characters') active @endif"><a href="/characters">
-                                <span class="fa fa-user"></span>Characters
+                                <span class="fa fa-user"></span>@lang('menu.characters')
                             </a></li>
                             <li class="@if ($nav == 'teams') active @endif"><a href="/teams">
-                                <span class="fa fa-users"></span>Teams
+                                <span class="fa fa-users"></span>@lang('menu.teams')
                             </a></li>
                             <li class="@if ($nav == 'arena') active @endif"><a href="/arena">
-                                <span class="fa fa-gavel"></span>Arena
+                                <span class="fa fa-gavel"></span>@lang('menu.arena')
                             </a></li>
                             <li class="@if ($nav == 'leaderboard') active @endif"><a href="/leaderboard">
-                                <span class="fa fa-line-chart"></span>Leaderboard
+                                <span class="fa fa-line-chart"></span>@lang('menu.leaderboard')
                             </a></li>
                         </ul>
                     @show
