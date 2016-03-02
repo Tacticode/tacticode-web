@@ -50,7 +50,7 @@ class Node extends Model
     */
     public function character()
     {
-        return $this->belongsToMany('App\Http\Models\Character');
+        return $this->belongsToMany('App\Http\Models\Character')->withTimestamps();
     }
 
     /**

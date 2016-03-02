@@ -76,7 +76,7 @@ class Character extends Model
     */
     public function node()
     {
-        return $this->belongsToMany('App\Http\Models\Node');
+        return $this->belongsToMany('App\Http\Models\Node')->withTimestamps();
     }
 
     /**
@@ -87,6 +87,6 @@ class Character extends Model
     */
     public function team()
     {
-        return $this->belongsToMany('App\Http\Models\Team');
+        return $this->belongsToMany('App\Http\Models\Team')->withTimestamps();
     }
 }

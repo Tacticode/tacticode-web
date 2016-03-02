@@ -21,17 +21,6 @@ class Power extends Model
     protected $fillable = ['name', 'description', 'spell'];
 
     /**
-    * A power belongs to many characters.
-    *
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    *
-    */
-    public function character()
-    {
-        return $this->belongsToMany('App\Http\Models\Character');
-    }
-
-    /**
     * A power has many nodes.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
