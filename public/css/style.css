@@ -7,6 +7,11 @@ body {
 	padding-top: 60px;
 }
 
+#growls {
+
+	top: 55px !important;
+}
+
 .clickable {
 	
 	cursor: pointer;
