@@ -2,30 +2,19 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\User;
-use App\Http\Models\Race;
-use App\Http\Models\Script;
-
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Fight extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'teams';
-
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['name', 'user_id'];
+    protected $table = 'fights';
 
     /**
-    * A team has multiple characters.
+    * A fight has many characters.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
     *
@@ -36,13 +25,13 @@ class Team extends Model
     }
 
     /**
-    * A team has many fights.
+    * A fight has many teams.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
     *
     */
-    public function fight()
+    public function team()
     {
-        return $this->belongsToMany('App\Http\Models\Fight', 'character_fight')->withTimestamps();
+        return $this->belongsToMany('App\Http\Models\Team', 'character_fight')->withTimestamps();
     }
 }

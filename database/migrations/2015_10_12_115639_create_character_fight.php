@@ -14,7 +14,6 @@ class CreateCharacterFight extends Migration
     {
         Schema::create('character_fight', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('side')->unsigned();
             $table->integer('fight_id')->unsigned();
             $table->integer('character_id')->unsigned();
             $table->integer('team_id')->unsigned()->nullable();

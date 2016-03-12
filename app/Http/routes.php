@@ -42,6 +42,7 @@ Route::get('/characters/delete/{id}', 'CharactersController@delete');
 Route::post('/characters/buynode', 'PowersController@buyNode');
 Route::post('/characters/sellnode', 'PowersController@sellNode');
 Route::post('/characters/resetpower', 'PowersController@resetPower');
+Route::post('/characters/setvisibility', 'CharactersController@setVisibility');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::get('/characters/{id}', 'CharactersController@view');
 Route::post('/characters/{id}', 'CharactersController@update');
@@ -51,11 +52,14 @@ Route::get('/characters/{id}/powersinfos', 'PowersController@powersInfos');
 Route::get('/teams', 'TeamsController@index');
 Route::get('/teams/add', 'TeamsController@create');
 Route::post('/teams/add', 'TeamsController@store');
+Route::post('/teams/setvisibility', 'TeamsController@setVisibility');
 Route::get('/teams/{id}', 'TeamsController@view');
 Route::post('/teams/{id}', 'TeamsController@update');
 Route::get('/teams/delete/{id}', 'TeamsController@delete');
 
 Route::get('/arena', 'FightsController@arena');
+Route::get('/arena/soloFight', 'FightsController@soloFight');
+Route::get('/arena/teamFight', 'FightsController@teamFight');
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');

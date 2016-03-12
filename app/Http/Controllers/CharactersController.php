@@ -136,4 +136,29 @@ class CharactersController extends Controller
 
         return redirect('/characters');
     }
+
+    /**
+     * Set the visibility of a character
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function setVisibility(Request $request)
+    {
+        $req = $request->all();
+        $character = Auth::user()->character->find($req['character_id']);
+        if ($character == null)
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('characters.doesNotBelongToTheUser')]);
+        }
+
+        if (!isset($req['visibility']))
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('characters.noVisibility')]);
+        }
+        $character->visibility = $req['visibility'];
+        $character->save();
+        
+        return response()->json(['result' => 'success']);
+    }
 }

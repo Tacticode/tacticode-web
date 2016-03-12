@@ -26,6 +26,7 @@ return [
     'add' => 'Add a character',
     'noScript' => 'No script',
     'fightingHistory' => 'Fighting history',
-    'doesNotBelongToTheUser' => 'The character does not belong to the user.'
+    'doesNotBelongToTheUser' => 'The character does not belong to the user.',
+    'noVisibility' => 'The visibility variable is not set.'
 
 ];

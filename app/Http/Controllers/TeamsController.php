@@ -62,18 +62,22 @@ class TeamsController extends Controller
         if ($req['name'] != $team->name)
             $team->name = $req['name'];
 
-        if (isset($req['characters'])) {
+        if (isset($req['characters']))
+        {
 
             $playersCharacters = Auth::user()->character->lists('id')->all();
 
             $characterIds = [];
-            foreach ($req['characters'] as $character) {
+            foreach ($req['characters'] as $character)
+            {
 
                 if ($character > 0 && !in_array($character, $characterIds) && in_array($character, $playersCharacters))
                     $characterIds[] = $character;
             }
             $team->character()->sync($characterIds);
-        } else {
+        }
+        else
+        {
             $team->character()->detach();
         }
 
@@ -108,12 +112,14 @@ class TeamsController extends Controller
 
         $team = Team::create($data);
 
-        if (isset($req['characters'])) {
+        if (isset($req['characters']))
+        {
 
             $playersCharacters = Auth::user()->character->lists('id')->all();
 
             $characterIds = [];
-            foreach ($req['characters'] as $character) {
+            foreach ($req['characters'] as $character)
+            {
 
                 if ($character > 0 && !in_array($character, $characterIds) && in_array($character, $playersCharacters))
                     $characterIds[] = $character;
@@ -139,5 +145,30 @@ class TeamsController extends Controller
         $team->delete();
 
         return redirect('/teams');
+    }
+
+    /**
+     * Set the visibility of a team
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function setVisibility(Request $request)
+    {
+        $req = $request->all();
+        $team = Auth::user()->team->find($req['team_id']);
+        if ($team == null)
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('teams.doesNotBelongToTheUser')]);
+        }
+
+        if (!isset($req['visible']))
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('characters.noVisibility')]);
+        }
+        $team->visible = $req['visible'];
+        $team->save();
+        
+        return response()->json(['result' => 'success']);
     }
 }

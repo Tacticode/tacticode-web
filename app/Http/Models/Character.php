@@ -89,4 +89,15 @@ class Character extends Model
     {
         return $this->belongsToMany('App\Http\Models\Team')->withTimestamps();
     }
+
+    /**
+    * A character has many fights.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    *
+    */
+    public function fight()
+    {
+        return $this->belongsToMany('App\Http\Models\Fight')->withTimestamps();
+    }
 }

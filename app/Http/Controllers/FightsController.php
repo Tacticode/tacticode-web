@@ -22,4 +22,24 @@ class FightsController extends Controller
     {
         return view('arena.index');
     }
+
+    /**
+     * Display the characters to choose.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function soloFight()
+    {
+        return view('arena.?', ['characters' => Auth::user()->character]);
+    }
+
+    /**
+     * Display the teams to choose.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function teamFight()
+    {
+        return view('arena.?', ['teams' => Auth::user()->team]);
+    }
 }
