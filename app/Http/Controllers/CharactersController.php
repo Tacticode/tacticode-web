@@ -158,7 +158,7 @@ class CharactersController extends Controller
         }
         $character->visibility = $req['visibility'];
         $character->save();
-        
+
         return response()->json(['result' => 'success']);
     }
 }
