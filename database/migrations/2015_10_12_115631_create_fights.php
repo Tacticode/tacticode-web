@@ -14,8 +14,8 @@ class CreateFights extends Migration
     {
         Schema::create('fights', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('result');
-            $table->longtext('fight_content');
+            $table->integer('result')->nullable();
+            $table->longtext('fight_content')->nullable();
             $table->datetime('date');
             $table->timestamps();
         });

@@ -74,12 +74,11 @@ class TeamsController extends Controller
             }
             $team->character()->sync($characterIds);
         } else {
-            
             $team->character()->detach();
         }
 
         $team->save();
-        return redirect()->action('TeamsController@view', [$id]);
+        return redirect()->action('TeamsController@index');
     }
 
     /**

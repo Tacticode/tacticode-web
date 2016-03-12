@@ -17,10 +17,12 @@ class CreateCharacterFight extends Migration
             $table->integer('side')->unsigned();
             $table->integer('fight_id')->unsigned();
             $table->integer('character_id')->unsigned();
+            $table->integer('team_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('fight_id')->references('id')->on('fights');
             $table->foreign('character_id')->references('id')->on('characters');
+            $table->foreign('team_id')->references('id')->on('teams');
         });
     }
 
