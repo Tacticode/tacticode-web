@@ -32,5 +32,9 @@ var lang = {
 		'cantDuplicateCharacter': 'You can\'t duplicate a character !',
 		'character': 'Character',
 		'removeCharacter': 'Remove character'
+	},
+	'characters': {
+		'visible': 'Visible',
+		'invisible': 'Invisible',
 	}
 };

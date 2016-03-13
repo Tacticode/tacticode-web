@@ -27,6 +27,9 @@ return [
     'noScript' => 'No script',
     'fightingHistory' => 'Fighting history',
     'doesNotBelongToTheUser' => 'The character does not belong to the user.',
-    'noVisibility' => 'The visibility variable is not set.'
+    'noVisibility' => 'The visibility variable is not set.',
+    'noCharacterId' => 'The character id variable is not set.',
+    'visible' => 'Visible',
+    'invisible' => 'Invisible'
 
 ];

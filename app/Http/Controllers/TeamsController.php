@@ -156,17 +156,21 @@ class TeamsController extends Controller
     public function setVisibility(Request $request)
     {
         $req = $request->all();
+        if (!isset($req['team_id']))
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('teams.noTeamId')]);
+        }
         $team = Auth::user()->team->find($req['team_id']);
         if ($team == null)
         {
             return response()->json(['result' => 'failure', 'description' => trans('teams.doesNotBelongToTheUser')]);
         }
 
-        if (!isset($req['visible']))
+        if (!isset($req['visibility']))
         {
             return response()->json(['result' => 'failure', 'description' => trans('characters.noVisibility')]);
         }
-        $team->visible = $req['visible'];
+        $team->visible = $req['visibility'];
         $team->save();
         
         return response()->json(['result' => 'success']);

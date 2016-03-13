@@ -1,8 +1,28 @@
 {{--*/ $nav = 'characters' /*--}}
 @extends('layouts.dashboard')
 
+@section('page-scripts')
+    <script src="/js/visibility.js"></script>
+@endsection
+
 @section('content')
-    <h1 class="page-header">{{ $character->name }} <a class="btn btn-primary" href="/characters/{{$character->id}}/powers">@lang('powers.manage')</a></h1>
+
+    <input id="visibility" type="hidden" value="{{$character->visible}}">
+    <input id="character_id" type="hidden" value="{{$character->id}}">
+
+    <h1 class="page-header">
+        {{ $character->name }}
+        <a class="btn btn-primary" href="/characters/{{$character->id}}/powers">@lang('powers.manage')</a>
+        @if ($character->visible)
+            <a class="btn btn-success visibility clickable">
+                <i class="fa fa-eye"></i> <span>@lang('characters.visible')</span>
+            </a>
+        @else
+            <a class="btn btn-warning visibility clickable">
+                <i class="fa fa-eye-slash"></i> <span>@lang('characters.invisible')</span>
+            </a>
+        @endif
+    </h1>
 
     <div class="row">
         <div class="col-md-4">

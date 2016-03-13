@@ -5,7 +5,7 @@
     <h1 class="page-header">@lang('dashboard.title')</h1>
 
     <div class="row placeholders">
-        @if (Auth::user()->character)
+        @if (count(Auth::user()->character))
             @foreach (Auth::user()->character as $character)
                 <div class="col-xs-6 col-sm-3 placeholder">
                     <h4>{{ $character->name }}</h4>

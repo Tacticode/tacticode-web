@@ -28,10 +28,7 @@ class PowersController extends Controller
             return redirect('/characters');
         }
 
-        $encrypter = app('Illuminate\Encryption\Encrypter');
-        $encrypted_token = $encrypter->encrypt(csrf_token());
-
-        return view('powers.manage', ['character' => $character, 'token' => $encrypted_token]);
+        return view('powers.manage', ['character' => $character]);
     }
 
     public function powersInfos($id) {

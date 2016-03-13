@@ -25,6 +25,7 @@ return [
     'noTeams' => 'You have no team at this time. Do you want to <a href=":link">add one</a>?',
     'doesNotBelongToTheUser' => 'The team does not belong to the user.',
     'character' => 'Character',
-    'removeCharacter' => 'Remove character'
+    'removeCharacter' => 'Remove character',
+    'noTeamId' => 'The team id variable is not set.',
 
 ];

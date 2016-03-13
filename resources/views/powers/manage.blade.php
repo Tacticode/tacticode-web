@@ -10,7 +10,6 @@
 
     <input type="hidden" id="characterid" value="{{ $character->id }}">
     <input type="hidden" id="raceid" value="{{ $character->race_id }}">
-    <input type="hidden" id="token" value="{{ $token }}">
 
     <div class="row">
         <div>@lang('powers.left', ['number' => 8]) <button class="btn btn-danger" onclick="resetPowers()">@lang('powers.resetAll')</button></div>

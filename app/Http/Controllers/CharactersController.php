@@ -146,6 +146,10 @@ class CharactersController extends Controller
     public function setVisibility(Request $request)
     {
         $req = $request->all();
+        if (!isset($req['character_id']))
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('characters.noCharacterId')]);
+        }
         $character = Auth::user()->character->find($req['character_id']);
         if ($character == null)
         {
@@ -156,7 +160,7 @@ class CharactersController extends Controller
         {
             return response()->json(['result' => 'failure', 'description' => trans('characters.noVisibility')]);
         }
-        $character->visibility = $req['visibility'];
+        $character->visible = $req['visibility'];
         $character->save();
 
         return response()->json(['result' => 'success']);

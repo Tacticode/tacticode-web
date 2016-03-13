@@ -1,6 +1,10 @@
 {{--*/ $nav = 'characters' /*--}}
 @extends('layouts.dashboard')
 
+@section('page-scripts')
+    <script src="/js/visibility.js"></script>
+@endsection
+
 @section('content')
     <h1 class="page-header">@lang('characters.title') <a class="btn btn-primary" href="/teams">@lang('teams.manage')</a></h1>
 
@@ -36,6 +40,17 @@
                             <td class="danger">2</td>
                             <td class="warning">0</td>
                             <td>
+                                <input id="visibility" type="hidden" value="{{$character->visible}}">
+                                <input id="character_id" type="hidden" value="{{$character->id}}">
+                                @if ($character->visible)
+                                    <a class="btn btn-success visibility clickable">
+                                        <i class="fa fa-eye"></i> <span>@lang('characters.visible')</span>
+                                    </a>
+                                @else
+                                    <a class="btn btn-warning visibility clickable">
+                                        <i class="fa fa-eye-slash"></i> <span>@lang('characters.invisible')</span>
+                                    </a>
+                                @endif
                                 <a href="/characters/{{ $character->id }}" class="btn btn-primary">@lang('navigation.more')</a>
                                 <a class="btn btn-danger" href="/characters/delete/{{ $character->id }}" onclick="if (!confirm('@lang('characters.confirmDelete')')) return false">@lang('navigation.delete')</a>
                             </td>

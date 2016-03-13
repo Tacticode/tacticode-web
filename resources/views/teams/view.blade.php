@@ -6,10 +6,26 @@
     <script src="/js/add-team.js"></script>
 
     <script src="/js/teams.js"></script>
+    <script src="/js/visibility.js"></script>
 @endsection
 
 @section('content')
-    <h1 class="page-header">{{ $team->name }}</h1>
+    <input id="visibility" type="hidden" value="{{$team->visible}}">
+    <input id="team_id" type="hidden" value="{{$team->id}}">
+
+    <h1 class="page-header">
+        {{ $team->name }}
+
+        @if ($team->visible)
+            <a class="btn btn-success visibility clickable">
+                <i class="fa fa-eye"></i> <span>@lang('characters.visible')</span>
+            </a>
+        @else
+            <a class="btn btn-warning visibility clickable">
+                <i class="fa fa-eye-slash"></i> <span>@lang('characters.invisible')</span>
+            </a>
+        @endif
+    </h1>
 
     <div class="row">
         <div class="col-md-4">

@@ -7,7 +7,7 @@
     <head>
         <title>Tacticode</title>
 
-        <link rel="icon" type="image/png" href="favicon.png" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
 
         <!-- Lang -->
         <script src="@lang('javascript.file')"></script>
@@ -32,9 +32,17 @@
 
         <link rel="stylesheet" href="/css/dashboard.css">
         <link rel="stylesheet" href="/css/style.css">
+
+        <script src="/js/token.js"></script>
     </head>
 
     <body>
+
+        <?php
+            $encrypter = app('Illuminate\Encryption\Encrypter');
+            $encrypted_token = $encrypter->encrypt(csrf_token()) 
+        ?>
+        <input id="token" type="hidden" value="{{$encrypted_token}}">
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             @section('navbar')
