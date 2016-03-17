@@ -58,8 +58,12 @@ Route::post('/teams/{id}', 'TeamsController@update');
 Route::get('/teams/delete/{id}', 'TeamsController@delete');
 
 Route::get('/arena', 'FightsController@arena');
-Route::get('/arena/soloFight', 'FightsController@soloFight');
-Route::get('/arena/teamFight', 'FightsController@teamFight');
+Route::get('/arena/solofight', 'FightsController@soloFight');
+Route::get('/arena/solofight/{characterId}', 'FightsController@launchSoloFight');
+Route::get('/arena/teamfight', 'FightsController@teamFight');
+Route::get('/arena/teamfight/{teamId}', 'FightsController@launchTeamFight');
+Route::get('/arena/viewfight/{fightId}', 'FightsController@viewFight');
+Route::get('/arena/contentfight/{fightId}', 'FightsController@contentFight');
 
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');

@@ -13,6 +13,8 @@ return [
 
     'title' => 'Arena',
     'soloFight' => 'Solo fight',
-    'teamFight' => 'team fight'
+    'teamFight' => 'Team fight',
+    'launchFight' => 'Launch fight !',
+    'stillComputing' => 'Sill fighting..'
 
 ];
