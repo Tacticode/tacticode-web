@@ -30,7 +30,6 @@ class UsersController extends Controller
         $user = \Auth::user();
         $fights = Fight::select([
             'fights.id',
-            'fights.date',
             'fights.result',
             'fights.created_at'
         ])->userFights($user->id)->get()->all();
