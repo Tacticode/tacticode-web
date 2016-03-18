@@ -36,6 +36,7 @@ class Fight extends Model
                 if ($fight->save())
                 {
                     \Storage::delete($file);
+                    Fight::computeElo($fight);
                 }
             }
         }
@@ -75,9 +76,39 @@ class Fight extends Model
         if ($fight->save())
         {
             \Storage::delete($file);
+            Fight::computeElo($fight);
             return $fight;
         }
         return null;
+    }
+
+    /**
+    * Calculate the variation of elo of the fighters
+    *
+    * @var \App\Models\Fight
+    */
+    public static function computeElo($fight)
+    {
+        //formula: https://metinmediamath.wordpress.com/2013/11/27/how-to-calculate-the-elo-rating-including-example/
+        $fighters = $fight->team()->groupBy('id')->get();
+        if (!$fighters->count())
+        {
+            $fighters = $fight->character;
+        }
+
+        $K = 32; // Based on chess. To chage if necessary
+        $rating = [pow(10,($fighters[0]->elo / 400)), pow(10,($fighters[1]->elo / 400))];
+        $score = [$rating[0] / ($rating[0] + $rating[1]), $rating[1] / ($rating[0] + $rating[1])];
+
+        $elo1 = $fighters[0]->elo + $K * (($fight->result == 0 ? 0.5 : ($fight->result == $fighters[0]->id ? 1 : 0)) - $score[0]);
+        $elo1 = ($elo1 < 0 ? 0 : $elo1);
+        $elo2 = $fighters[1]->elo + $K * (($fight->result == 0 ? 0.5 : ($fight->result == $fighters[1]->id ? 1 : 0)) - $score[1]);
+        $elo2 = ($elo2 < 0 ? 0 : $elo2);
+
+        $fighters[0]->elo = $elo1;
+        $fighters[0]->save();
+        $fighters[1]->elo = $elo2;
+        $fighters[1]->save();
     }
 
     /**
