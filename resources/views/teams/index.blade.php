@@ -32,8 +32,8 @@
                             <td class="danger">2</td>
                             <td class="warning">0</td>
                             <td>
-                                <input id="visibility" type="hidden" value="{{$team->visible}}">
-                                <input id="team_id" type="hidden" value="{{$team->id}}">
+                                <input class="visibility" type="hidden" value="{{$team->visible}}">
+                                <input class="team_id" type="hidden" value="{{$team->id}}">
                                 @if ($team->visible)
                                     <a class="btn btn-success visibility clickable">
                                         <i class="fa fa-eye"></i> <span>@lang('characters.visible')</span>

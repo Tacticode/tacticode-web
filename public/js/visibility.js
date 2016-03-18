@@ -1,22 +1,21 @@
-var visibility = null;
-var character_id = null;
-var team_id = null;
-
 $(document).ready(function() {
 
-    visibility = $('#visibility').val();
-    character_id = $('#character_id').val();
-    team_id = $('#team_id').val();
     $('#visibility, #character_id', '#team_id').remove();
 
     $('a.visibility').click(function() {
+
+        var div = $(this).parent().parent();
+
+        var visibility = $(div).find('.visibility').val();
+        var character_id = $(div).find('.character_id').val();
+        var team_id = $(div).find('.team_id').val();
 
         var new_visibility = 0;
         if (visibility == 0)
             new_visibility = 1;
 
-        $('a.visibility i').removeClass('fa-eye fa-eye-slash');
-        $('a.visibility i').addClass('fa-spin fa-spinner');
+        $(div).find('a.visibility i').removeClass('fa-eye fa-eye-slash');
+        $(div).find('a.visibility i').addClass('fa-spin fa-spinner');
 
         var url, data;
 
@@ -46,20 +45,20 @@ $(document).ready(function() {
 
                 if (data.result == 'success') {
 
-                    $('a.visibility i').removeClass('fa-spin fa-spinner');
+                    $(div).find('a.visibility i').removeClass('fa-spin fa-spinner');
 
-                    $('a.visibility').toggleClass('btn-success');
-                    $('a.visibility').toggleClass('btn-warning');
+                    $(div).find('a.visibility').toggleClass('btn-success');
+                    $(div).find('a.visibility').toggleClass('btn-warning');
                     visibility = new_visibility;
                     if (visibility) {
 
-                        $('a.visibility span').text(lang.characters.visible);
-                        $('a.visibility i').toggleClass('fa-eye');
+                        $(div).find('a.visibility span').text(lang.characters.visible);
+                        $(div).find('a.visibility i').toggleClass('fa-eye');
                     }
                     else {
 
-                        $('a.visibility span').text(lang.characters.invisible);
-                        $('a.visibility i').toggleClass('fa-eye-slash');
+                        $(div).find('a.visibility span').text(lang.characters.invisible);
+                        $(div).find('a.visibility i').toggleClass('fa-eye-slash');
                     }
                 }
             }

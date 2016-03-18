@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use Auth;
+use Blade;
 use Validator;
 
 class AppServiceProvider extends ServiceProvider

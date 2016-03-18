@@ -40,8 +40,8 @@
                             <td class="danger">2</td>
                             <td class="warning">0</td>
                             <td>
-                                <input id="visibility" type="hidden" value="{{$character->visible}}">
-                                <input id="character_id" type="hidden" value="{{$character->id}}">
+                                <input class="visibility" type="hidden" value="{{$character->visible}}">
+                                <input class="character_id" type="hidden" value="{{$character->id}}">
                                 @if ($character->visible)
                                     <a class="btn btn-success visibility clickable">
                                         <i class="fa fa-eye"></i> <span>@lang('characters.visible')</span>

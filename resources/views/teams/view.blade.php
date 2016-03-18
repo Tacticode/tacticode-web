@@ -10,10 +10,10 @@
 @endsection
 
 @section('content')
-    <input id="visibility" type="hidden" value="{{$team->visible}}">
-    <input id="team_id" type="hidden" value="{{$team->id}}">
-
     <h1 class="page-header">
+        <input class="visibility" type="hidden" value="{{$team->visible}}">
+        <input class="team_id" type="hidden" value="{{$team->id}}">
+
         {{ $team->name }}
 
         @if ($team->visible)

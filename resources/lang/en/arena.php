@@ -12,6 +12,7 @@ return [
     */
 
     'title' => 'Arena',
+    'fight' => 'Fight',
     'soloFight' => 'Solo fight',
     'teamFight' => 'Team fight',
     'launchFight' => 'Launch fight !',

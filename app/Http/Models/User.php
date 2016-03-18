@@ -73,9 +73,12 @@ class User extends Model implements AuthenticatableContract,
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
     *
     */
-    public function fight()
+    public function scopeFight($query)
     {
-        return $this->hasManyThrough('App\Http\Models\Fight', 'App\Http\Models\Character');
+        return $query->join('characters', 'characters.user_id', '=', 'users.id')
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'fights.id', '=', 'character_fight.fight_id')
+                    ->groupBy('fights.id');
     }
 
     /**

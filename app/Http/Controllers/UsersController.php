@@ -27,8 +27,9 @@ class UsersController extends Controller
     public function index()
     {
         $user = \Auth::user();
+        $fights = $user->fight()->get()->all();
 
-        $data = compact('user');
+        $data = compact('user', 'fights');
         return view('dashboard', $data);
     }
 

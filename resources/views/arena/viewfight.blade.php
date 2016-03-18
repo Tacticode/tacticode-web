@@ -1,8 +1,14 @@
 {{--*/ $nav = 'arena' /*--}}
 @extends('layouts.dashboard')
 
+@section('page-scripts')
+
+	
+
+@endsection
+
 @section('content')
-    <h1 class="page-header">@lang('arena.soloFight')</h1>
+    <h1 class="page-header">@lang('arena.fight')</h1>
 
     @if (!$fight['fight_content'])
     	
@@ -29,13 +35,13 @@
 						@endforeach
 					</div>
 				@else
-					<div class="col-md-5">
+					<div class="col-xs-5 col-md-2 fight-character">
 						{{$fight['characters'][0]['name']}}
 					</div>
-					<div class="col-md-2">
+					<div class="col-xs-2 col-md-1 fight-character">
 						VS
 					</div>
-					<div class="col-md-5">
+					<div class="col-xs-5 col-md-2 fight-character">
 						{{$fight['characters'][1]['name']}}
 					</div>
 				@endif

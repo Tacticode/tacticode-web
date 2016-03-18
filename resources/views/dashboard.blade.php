@@ -8,6 +8,9 @@
         @if (count($user->character))
             @foreach ($user->character as $character)
                 <div class="col-xs-6 col-sm-3 placeholder">
+                    <div>
+                        @include('partials.raceimg', ['race' => $character->race->name])
+                    </div>
                     <h4>{{ $character->name }}</h4>
                     <span class="text-muted"><a href="/characters/{{ $character->id }}">@lang('navigation.seeMore')</a></span>
                 </div>
@@ -31,12 +34,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>2015-06-27 18:28</td>
-                    <td><a href="/characters/1">Bob</a></td>
-                    <td><a href="/characters/1">Kevin-roxXxor</a></td>
-                    <td class="success"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></td>
-                </tr>
+                @foreach ($fights as $fight)
+                    <tr>
+                        <td>2015-06-27 18:28</td>
+                        <td><a href="/characters/1">Bob</a></td>
+                        <td><a href="/characters/1">Kevin-roxXxor</a></td>
+                        <td class="success"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></td>
+                    </tr>
+                @endforeach
+                
                 <tr>
                     <td>2015-06-26 15:32</td>
                     <td><a href="/characters/1">Bob</a></td>

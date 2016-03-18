@@ -7,11 +7,12 @@
 
 @section('content')
 
-    <input id="visibility" type="hidden" value="{{$character->visible}}">
-    <input id="character_id" type="hidden" value="{{$character->id}}">
-
     <h1 class="page-header">
+        <input class="visibility" type="hidden" value="{{$character->visible}}">
+        <input class="character_id" type="hidden" value="{{$character->id}}">
+
         {{ $character->name }}
+        
         <a class="btn btn-primary" href="/characters/{{$character->id}}/powers">@lang('powers.manage')</a>
         @if ($character->visible)
             <a class="btn btn-success visibility clickable">

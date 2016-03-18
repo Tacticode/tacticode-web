@@ -9,6 +9,9 @@
 	        @if (count($characters))
 	            @foreach ($characters as $character)
 	                <div class="col-xs-6 col-sm-3 placeholder">
+	                	<div>
+	                        @include('partials.raceimg', ['race' => $character->race->name])
+	                    </div>
 	                    <h4>{{ $character->name }}</h4>
 	                    <span class="text-muted"><a href="/arena/solofight/{{ $character->id }}">@lang('arena.launchFight')</a></span>
 	                </div>

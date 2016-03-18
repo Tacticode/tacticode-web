@@ -32,6 +32,22 @@ body {
 	background: url('/img/geometry2.png');
 }
 
+.choose-class {
+
+	text-align: center;
+}
+
+.choose-class.active h4,
+.choose-class:hover h4 {
+
+	text-decoration: underline;
+}
+
+.fight-character {
+
+	text-align: center;
+}
+
 /***************
 ** Navigation **
 ****************/
