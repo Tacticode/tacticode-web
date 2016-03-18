@@ -68,6 +68,17 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+    * A user has many fights.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function fight()
+    {
+        return $this->hasManyThrough('App\Http\Models\Fight', 'App\Http\Models\Character');
+    }
+
+    /**
     * A user has many scripts.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany

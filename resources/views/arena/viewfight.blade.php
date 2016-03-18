@@ -9,10 +9,26 @@
     	<input id="fightId" name="fightId" value="{{$fight['id']}}" type="hidden">
     
 	    <div class="row arena">
-			@if ($fight['characters'][0]['team_id'])
-				Combat team
-			@else
-				<div class="row">
+			<div class="row">
+				@if ($fight['characters'][0]['team_id'])
+					<div class="col-md-5">
+						@foreach ($fight['characters'] as $characters)
+							@if ($characters['team_id'] == $fight['characters'][0]['team_id'])
+								{{$characters['name']}}
+							@endif
+						@endforeach
+					</div>
+					<div class="col-md-2">
+						VS
+					</div>
+					<div class="col-md-5">
+						@foreach ($fight['characters'] as $characters)
+							@if ($characters['team_id'] != $fight['characters'][0]['team_id'])
+								{{$characters['name']}}
+							@endif
+						@endforeach
+					</div>
+				@else
 					<div class="col-md-5">
 						{{$fight['characters'][0]['name']}}
 					</div>
@@ -22,11 +38,11 @@
 					<div class="col-md-5">
 						{{$fight['characters'][1]['name']}}
 					</div>
-				</div>
-				<div class="row">
-					Combat en cours...
-				</div>
-			@endif
+				@endif
+			</div>
+			<div class="row">
+				Combat en cours...
+			</div>
 	    </div>
 
 	@else

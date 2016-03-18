@@ -31,8 +31,8 @@ class FightsController extends Controller
             'result' => null,
             'fight_content' => null,
             'characters' => [
-                ['name' => 'toto', 'team_id' => null],
-                ['name' => 'pinpin', 'team_id' => null]
+                ['name' => 'toto', 'team_id' => null, 'id' => 42],
+                ['name' => 'pinpin', 'team_id' => null, 'id' => 1]
             ]
         ];
 

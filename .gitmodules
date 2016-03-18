@@ -1,0 +1,3 @@
+[submodule "public/arena-viewer"]
+	path = public/arena-viewer
+	url = git@tacticode.mrphi.net:tacticode/arena-viewer.git
