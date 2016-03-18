@@ -90,7 +90,7 @@ class Fight extends Model
     public static function computeElo($fight)
     {
         //formula: https://metinmediamath.wordpress.com/2013/11/27/how-to-calculate-the-elo-rating-including-example/
-        $fighters = $fight->team()->groupBy('id')->get();
+        $fighters = $fight->team()->groupBy('teams.id')->get();
         if (!$fighters->count())
         {
             $fighters = $fight->character;
