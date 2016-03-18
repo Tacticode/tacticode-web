@@ -27,7 +27,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-        User::getGlobalElo();
         $user = \Auth::user();
         $fights = Fight::select([
             'fights.id',
@@ -75,7 +74,8 @@ class UsersController extends Controller
     public function leaderboard()
     {
         $users = User::all();
-        return view('leaderboard.index', ['users' => $users]);
+        $elo = User::getGlobalElo();
+        return view('leaderboard.index', compact('users', 'elo'));
     }
 
     /**

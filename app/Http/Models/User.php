@@ -67,6 +67,7 @@ class User extends Model implements AuthenticatableContract,
         {
             $total[$key] = (isset($characters[$key]) ? $characters[$key] : 0) + (isset($teams[$key]) ? $teams[$key] : 0);
         }
+        arsort($total);
         return $total;
     }
 

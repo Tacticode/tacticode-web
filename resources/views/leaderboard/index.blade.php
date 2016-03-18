@@ -14,20 +14,20 @@
                 </tr>
             </thead>
             <tbody>
-            	@foreach ($users as $user)
-            	 	@if ($user->id == Auth::user()->id)
+            	@foreach ($elo as $key => $e)
+            	 	@if ($users[$key-1]->id == Auth::user()->id)
             	 		<tr class="info">
-		                    <td>?</td>
-		                    <td>{{ $user->login }}</td>
-		                    <td>?</td>
+		                    <td>{{ array_search($key, array_keys($elo)) + 1 }}</td>
+		                    <td>{{ $users[$key-1]->login }}</td>
+		                    <td>{{ $e }}</td>
 		                    <td><a class="btn btn-primary" href="/user">@lang('leaderboard.myProfile')</a></td>
 		                </tr>
             	 	@else
 		                <tr>
-		                    <td>?</td>
-		                    <td>{{ $user->login }}</td>
-		                    <td>?</td>
-		                    <td><a class="btn btn-primary" href="/users/{{ $user->id }}">@lang('navigation.view')</a></td>
+		                    <td>{{ array_search($key, array_keys($elo)) + 1 }}</td>
+		                    <td>{{ $users[$key-1]->login }}</td>
+		                    <td>{{ $e }}</td>
+		                    <td><a class="btn btn-primary" href="/users/{{ $users[$key-1]->id }}">@lang('navigation.view')</a></td>
 		                </tr>
 	                @endif
 	            @endforeach
