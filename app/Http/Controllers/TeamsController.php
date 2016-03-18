@@ -24,7 +24,11 @@ class TeamsController extends Controller
      */
     public function index()
     {
-        return view('teams.index', ['teams' => Auth::user()->team]);
+        $teams = Auth::user()->team;
+        foreach ($teams as &$team) {
+            $team->stats = Team::getStats($team->id);
+        }
+        return view('teams.index', compact('teams'));
     }
 
     /**

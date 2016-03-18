@@ -27,11 +27,13 @@ class UsersController extends Controller
      */
     public function index()
     {
+        User::getGlobalElo();
         $user = \Auth::user();
         $fights = Fight::select([
             'fights.id',
             'fights.date',
-            'fights.result'
+            'fights.result',
+            'fights.created_at'
         ])->userFights($user->id)->get()->all();
         $charactersIds = $user->character->lists('id')->all();
 

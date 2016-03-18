@@ -37,7 +37,7 @@
                 <tbody>
                     @foreach ($fights as $fight)
                         <tr>
-                            <td><a href="/arena/viewfight/{{$fight->id}}">{{$fight->date}}</a></td>
+                            <td><a href="/arena/viewfight/{{$fight->id}}">{{$fight->created_at->format('d M Y - H:i:s')}}</a></td>
                             @if ($fight->character[0]->team_id)
                             @else
                                 @if (in_array($fight->character[0]->id, $charactersIds))

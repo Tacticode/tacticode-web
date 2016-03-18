@@ -35,7 +35,7 @@
                                     <i>@lang('characters.noScript')</i>
                                 @endif
                             </td>
-                            <td>10</td>
+                            <td>{{$character->stats['win'] + $character->stats['loss'] + $character->stats['draw']}}</td>
                             <td class="success">{{$character->stats['win']}}</td>
                             <td class="danger">{{$character->stats['loss']}}</td>
                             <td class="warning">{{$character->stats['draw']}}</td>

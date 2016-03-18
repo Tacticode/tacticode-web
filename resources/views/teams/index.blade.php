@@ -27,10 +27,10 @@
                         <tr>
                             <td>{{ $team->name }}</td>
                             <td>{{ count($team->character) }}</td>
-                            <td>10</td>
-                            <td class="success">8</td>
-                            <td class="danger">2</td>
-                            <td class="warning">0</td>
+                            <td>{{$team->stats['win'] + $team->stats['loss'] + $team->stats['draw']}}</td>
+                            <td class="success">{{$team->stats['win']}}</td>
+                            <td class="danger">{{$team->stats['loss']}}</td>
+                            <td class="warning">{{$team->stats['draw']}}</td>
                             <td>
                                 <input class="visibility" type="hidden" value="{{$team->visible}}">
                                 <input class="team_id" type="hidden" value="{{$team->id}}">

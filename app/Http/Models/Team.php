@@ -34,13 +34,13 @@ class Team extends Model
     */
     public static function getStats($id)
     {
-        $datas = Character::find($id)->with(['fight' => function($query) {
-            $query->whereNotNull('team_id')->selectRaw('COUNT(CASE WHEN result = team_id then 1 ELSE NULL END) as win,
-                COUNT(CASE WHEN result != team_id AND result IS NOT NULL AND result > 0 then 1 ELSE NULL END) as loss,
-                COUNT(CASE WHEN result = 0 then 1 ELSE NULL END) as draw,
-                COUNT(CASE WHEN result IS NULL then 1 ELSE NULL END) as pending');
+        $datas = Team::where('id', $id)->with(['fight' => function($query) {
+            $query->whereNotNull('team_id')->selectRaw('COUNT(DISTINCT fights.id, CASE WHEN result = team_id then 1 ELSE NULL END) as win,
+                COUNT(DISTINCT fights.id, CASE WHEN result != team_id AND result IS NOT NULL AND result > 0 then 1 ELSE NULL END) as loss,
+                COUNT(DISTINCT fights.id, CASE WHEN result = 0 then 1 ELSE NULL END) as draw,
+                COUNT(DISTINCT fights.id, CASE WHEN result IS NULL then 1 ELSE NULL END) as pending');
         }])->first();
-
+        //dd($datas);
         $ret = [
             'win' => isset($datas->fight[0]) ? $datas->fight[0]->win : 0,
             'loss' => isset($datas->fight[0]) ? $datas->fight[0]->loss : 0,
