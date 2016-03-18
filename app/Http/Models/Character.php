@@ -34,7 +34,7 @@ class Character extends Model
     */
     public static function getStats($id)
     {
-        $datas = Character::find($id)->with(['fight' => function($query) {
+        $datas = Character::where('id', $id)->with(['fight' => function($query) {
             $query->where('team_id', null)->selectRaw('COUNT(CASE WHEN result = character_id then 1 ELSE NULL END) as win,
                 COUNT(CASE WHEN result != character_id AND result IS NOT NULL AND result > 0 then 1 ELSE NULL END) as loss,
                 COUNT(CASE WHEN result = 0 then 1 ELSE NULL END) as draw,

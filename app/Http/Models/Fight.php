@@ -34,4 +34,19 @@ class Fight extends Model
     {
         return $this->belongsToMany('App\Http\Models\Team', 'character_fight')->withTimestamps();
     }
+
+    /**
+    * Get all the fight of a users
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    *
+    */
+    public function scopeUserFights($query, $userId)
+    {
+        return $query->join('character_fight', 'character_fight.fight_id', '=', 'fights.id')
+                    ->join('characters', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('users', 'users.id', '=', 'characters.user_id')
+                    ->where('users.id', '=', $userId)
+                    ->groupBy('fights.id');
+    }
 }

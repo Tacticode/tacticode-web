@@ -16,6 +16,7 @@ return [
     'soloFight' => 'Solo fight',
     'teamFight' => 'Team fight',
     'launchFight' => 'Launch fight !',
-    'stillComputing' => 'Sill fighting..'
+    'stillComputing' => 'Sill fighting..',
+    'noFights' => 'You haven\'t made any fight, go to the arena quickly !'
 
 ];

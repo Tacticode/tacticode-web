@@ -2,15 +2,21 @@
 @extends('layouts.dashboard')
 
 @section('page-scripts')
-
-	
-
+	<script src="/arena-viewer/lib/pixi-3.0.9.js"></script>
+	<script src="/arena-viewer/lib/jquery-2.2.0.js"></script>
+	<script src="/arena-viewer/script/tacticode.js"></script>
+	<script src="/arena-viewer/script/map.js"></script>
+	<script src="/arena-viewer/script/projectile.js"></script>
+	<script src="/arena-viewer/script/entity.js"></script>
+	<script src="/arena-viewer/script/fight.js"></script>
+	<script src="/arena-viewer/script/viewer.js"></script>
+	<script src="/arena-viewer/script/shadowtext.js"></script>
 @endsection
 
 @section('content')
     <h1 class="page-header">@lang('arena.fight')</h1>
 
-    @if (!$fight['fight_content'])
+    @if (!$fight['fight_content'] && 0)
     	
     	<input id="fightId" name="fightId" value="{{$fight['id']}}" type="hidden">
     
@@ -51,11 +57,13 @@
 			</div>
 	    </div>
 
-	@else
+	@elseif (0)
 
 		Combat \o/
 
     @endif
+
+    <div id="viewer"></div>
 
     <script>
 

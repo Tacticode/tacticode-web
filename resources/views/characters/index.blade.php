@@ -36,9 +36,9 @@
                                 @endif
                             </td>
                             <td>10</td>
-                            <td class="success">8</td>
-                            <td class="danger">2</td>
-                            <td class="warning">0</td>
+                            <td class="success">{{$character->stats['win']}}</td>
+                            <td class="danger">{{$character->stats['loss']}}</td>
+                            <td class="warning">{{$character->stats['draw']}}</td>
                             <td>
                                 <input class="visibility" type="hidden" value="{{$character->visible}}">
                                 <input class="character_id" type="hidden" value="{{$character->id}}">

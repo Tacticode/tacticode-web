@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\User;
 use App\Http\Models\Group;
+use App\Http\Models\Fight;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Auth;
@@ -27,9 +28,14 @@ class UsersController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $fights = $user->fight()->get()->all();
+        $fights = Fight::select([
+            'fights.id',
+            'fights.date',
+            'fights.result'
+        ])->userFights($user->id)->get()->all();
+        $charactersIds = $user->character->lists('id')->all();
 
-        $data = compact('user', 'fights');
+        $data = compact('user', 'fights', 'charactersIds');
         return view('dashboard', $data);
     }
 

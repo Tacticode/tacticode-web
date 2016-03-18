@@ -24,38 +24,45 @@
 
     <h2 class="sub-header">@lang('fights.history')</h2>
     <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>@lang('fights.date')</th>
-                    <th>@lang('fights.character')</th>
-                    <th>@lang('fights.enemy')</th>
-                    <th>@lang('fights.victory')</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($fights as $fight)
+        @if (count($fights))
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>2015-06-27 18:28</td>
-                        <td><a href="/characters/1">Bob</a></td>
-                        <td><a href="/characters/1">Kevin-roxXxor</a></td>
-                        <td class="success"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></td>
+                        <th>@lang('fights.date')</th>
+                        <th>@lang('fights.character')</th>
+                        <th>@lang('fights.enemy')</th>
+                        <th>@lang('fights.victory')</th>
                     </tr>
-                @endforeach
-                
-                <tr>
-                    <td>2015-06-26 15:32</td>
-                    <td><a href="/characters/1">Bob</a></td>
-                    <td><a href="/characters/1">Archer42b</a></td>
-                    <td class="danger"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
-                </tr>
-                <tr>
-                    <td>2015-06-25 12:42</td>
-                    <td><a href="/characters/2">Warrior1</a></td>
-                    <td><a href="/characters/1">NoobXxD3ad</a></td>
-                    <td class="danger"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
-                </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($fights as $fight)
+                        <tr>
+                            <td><a href="/arena/viewfight/{{$fight->id}}">{{$fight->date}}</a></td>
+                            @if ($fight->character[0]->team_id)
+                            @else
+                                @if (in_array($fight->character[0]->id, $charactersIds))
+                                    <td><a href="/characters/{{$fight->character[0]->id}}">{{$fight->character[0]->name}}</a></td>
+                                    <td><a href="/characters/{{$fight->character[1]->id}}">{{$fight->character[1]->name}}</a></td>
+                                @else
+                                    <td><a href="/characters/{{$fight->character[1]->id}}">{{$fight->character[1]->name}}</a></td>
+                                    <td><a href="/characters/{{$fight->character[0]->id}}">{{$fight->character[0]->name}}</a></td>
+                                @endif
+                                @if ($fight->result)
+                                    @if (in_array($fight->result, $charactersIds))
+                                        <td class="success"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></td>
+                                    @else
+                                        <td class="danger"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
+                                    @endif
+                                @else
+                                    <td>@lang('arena.stillComputing')</span></td>
+                                @endif
+                            @endif
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <i>@lang('arena.noFights')</i>
+        @endif
     </div>
 @endsection

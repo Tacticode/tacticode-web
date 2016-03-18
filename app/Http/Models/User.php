@@ -68,20 +68,6 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-    * A user has many fights.
-    *
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    *
-    */
-    public function scopeFight($query)
-    {
-        return $query->join('characters', 'characters.user_id', '=', 'users.id')
-                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
-                    ->join('fights', 'fights.id', '=', 'character_fight.fight_id')
-                    ->groupBy('fights.id');
-    }
-
-    /**
     * A user has many scripts.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany

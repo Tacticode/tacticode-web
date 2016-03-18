@@ -28,7 +28,11 @@ class CharactersController extends Controller
      */
     public function index()
     {
-        return view('characters.index', ['characters' => Auth::user()->character]);
+        $characters = Auth::user()->character;
+        foreach ($characters as &$character) {
+            $character->stats = Character::getStats($character->id);
+        }
+        return view('characters.index', compact('characters'));
     }
 
     /**
