@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Character;
+use App\Http\Models\Fight;
 
 class FightsController extends Controller
 {
@@ -23,20 +25,20 @@ class FightsController extends Controller
         return view('arena.index');
     }
 
-    public function viewfight($fightId) {
 
-        //we get the fight
-        $fight = [
-            'id' => 1,
-            'result' => null,
-            'fight_content' => null,
-            'characters' => [
-                ['name' => 'toto', 'team_id' => null, 'id' => 42],
-                ['name' => 'pinpin', 'team_id' => null, 'id' => 1]
-            ]
-        ];
-
-        //if the fight has no results, we check and maybe update it
+    /**
+    * Display the visual of the fight.
+    *
+    * @var integer
+    * @return \Illuminate\Http\Response
+    */
+    public function viewfight($fightId)
+    {
+        $fight = Fight::getFight($fightId);
+        if ($fight == false)
+        {
+            return \Redirect::back()->withError(['error', trans('fights.doesNotExist')]);
+        }
 
         //we pass the list of user character to show them differently
         $userCharactersIds = Auth::user()->character->lists('id');
@@ -46,13 +48,20 @@ class FightsController extends Controller
         return view('arena.viewFight', $data);
     }
 
-    public function contentFight($fightId) {
+    /**
+    * Return a json with the content of the fight if the fight is over.
+    *
+    * @var integer
+    * @return Json 
+    */
+    public function contentFight($fightId)
+    {
+        $fight = Fight::getFight($fightId);
 
-        //checking if the fight is finished
-
-        if (1)
-            return response()->json(['content' => 'euh..']);
-
+        if ($fight != null && $fight->fight_content != null)
+        {
+            return response()->json(['content' => $fight->fight_content]);
+        }
         return response()->json(['content' => null, 'description' => trans('arena.stillComputing')]);
     }
 
@@ -79,17 +88,23 @@ class FightsController extends Controller
             return \Redirect::back();
         }
 
-        //find the opponent
-        $opponent = $character;
+        $opponent = Fight::getSoloRankedOpponent($character);
         if ($opponent == null)
         {
             return \Redirect::back()->withError(['error', trans('fights.noOpponent')]);
         }
 
-        //create the battle in database
-        $fightId = 1;
+        $character->visible = true;
+        $character->save();
 
-        return redirect('/arena/viewfight/' . $fightId);
+        $fight = Fight::create();
+        $fight->character()->sync([$character->id, $opponent->id]);
+
+        /* TEMPORAIRE EN ATTENTE DU SERVEUR DE COMBAT */
+        \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $opponent->id : $character->id).'}');
+        /* FIN DU TEMPORAIRE */
+
+        return redirect('/arena/viewfight/' . $fight->id);
     }
 
 
@@ -116,16 +131,23 @@ class FightsController extends Controller
             return \Redirect::back();
         }
 
-        //find the opponent
-        $opponent = $team;
+        $opponent = Fight::getTeamRankedOpponent($team);
         if ($opponent == null)
         {
             return \Redirect::back()->withError(['error', trans('fights.noOpponent')]);
         }
 
-        //create the battle in database
-        $fightId = 1;
+        $team->visible = true;
+        $team->save();
+        
+        $fight = Fight::create();
+        $fight->character()->attach($team->character->lists('id')->toArray(), ['team_id' => $team->id]);
+        $fight->character()->attach($opponent->character->lists('id')->toArray(), ['team_id' => $opponent->id]);
 
-        return redirect('/arena/viewfight/' . $fightId);
+        /* TEMPORAIRE EN ATTENTE DU SERVEUR DE COMBAT */
+        \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $opponent->id : $team->id).'}');
+        /* FIN DU TEMPORAIRE */
+
+        return redirect('/arena/viewfight/' . $fight->id);
     }
 }
