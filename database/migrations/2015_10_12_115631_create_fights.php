@@ -16,7 +16,6 @@ class CreateFights extends Migration
             $table->increments('id');
             $table->integer('result')->nullable();
             $table->longtext('fight_content')->nullable();
-            $table->datetime('date');
             $table->timestamps();
         });
     }
