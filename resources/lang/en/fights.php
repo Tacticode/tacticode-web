@@ -16,5 +16,6 @@ return [
     'character' => 'Character',
     'enemy' => 'Enemy',
     'victory' => 'Victory',
+    'noOpponent' => 'No opponent currently available. Please try again later.'
     
 ];

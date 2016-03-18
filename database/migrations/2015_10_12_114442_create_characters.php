@@ -18,7 +18,9 @@ class CreateCharacters extends Migration
             $table->integer('race_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('script_id')->unsigned()->nullable()->default(NULL);
+            $table->integer('elo')->default(0);
             $table->boolean('visible')->default(false);
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('race_id')->references('id')->on('races');

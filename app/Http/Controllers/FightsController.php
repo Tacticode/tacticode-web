@@ -76,11 +76,15 @@ class FightsController extends Controller
         $character = Auth::user()->character->find($characterId);
         if ($character == null)
         {
-            return redirect('/arena/solofight');
+            return \Redirect::back();
         }
 
         //find the opponent
         $opponent = $character;
+        if ($opponent == null)
+        {
+            return \Redirect::back()->withError(['error', trans('fights.noOpponent')]);
+        }
 
         //create the battle in database
         $fightId = 1;
@@ -109,11 +113,15 @@ class FightsController extends Controller
         $team = Auth::user()->team->find($teamId);
         if ($team == null)
         {
-            return redirect('/arena/solofight');
+            return \Redirect::back();
         }
 
         //find the opponent
         $opponent = $team;
+        if ($opponent == null)
+        {
+            return \Redirect::back()->withError(['error', trans('fights.noOpponent')]);
+        }
 
         //create the battle in database
         $fightId = 1;
