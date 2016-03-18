@@ -25,6 +25,7 @@ return [
     'noCharacters' => 'You have no characters at this time. Do you want to <a href=":link">add one</a>?',
     'add' => 'Add a character',
     'noScript' => 'No script',
+    'noFights' => 'This character hasn\'t made any fight in solo mode',
     'fightingHistory' => 'Fighting history',
     'doesNotBelongToTheUser' => 'The character does not belong to the user.',
     'noVisibility' => 'The visibility variable is not set.',

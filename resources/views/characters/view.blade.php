@@ -73,31 +73,51 @@
 
     <h2 class="sub-header">@lang('fights.history')</h2>
     <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>@lang('fights.date')</th>
-                    <th>@lang('fights.enemy')</th>
-                    <th>@lang('fights.victory')</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2015-06-27 18:28</td>
-                    <td><a href="/characters/view/1">Kevin-roxXxor</a></td>
-                    <td class="success"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></td>
-                </tr>
-                <tr>
-                    <td>2015-06-26 15:32</td>
-                    <td><a href="/characters/view/1">Archer42b</a></td>
-                    <td class="danger"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
-                </tr>
-                <tr>
-                    <td>2015-06-25 12:42</td>
-                    <td><a href="/characters/view/1">NoobXxD3ad</a></td>
-                    <td class="danger"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
-                </tr>
-            </tbody>
-        </table>
+        @if (count($character->fight))
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@lang('fights.date')</th>
+                        <th>@lang('fights.enemy')</th>
+                        <th>@lang('fights.victory')</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($character->fight as $fight)
+                        @if (!$fight->character[0]['team_id'])
+                            <tr>
+                                <td>{{$fight->created_at->format('d M Y - H:i:s')}}</td>
+                                <td>
+                                    @if ($fight->character[0]['id'] == $character->id)
+                                        <a href="/characters/view/{{$fight->character[1]['id']}}">{{$fight->character[1]['name']}}</a>
+                                    @else
+                                        <a href="/characters/view/{{$fight->character[0]['id']}}">{{$fight->character[0]['name']}}</a>
+                                    @endif
+                                </td>
+                                @if ($fight->result == $character->id)
+                                    <td class="success">
+                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    </td>
+                                @elseif ($fight->result == 0)
+                                    <td>
+                                        @lang('characters.draw')
+                                    </td>
+                                @elseif ($fight->result == 0)
+                                    <td>
+                                        @lang('arena.stillComputing')
+                                    </td>
+                                @else
+                                    <td class="danger">
+                                        <span class="glyphicon glyphicon-unchecked" aria-hidden="true">
+                                    </td>
+                                @endif
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <i>@lang('characters.noFights')</i>
+        @endif
     </div>
 @endsection
