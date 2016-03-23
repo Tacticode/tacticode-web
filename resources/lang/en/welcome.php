@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'welcome' => 'Developers, discover a game who is so fun, you\'re gonna love it.',
+    'welcome' => 'Developers, discover a game which is so fun, you\'re gonna love it.',
     'registration' => 'You\'re about to experience something amazing',
     'advantage1' => [
         'title' => 'Advantage 1',
