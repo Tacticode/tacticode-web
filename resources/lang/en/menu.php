@@ -34,5 +34,6 @@ return [
     'teams' => 'Teams',
     'arena' => 'Arena',
     'leaderboard' => 'Leaderboard',
+    'administration' => 'Administration',
 
 ];

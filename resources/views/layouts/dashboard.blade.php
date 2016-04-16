@@ -55,6 +55,9 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="#">Tacticode</a>
+                        @if (Session::get('loggedFrom', -1) > -1)
+                            <a class="btn btn-primary" href="/administration/logback">Back to account</a>
+                        @endif
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -92,6 +95,11 @@
                             <li class="@if ($nav == 'leaderboard') active @endif"><a href="/leaderboard">
                                 <span class="fa fa-line-chart"></span>@lang('menu.leaderboard')
                             </a></li>
+                            @if (Auth::user()->group->name == 'ADMIN')
+                            <li class="@if ($nav == 'admin') active @endif"><a href="/administration">
+                                <span class="fa fa-eye"></span>@lang('menu.administration')
+                            </a></li>
+                            @endif
                         </ul>
                     @show
                 </div>
