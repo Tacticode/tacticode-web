@@ -56,7 +56,7 @@
                         </button>
                         <a class="navbar-brand" href="#">Tacticode</a>
                         @if (Session::get('loggedFrom', -1) > -1)
-                            <a class="btn btn-primary" href="/administration/logback">Back to account</a>
+                            <a class="btn btn-primary" href="/administration/logback">@lang('administration.logBack')</a>
                         @endif
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">

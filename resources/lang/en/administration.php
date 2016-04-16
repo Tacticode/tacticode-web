@@ -20,5 +20,6 @@ return [
     'bann' => 'Bann',
     'unbann' => 'Unbann',
     'denied' => 'You do not have the permissions to access this page.',
+    'logBack' => 'Back to account',
 
 ];
