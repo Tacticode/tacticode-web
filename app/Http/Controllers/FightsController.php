@@ -66,6 +66,39 @@ class FightsController extends Controller
     }
 
     /**
+    * Take a Fight in parameter, create the Json and call the battle engine to launch the fight.
+    *
+    * @var \App\Http\Models\Fight
+    */
+    public function callBattleEngine($fight)
+    {
+        //To finish when battle engine json input is done.
+        $json = [
+            'map' => json_decode(\Storage::get('maps/sample_map.json')),
+            'fight' => [
+                'fightId' => $fight->id,
+                'entities' => []
+            ]
+        ];
+
+        // Temporary path
+        if (file_exists('../../battle_server/bin/tactibin.exe'))
+        {
+            $ba = popen('..\..\battle_server\bin\tactibin.exe > ..\storage\app\fights\\'. $fight->id, 'w');
+            fwrite($ba, json_encode($json));
+            pclose($ba);
+        }
+
+        // As the output is not valid at the moment, we rewrite the file with a random winner
+        $fighters = $fight->team()->groupBy('teams.id')->get();
+        if (!$fighters->count())
+        {
+            $fighters = $fight->character;
+        }
+        \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $fighters[0]->id : $fighters[1]->id).'}');
+    }
+
+    /**
      * Display the characters to choose.
      *
      * @return \Illuminate\Http\Response
@@ -100,9 +133,7 @@ class FightsController extends Controller
         $fight = Fight::create();
         $fight->character()->sync([$character->id, $opponent->id]);
 
-        /* TEMPORAIRE EN ATTENTE DU SERVEUR DE COMBAT */
-        \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $opponent->id : $character->id).'}');
-        /* FIN DU TEMPORAIRE */
+        $this->callBattleEngine($fight);
 
         return redirect('/arena/viewfight/' . $fight->id);
     }
@@ -144,9 +175,7 @@ class FightsController extends Controller
         $fight->character()->attach($team->character->lists('id')->toArray(), ['team_id' => $team->id]);
         $fight->character()->attach($opponent->character->lists('id')->toArray(), ['team_id' => $opponent->id]);
 
-        /* TEMPORAIRE EN ATTENTE DU SERVEUR DE COMBAT */
-        \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $opponent->id : $team->id).'}');
-        /* FIN DU TEMPORAIRE */
+        $this->callBattleEngine($fight);
 
         return redirect('/arena/viewfight/' . $fight->id);
     }
