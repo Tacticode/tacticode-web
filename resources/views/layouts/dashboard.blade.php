@@ -59,6 +59,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>
+                            <li class="@if ($nav == 'messages') active @endif"><a href="/messages">@lang('menu.messages')</a></li>
                             <li class="@if ($nav == 'help') active @endif"><a href="#">@lang('menu.help')</a></li>
                             <li class="@if ($nav == 'chat') active @endif"><a href="#">@lang('menu.chat')</a></li>
                             <li class="@if ($nav == 'forum') active @endif"><a href="#">@lang('menu.forum')</a></li>

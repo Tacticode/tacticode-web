@@ -33,6 +33,8 @@ Route::get('/users/{id}', 'UsersController@show');
 Route::post('/user', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
 
+Route::get('/messages', 'MessagesController@index');
+
 Route::get('/leaderboard', 'UsersController@leaderboard');
 
 Route::get('/characters', 'CharactersController@index');

@@ -83,6 +83,17 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+    * A user has multiple messages.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    *
+    */
+    public function message()
+    {
+        return $this->belongsToMany('App\Http\Models\Message')->withTimestamps();
+    }
+
+    /**
     * A user has many characters.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
