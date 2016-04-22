@@ -24,7 +24,7 @@
                     <tbody>
                         @foreach ($messages as $message)
                             @if (!$message->pivot->type)
-                                <tr>
+                                <tr @if ($message->pivot->seen == 0) class="new" @endif>
                                     <td>{{ $message->object }}</td>
                                     <td>
                                         @foreach ($message->user as $user)

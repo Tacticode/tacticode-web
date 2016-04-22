@@ -4,11 +4,21 @@
 @section('content')
     <h1 class="page-header">@lang('messages.add')</h1>
 
+    <input id="users" value="{{$users}}" type="hidden">
+
     {!! Form::open() !!}
     
         <div class="form-group @if ($errors->has('to')) has-error @endif">
             {!! Form::label('to', trans('messages.to')) !!}
-            {!! Form::text('to', null, ['class' => 'form-control', 'placeholder' => trans('messages.to')]) !!}
+            @if ($message)
+                @foreach ($message->user as $user)
+                    @if ($user->pivot->type)
+                        {!! Form::text('to', $user->login, ['class' => 'form-control', 'placeholder' => trans('messages.to')]) !!}
+                    @endif
+                @endforeach
+            @else
+                {!! Form::text('to', null, ['class' => 'form-control', 'placeholder' => trans('messages.to')]) !!}
+            @endif
             <div class="help-block">
                 @foreach ($errors->get('tp') as $error)
                     <div>{{ $error }}</div>
@@ -18,7 +28,11 @@
 
         <div class="form-group @if ($errors->has('object')) has-error @endif">
             {!! Form::label('object', trans('messages.object')) !!}
-            {!! Form::text('object', null, ['class' => 'form-control', 'placeholder' => trans('messages.object')]) !!}
+            @if ($message)
+                {!! Form::text('object', 'Re: ' . $message->object, ['class' => 'form-control', 'placeholder' => trans('messages.object')]) !!}
+            @else
+                {!! Form::text('object', null, ['class' => 'form-control', 'placeholder' => trans('messages.object')]) !!}
+            @endif
             <div class="help-block">
                 @foreach ($errors->get('tp') as $error)
                     <div>{{ $error }}</div>
@@ -51,6 +65,9 @@
             'pseudo1',
             'pseudo2'
         ];
+
+        var users = $.parseJSON($('#users').val());
+        $('#users').remove();
 
         function split( val ) {
             return val.split( /,\s*/ );

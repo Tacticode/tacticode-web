@@ -50,6 +50,17 @@
         ?>
         <input id="token" type="hidden" value="{{$encrypted_token}}">
 
+        <?php
+
+            $nb_new_message = 0;
+            foreach (Auth::User()->message as $message) {
+
+                if ($message->pivot->seen == 0)
+                    ++$nb_new_message;
+            }
+
+        ?>
+
         <nav class="navbar navbar-inverse navbar-fixed-top">
             @section('navbar')
                 <div class="container-fluid">
@@ -68,7 +79,12 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>
-                            <li class="@if ($nav == 'messages') active @endif"><a href="/messages">@lang('menu.messages')</a></li>
+                            <li class="@if ($nav == 'messages') active @endif"><a href="/messages">
+                                @lang('menu.messages')
+                                @if ($nb_new_message > 0)
+                                    <span class="badge">{{$nb_new_message}}</span>
+                                @endif
+                            </a></li>
                             <li class="@if ($nav == 'help') active @endif"><a href="#">@lang('menu.help')</a></li>
                             <li class="@if ($nav == 'chat') active @endif"><a href="#">@lang('menu.chat')</a></li>
                             <li class="@if ($nav == 'forum') active @endif"><a href="#">@lang('menu.forum')</a></li>

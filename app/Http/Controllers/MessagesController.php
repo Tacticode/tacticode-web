@@ -30,13 +30,35 @@ class MessagesController extends Controller
     }
 
     /**
+     * Show the specified message.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function view($id)
+    {
+        if (!($message = Auth::user()->message->find($id)))
+            return redirect('/messages');
+
+        $message->pivot->seen = 1;
+        Auth::user()->message()->updateExistingPivot($message->id, ['seen' => 1], false);
+
+        return view('messages.view', ['message' => $message]);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id = 0)
     {
-        return view('messages.add');
+        $message = null;
+        if ($id && !($message = Auth::user()->message->find($id)))
+            return redirect('/messages');
+        $users = User::lists('login');
+        return view('messages.add', ['users' => json_encode($users), 'message' => $message]);
     }
 
     /**

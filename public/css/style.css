@@ -48,6 +48,11 @@ body {
 	text-align: center;
 }
 
+table tr.new {
+
+	font-weight: bold;
+}
+
 /***************
 ** Navigation **
 ****************/

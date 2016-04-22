@@ -22,5 +22,6 @@ return [
     'message' => 'Message',
     'inbox' => 'Inobx',
     'sendbox' => 'SendBox',
+    'answer' => 'Answer',
 
 ];
