@@ -50,8 +50,9 @@ class User extends Model implements AuthenticatableContract,
     *
     * @return \Illuminate\Database\Eloquent\Collection
     */
-    public static function getGlobalElo()
+    public static function getElo()
     {
+        $users = User::all()->lists('id')->toArray();
         //Si quelqu'un veut s'amuser, voici la query à mettre en ORM si on veut le faire en 1 requête
         //SELECT id, SUM(elo) as elo FROM (SELECT users.id as id, characters.elo as elo FROM users LEFT JOIN characters ON characters.user_id = users.id UNION ALL SELECT users.id as id, teams.elo as elo FROM users LEFT JOIN teams ON teams.user_id = users.id) as tmp GROUP BY id
         $characters = User::join('characters', 'characters.user_id', '=', 'users.id')
@@ -62,13 +63,19 @@ class User extends Model implements AuthenticatableContract,
         ->selectRaw('users.id, SUM(teams.elo) as elo')
         ->lists('elo', 'users.id')->toArray();
 
-        $total = [];
-        foreach (array_keys($characters + $teams) as $key)
+        $global = [];
+        $solo = [];
+        $team = [];
+        foreach ($users as $id)
         {
-            $total[$key] = (isset($characters[$key]) ? $characters[$key] : 0) + (isset($teams[$key]) ? $teams[$key] : 0);
+            $solo[$id] = (isset($characters[$id]) ? $characters[$id] : 0);
+            $team[$id] = (isset($teams[$id]) ? $teams[$id] : 0);
+            $global[$id] = $solo[$id] + $team[$id];
         }
-        arsort($total);
-        return $total;
+        arsort($characters);
+        arsort($teams);
+        arsort($global);
+        return ['solo' => $solo, 'team' => $team, 'global' => $global];
     }
 
     /**

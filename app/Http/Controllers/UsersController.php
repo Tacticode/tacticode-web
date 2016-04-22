@@ -73,7 +73,7 @@ class UsersController extends Controller
     public function leaderboard()
     {
         $users = User::all();
-        $elo = User::getGlobalElo();
+        $elo = User::getElo();
         return view('leaderboard.index', compact('users', 'elo'));
     }
 
