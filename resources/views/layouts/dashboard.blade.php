@@ -13,7 +13,13 @@
         <script src="@lang('javascript.file')"></script>
 
         <!-- Jquery -->
+        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/css/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="/css/jquery-ui.theme.min.css">
         <script src="/js/jquery-2.1.4.min.js"></script>
+
+        <!-- Jquery UI -->
+        <script src="/js/jquery-ui.min.js"></script>
 
         <!-- Font Awesome -->
         <link rel="stylesheet" href="/css/font-awesome.min.css">

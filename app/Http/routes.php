@@ -34,6 +34,8 @@ Route::post('/user', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
 
 Route::get('/messages', 'MessagesController@index');
+Route::get('/messages/add', 'MessagesController@create');
+Route::post('/messages/add', 'MessagesController@store');
 
 Route::get('/leaderboard', 'UsersController@leaderboard');
 

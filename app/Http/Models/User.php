@@ -90,7 +90,7 @@ class User extends Model implements AuthenticatableContract,
     */
     public function message()
     {
-        return $this->belongsToMany('App\Http\Models\Message')->withTimestamps();
+        return $this->belongsToMany('App\Http\Models\Message')->withTimestamps()->withPivot('type', 'seen');
     }
 
     /**

@@ -30,6 +30,6 @@ class Message extends Model
     */
     public function user()
     {
-        return $this->belongsToMany('App\Http\Models\User')->withTimestamps();
+        return $this->belongsToMany('App\Http\Models\User')->withTimestamps()->withPivot('type', 'seen');
     }
 }

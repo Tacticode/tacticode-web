@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\User;
 use App\Http\Models\Message;
 use Auth;
 
@@ -36,6 +37,50 @@ class MessagesController extends Controller
     public function create()
     {
         return view('messages.add');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(MessageRequest $request)
+    {
+        $req = $request->all();
+        
+        $data = [
+            'object' => $req['object'],
+            'content' => $req['content']
+        ];
+
+        $message = Message::create($data);
+
+        $tos = explode(', ', $req['to']);
+        $users = [
+            Auth::user()->id => [
+                'type' => 1,
+                'seen' => 1
+            ]
+        ];
+        foreach ($tos as $to)
+        {
+
+            if ($to) {
+
+                $user = User::where('login', '=', $to)->first();
+                if ($user) {
+
+                    $users[$user->id] = [
+                        'type' => 0,
+                        'seen' => 0
+                    ];
+                }
+            }
+        }
+        $message->user()->sync($users);
+
+        return redirect()->action('MessagesController@index');
     }
 
 }

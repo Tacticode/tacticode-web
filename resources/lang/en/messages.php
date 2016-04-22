@@ -14,5 +14,13 @@ return [
     'title' => 'Messages',
     'noMessages' => 'You don\'t have any message in your inbox',
     'add' => 'Write a new message',
+    'send' => 'Send',
+    'read' => 'Read',
+    'to' => 'To',
+    'from' => 'From',
+    'object' => 'Object',
+    'message' => 'Message',
+    'inbox' => 'Inobx',
+    'sendbox' => 'SendBox',
 
 ];
