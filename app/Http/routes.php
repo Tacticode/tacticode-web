@@ -73,3 +73,9 @@ Route::post('/scripts/add', 'ScriptsController@store');
 Route::get('/scripts/delete/{id}', 'ScriptsController@delete');
 Route::get('/scripts/{id}', 'ScriptsController@view');
 Route::post('/scripts/{id}', 'ScriptsController@update');
+
+Route::get('/administration', 'AdministrationController@index');
+Route::get('/administration/logas/{id}', 'AdministrationController@logAs');
+Route::get('/administration/logback', 'AdministrationController@logBack');
+Route::get('/administration/bann/{id}', 'AdministrationController@bann');
+Route::get('/administration/unbann/{id}', 'AdministrationController@unbann');

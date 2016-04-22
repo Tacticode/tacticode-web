@@ -20,6 +20,8 @@ class CreateUsers extends Migration
             $table->string('id_facebook', 255)->nullable()->default(null);
             $table->rememberToken();
             $table->integer('group_id')->unsigned();
+            $table->boolean('banned')->default(false);
+            $table->date('banned_until')->nullable()->default(null);
             $table->softDeletes();
             $table->timestamps();
 

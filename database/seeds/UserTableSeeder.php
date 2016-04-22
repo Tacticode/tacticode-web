@@ -14,7 +14,7 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        User::create(array('login' => 'GDF', 'email' => 'gdf@tacticode.fr', 'password' => '1234', 'group_id' => 2));
-        User::create(array('login' => 'Poney', 'email' => 'poney@tacticode.fr', 'password' => '1234', 'group_id' => 2));
+        User::create(array('login' => 'GDF', 'email' => 'gdf@tacticode.fr', 'password' => '1234', 'group_id' => 1));
+        User::create(array('login' => 'Poney', 'email' => 'poney@tacticode.fr', 'password' => '1234', 'group_id' => 1));
     }
 }
