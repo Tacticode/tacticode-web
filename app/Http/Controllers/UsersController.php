@@ -68,6 +68,7 @@ class UsersController extends Controller
         $notification->seen = 0;
         $notification->title = 'Welcome !';
         $notification->content = 'Welcome on the site';
+        $notification->date = date('Y-m-d H:i:s');
         $notification->save();
 
         return redirect('/');
