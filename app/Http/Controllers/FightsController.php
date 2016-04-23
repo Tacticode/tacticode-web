@@ -25,7 +25,6 @@ class FightsController extends Controller
         return view('arena.index');
     }
 
-
     /**
     * Display the visual of the fight.
     *
@@ -66,6 +65,36 @@ class FightsController extends Controller
     }
 
     /**
+    * Add a character to the array for the Battle Engine
+    */
+    private function addCharacterToArray(&$arr, $char, $teamId)
+    {
+        $skills = [];
+        foreach ($char->node as $node)
+        {
+            if ($node->power != null)
+            {
+                array_push($skills, $node->power->name);                
+            }
+        }
+        $newEnt = [
+            'team' => ($teamId == null ? $char->id : $teamId),
+            'id' => $char->id,
+            'name' => $char->name,
+            'breed' => $char->race->name,
+            'attack' => 1,
+            'power' => 1,
+            'defence' => 1,
+            'resilience' => 1,
+            'luck' => 1,
+            'movements' => 4,
+            'skills' => $skills
+        ];
+
+        array_push($arr['fight']['entities'], $newEnt);
+    }
+
+    /**
     * Take a Fight in parameter, create the Json and call the battle engine to launch the fight.
     *
     * @var \App\Http\Models\Fight
@@ -81,21 +110,41 @@ class FightsController extends Controller
             ]
         ];
 
-        // Temporary path
-        if (file_exists('../../battle_server/bin/tactibin.exe'))
-        {
-            $ba = popen('..\..\battle_server\bin\tactibin.exe > ..\storage\app\fights\\'. $fight->id, 'w');
-            fwrite($ba, json_encode($json));
-            pclose($ba);
-        }
-
-        // As the output is not valid at the moment, we rewrite the file with a random winner
         $fighters = $fight->team()->groupBy('teams.id')->get();
         if (!$fighters->count())
         {
             $fighters = $fight->character;
+            foreach ($fighters as $char)
+            {
+                $this->addCharacterToArray($json, $char, null);
+            }
         }
-        \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $fighters[0]->id : $fighters[1]->id).'}');
+        else
+        {
+            foreach ($fighters as $team)
+            {
+                foreach ($team->character as $char)
+                {
+                    //$this->addCharacterToArray($json, $char, $team->id);
+                }
+            }
+        }
+
+        if (file_exists(Fight::getBattleEnginePath()))
+        {
+            $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '\app\fights\\' . $fight->id, 'w');
+            fwrite($ba, json_encode($json));
+            pclose($ba);
+        }
+        else
+        {
+            $fighters = $fight->team()->groupBy('teams.id')->get();
+            if (!$fighters->count())
+            {
+                $fighters = $fight->character;
+            }
+            \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $fighters[0]->id : $fighters[1]->id).'}');
+        }
     }
 
     /**

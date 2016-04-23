@@ -98,13 +98,13 @@
                                     <td class="success">
                                         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                                     </td>
-                                @elseif ($fight->result == 0)
-                                    <td>
-                                        @lang('characters.draw')
-                                    </td>
-                                @elseif ($fight->result == 0)
+                                @elseif ($fight->result === null)
                                     <td>
                                         @lang('arena.stillComputing')
+                                    </td>
+                                @elseif ($fight->result == 0)
+                                    <td class="warning">
+                                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                                     </td>
                                 @else
                                     <td class="danger">

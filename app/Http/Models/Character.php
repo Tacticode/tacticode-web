@@ -135,17 +135,6 @@ class Character extends Model
     }
 
     /**
-    * A character has many power.
-    *
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    *
-    */
-    public function power()
-    {
-        return $this->hasMany('App\Http\Models\Script');
-    }
-
-    /**
     * A character has multiple nodes.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

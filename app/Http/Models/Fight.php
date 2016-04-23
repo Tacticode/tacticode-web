@@ -16,6 +16,20 @@ class Fight extends Model
     protected $table = 'fights';
 
     /**
+    * Return the BATTLE_ENGINE environement variable or kill the process if it is not set
+    *
+    * @return String
+    */
+    public static function getBattleEnginePath()
+    {
+        if (env('BATTLE_ENGINE') == '')
+        {
+            dd('Error: Can not call the battle engine: Variable BATTLE_ENGINE not set.');            
+        }
+        return (env('BATTLE_ENGINE'));
+    }
+
+    /**
     * Allow to transfer all pending fights into the bdd.
     */
     public static function pendingFights()
@@ -30,7 +44,8 @@ class Fight extends Model
                 $content = \Storage::get($file);
                 $result = json_decode($content);
                 
-                $fight->result = $result->winner;
+                // As the winner of the battle engine is not valid at the moment, there is no winner if the output fight is from the battle engine
+                $fight->result = (file_exists(Fight::getBattleEnginePath()) ? 0 : $result->winner);
                 $fight->fight_content = $content;
 
                 if ($fight->save())
@@ -70,7 +85,9 @@ class Fight extends Model
         $content = \Storage::get($file);
 
         $result = json_decode($content);
-        $fight->result = $result->winner;
+
+        // As the winner of the battle engine is not valid at the moment, there is no winner if the output fight is from the battle engine
+        $fight->result = (file_exists(Fight::getBattleEnginePath()) ? 0 : $result->winner);
         $fight->fight_content = $content;
 
         if ($fight->save())

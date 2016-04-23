@@ -47,8 +47,10 @@
                                     <td><a href="/characters/{{$fight->character[1]->id}}">{{$fight->character[1]->name}}</a></td>
                                     <td><a href="/characters/{{$fight->character[0]->id}}">{{$fight->character[0]->name}}</a></td>
                                 @endif
-                                @if ($fight->result)
-                                    @if (in_array($fight->result, $charactersIds))
+                                @if ($fight->result !== null)
+                                    @if ($fight->result == 0)
+                                        <td class="warning"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span></td>
+                                    @elseif (in_array($fight->result, $charactersIds))
                                         <td class="success"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></td>
                                     @else
                                         <td class="danger"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></td>
