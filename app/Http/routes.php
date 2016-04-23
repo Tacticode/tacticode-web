@@ -33,6 +33,8 @@ Route::get('/users/{id}', 'UsersController@show');
 Route::post('/user', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
 
+Route::get('/notifications/see', 'NotificationsController@see');
+
 Route::get('/messages', 'MessagesController@index');
 Route::get('/messages/delete/{id}', 'MessagesController@delete');
 Route::get('/messages/add', 'MessagesController@create');

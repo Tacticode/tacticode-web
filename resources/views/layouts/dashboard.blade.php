@@ -40,6 +40,7 @@
         <link rel="stylesheet" href="/css/style.css">
 
         <script src="/js/token.js"></script>
+        <script src="/js/notification.js"></script>
     </head>
 
     <body>
@@ -49,6 +50,13 @@
             $encrypted_token = $encrypter->encrypt(csrf_token()) 
         ?>
         <input id="token" type="hidden" value="{{$encrypted_token}}">
+
+        <?php $nb_new_notifications = 0; ?>
+        @foreach (Auth::User()->notification as $notification)
+            @if ($notification->seen == 0)
+                <?php ++$nb_new_notifications; ?>
+            @endif
+        @endforeach
 
         <?php $nb_new_message = 0; ?>
         @foreach (Auth::User()->message as $message)
@@ -74,6 +82,23 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
+                            <li id="notifications" class="dropdown">
+                                <a class="dropdown-toggle clickable" data-toggle="dropdown">
+                                    <i class="fa fa-bell"></i>
+                                    @if ($nb_new_notifications > 0)
+                                        <span class="badge">{{$nb_new_notifications}}</span>
+                                    @endif
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach (Auth::User()->notification as $notification)
+                                        <li>
+                                            <i class="date">{{$notification->date}}</i>
+                                            <h3>{{$notification->title}}</h3>
+                                            <p>{{$notification->content}}</p>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
                             <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>
                             <li class="@if ($nav == 'messages') active @endif"><a href="/messages">
                                 @lang('menu.messages')

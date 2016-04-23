@@ -59,13 +59,6 @@
     <script>
     $(function() {
 
-        var users = [
-            'user1',
-            'user2',
-            'pseudo1',
-            'pseudo2'
-        ];
-
         var users = $.parseJSON($('#users').val());
         $('#users').remove();
 

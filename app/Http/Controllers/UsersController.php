@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\User;
 use App\Http\Models\Group;
 use App\Http\Models\Fight;
+use App\Http\Models\Notification;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Auth;
@@ -60,7 +61,14 @@ class UsersController extends Controller
         $data = $request->all();
         $group = Group::where('name', 'like', 'USER')->firstOrFail();
         $data['group_id'] = $group->id;
-        User::create($data);
+        $user = User::create($data);
+
+        $notification = new notification;
+        $notification->user_id = $user->id;
+        $notification->seen = 0;
+        $notification->title = 'Welcome !';
+        $notification->content = 'Welcome on the site';
+        $notification->save();
 
         return redirect('/');
     }

@@ -101,6 +101,17 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+    * A user has many notifications.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function notification()
+    {
+        return $this->hasMany('App\Http\Models\Notification');
+    }
+
+    /**
     * A user has many characters.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
