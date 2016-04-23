@@ -91,7 +91,7 @@ class MessagesController extends Controller
             if ($to) {
 
                 $user = User::where('login', '=', $to)->first();
-                if ($user) {
+                if ($user && $user->id != Auth::user()->id) {
 
                     $users[$user->id] = [
                         'type' => 0,
@@ -103,6 +103,23 @@ class MessagesController extends Controller
         $message->user()->sync($users);
 
         return redirect()->action('MessagesController@index');
+    }
+
+    /**
+     * Delete the specified message.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        if (!($message = Auth::user()->message->find($id)))
+            return redirect('/messages');
+
+        $message->pivot->deleted = 1;
+        Auth::user()->message()->updateExistingPivot($message->id, ['deleted' => 1], false);
+
+        return redirect('/messages');
     }
 
 }

@@ -24,6 +24,7 @@ class MessageRequest extends Request
     public function rules()
     {
         $rules = [
+            'object' => 'required'
         ];
 
         return $rules;

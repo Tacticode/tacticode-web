@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         @foreach ($messages as $message)
-                            @if (!$message->pivot->type)
+                            @if (!$message->pivot->deleted && !$message->pivot->type)
                                 <tr @if ($message->pivot->seen == 0) class="new" @endif>
                                     <td>{{ $message->object }}</td>
                                     <td>
@@ -55,7 +55,7 @@
                     </thead>
                     <tbody>
                         @foreach ($messages as $message)
-                            @if ($message->pivot->type)
+                            @if (!$message->pivot->deleted && $message->pivot->type)
                                 <tr>
                                     <td>{{ $message->object }}</td>
                                     <td>

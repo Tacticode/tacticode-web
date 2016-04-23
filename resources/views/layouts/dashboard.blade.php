@@ -50,16 +50,12 @@
         ?>
         <input id="token" type="hidden" value="{{$encrypted_token}}">
 
-        <?php
-
-            $nb_new_message = 0;
-            foreach (Auth::User()->message as $message) {
-
-                if ($message->pivot->seen == 0)
-                    ++$nb_new_message;
-            }
-
-        ?>
+        <?php $nb_new_message = 0; ?>
+        @foreach (Auth::User()->message as $message)
+            @if ($message->pivot->seen == 0)
+                <?php ++$nb_new_message; ?>
+            @endif
+        @endforeach
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             @section('navbar')

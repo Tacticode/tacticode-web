@@ -2,16 +2,18 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">
-        <i>
-            @foreach ($message->user as $user)
-                @if ($user->pivot->type)
-                    {{$user->login}}
-                @endif
-            @endforeach
-        </i>
-        : {{$message['object']}}
-    </h1>
+    <h2 class="page-header">
+        <?php $to = []; ?>
+        @foreach ($message->user as $user)
+            @if ($user->pivot->type)
+                <i>@lang('messages.from')</i> : {{$user->login}}<br>
+            @else
+                <?php $to[] = $user->login ?>
+            @endif
+        @endforeach
+        <i>@lang('messages.object')</i> : {{$message['object']}}<br>
+        <i>@lang('messages.to')</i> : {{implode($to, ',')}}
+    </h2>
 
     <p>
         {{$message['content']}}

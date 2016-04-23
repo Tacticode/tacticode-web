@@ -13,6 +13,7 @@ return [
 
     'title' => 'Messages',
     'noMessages' => 'You don\'t have any message in your inbox',
+    'confirmDelete' => 'Are you sure you want to delete this message?',
     'add' => 'Write a new message',
     'send' => 'Send',
     'read' => 'Read',

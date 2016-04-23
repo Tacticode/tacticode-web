@@ -20,7 +20,7 @@
                 {!! Form::text('to', null, ['class' => 'form-control', 'placeholder' => trans('messages.to')]) !!}
             @endif
             <div class="help-block">
-                @foreach ($errors->get('tp') as $error)
+                @foreach ($errors->get('to') as $error)
                     <div>{{ $error }}</div>
                 @endforeach
             </div>
@@ -34,7 +34,7 @@
                 {!! Form::text('object', null, ['class' => 'form-control', 'placeholder' => trans('messages.object')]) !!}
             @endif
             <div class="help-block">
-                @foreach ($errors->get('tp') as $error)
+                @foreach ($errors->get('object') as $error)
                     <div>{{ $error }}</div>
                 @endforeach
             </div>
