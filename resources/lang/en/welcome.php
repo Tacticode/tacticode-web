@@ -14,16 +14,16 @@ return [
     'welcome' => 'Developers, discover a game which is so fun, you\'re gonna love it.',
     'registration' => 'You\'re about to experience something amazing',
     'advantage1' => [
-        'title' => 'Advantage 1',
-        'desc' => 'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'
+        'title' => 'Create your characters',
+        'desc' => 'In Tacticode you can create plenty of characters, script them, make them fight, win, loose. Try all the combinaison and find the best to win every fights!'
     ],
     'advantage2' => [
-        'title' => 'Advantage 2',
-        'desc' => 'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'
+        'title' => 'Fight with epic powers',
+        'desc' => 'This game include tons of differents class and powers. Test differents strategy and find the powers who correspond you the most!'
     ],
     'advantage3' => [
-        'title' => 'Advantage 3',
-        'desc' => 'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'
+        'title' => 'Code the perfect IA',
+        'desc' => 'With our code editor, program the most intelligent IA who will never be beaten and climb the leaderboard quickly!'
     ]
 
 ];

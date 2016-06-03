@@ -10,19 +10,26 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
+            <a href="/img/advantage1.png" data-lightbox="welcome"><img src="/img/advantage1.png" style="width: 80%; height: 200px;"></a>
             <h2>@lang('welcome.advantage1.title')</h2>
             <p>@lang('welcome.advantage1.desc')</p>
             <p><a class="btn btn-default" href="#" role="button">@lang('navigation.viewDetails') &raquo;</a></p>
         </div>
         <div class="col-md-4">
+            <a href="/img/advantage2.png" data-lightbox="welcome"><img src="/img/advantage2.png" style="width: 80%; height: 200px;"></a>
             <h2>@lang('welcome.advantage2.title')</h2>
             <p>@lang('welcome.advantage2.desc')</p>
             <p><a class="btn btn-default" href="#" role="button">@lang('navigation.viewDetails') &raquo;</a></p>
         </div>
         <div class="col-md-4">
+            <a href="/img/advantage3.png" data-lightbox="welcome"><img src="/img/advantage3.png" style="width: 80%; height: 200px;"></a>
             <h2>@lang('welcome.advantage3.title')</h2>
             <p>@lang('welcome.advantage3.desc')</p>
             <p><a class="btn btn-default" href="#" role="button">@lang('navigation.viewDetails') &raquo;</a></p>
         </div>
     </div>
+
+    <!-- Lightbox -->
+        <link rel="stylesheet" href="/css/lightbox.min.css">
+        <script src="/js/lightbox.js"></script>
 @endsection
