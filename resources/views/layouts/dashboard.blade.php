@@ -136,6 +136,9 @@
                             <li class="@if ($nav == 'arena') active @endif"><a href="/arena">
                                 <span class="fa fa-gavel"></span>@lang('menu.arena')
                             </a></li>
+                            <li class="@if ($nav == 'adventure') active @endif"><a href="/adventure">
+                                <span class="fa fa-key"></span>@lang('menu.adventure')
+                            </a></li>
                             <li class="@if ($nav == 'leaderboard') active @endif"><a href="/leaderboard">
                                 <span class="fa fa-line-chart"></span>@lang('menu.leaderboard')
                             </a></li>

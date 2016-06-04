@@ -24,7 +24,7 @@ class AdventureController extends Controller
      */
     function index()
     {
-    	return ('adventure.index');
+    	return view('adventure.index');
     }
 
     /**
@@ -34,9 +34,9 @@ class AdventureController extends Controller
      */
     function dungeons()
     {
-    	$dungeons = Dungeon::where_not_null('official')->orderBy('official', 'asc')->get();
+    	$dungeons = Dungeon::whereNotNull('official')->orderBy('official', 'asc')->get();
 
-    	return ('adventure.dungeons', compact('dungeons'));
+    	return view('adventure.dungeons', compact('dungeons'));
     }
 
     /**
@@ -48,7 +48,7 @@ class AdventureController extends Controller
     {
 		$dungeons = Dungeon::where('official', null)->orderBy('rating', 'desc')->get();
 
-    	return ('adventure.customDungeons', compact('dungeons'));
+    	return view('adventure.customDungeons', compact('dungeons'));
     }
 
     /**

@@ -75,6 +75,10 @@ Route::get('/arena/teamfight/{teamId}', 'FightsController@launchTeamFight');
 Route::get('/arena/viewfight/{fightId}', 'FightsController@viewFight');
 Route::get('/arena/contentfight/{fightId}', 'FightsController@contentFight');
 
+Route::get('/adventure', 'AdventureController@index');
+Route::get('/adventure/dungeons', 'AdventureController@dungeons');
+Route::get('/adventure/customdungeons', 'AdventureController@customDungeons');
+
 Route::get('/scripts', 'ScriptsController@index');
 Route::get('/scripts/add', 'ScriptsController@create');
 Route::post('/scripts/add', 'ScriptsController@store');

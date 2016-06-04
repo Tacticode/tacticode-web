@@ -34,6 +34,7 @@ return [
     'characters' => 'Characters',
     'teams' => 'Teams',
     'arena' => 'Arena',
+    'adventure' => 'Adventure',
     'leaderboard' => 'Leaderboard',
     'administration' => 'Administration',
 
