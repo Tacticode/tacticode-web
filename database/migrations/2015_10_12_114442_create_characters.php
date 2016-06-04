@@ -18,6 +18,9 @@ class CreateCharacters extends Migration
             $table->integer('race_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('script_id')->unsigned()->nullable()->default(NULL);
+            $table->boolean('adventure')->default(false);
+            $table->integer('level')->unsigned()->default(1);
+            $table->integer('experience')->unsigned()->default(0);
             $table->integer('elo')->default(0);
             $table->boolean('visible')->default(false);
             $table->softDeletes();

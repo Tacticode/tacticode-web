@@ -125,7 +125,7 @@ class FightsController extends Controller
             {
                 foreach ($team->character as $char)
                 {
-                    //$this->addCharacterToArray($json, $char, $team->id);
+                    $this->addCharacterToArray($json, $char, $team->id);
                 }
             }
         }

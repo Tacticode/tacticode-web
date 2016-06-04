@@ -4,6 +4,7 @@ namespace App\Http\Models;
 
 use App\Http\Models\Group;
 use App\Http\Models\Character;
+use App\Http\Models\Dungeon;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -142,5 +143,16 @@ class User extends Model implements AuthenticatableContract,
     public function team()
     {
         return $this->hasMany('App\Http\Models\Team');
+    }
+
+    /**
+    * A user has many dungeons.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function dungeon()
+    {
+        return $this->hasMany('App\Http\Models\Dungeon');
     }
 }

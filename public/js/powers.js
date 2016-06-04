@@ -78,6 +78,11 @@ function addRace(id, name, x, y) {
 
 function addPower(id, name, description, x, y) {
 
+	circles[id] = new Circle(id, x, y, 10, name, "#2E6dA4", "#4482B7", 'power', description);
+}
+
+function addPassive(id, name, description, x, y) {
+
 	circles[id] = new Circle(id, x, y, 10, name, "#7FAD76", "#9DD492", 'power', description);
 }
 
@@ -351,7 +356,12 @@ function init() {
 			if (node.race)
 				addRace(node.id, node.race.name, node.pos_x, node.pos_y);
 			else if (node.power)
-				addPower(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);
+			{
+				if (node.power.spell)
+					addPower(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);
+				else
+					addPassive(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);			
+			}
 		}
 
 		for (var i in data.paths) {
