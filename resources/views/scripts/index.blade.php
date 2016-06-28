@@ -18,7 +18,7 @@
                     @foreach ($scripts as $script)
                         <tr>
                             <td>{{ $script->name }}</td>
-                            <td>1</td>
+                            <td>{{ $script->nbLines }}</td>
                             <td>
                                 <a href="/scripts/{{ $script->id }}" class="btn btn-primary">@lang('navigation.edit')</a>
                                 <a class="btn btn-danger" href="/scripts/delete/{{ $script->id }}" onclick="if (!confirm('@lang('scripts.confirmDelete')')) return false">@lang('navigation.delete')</a>

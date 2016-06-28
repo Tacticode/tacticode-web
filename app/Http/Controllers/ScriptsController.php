@@ -25,7 +25,11 @@ class ScriptsController extends Controller
      */
     public function index()
     {
-        return view('scripts.index', ['scripts' => Auth::user()->script]);
+        $scripts = Auth::user()->script;
+        foreach ($scripts as $script) {
+            $script->nbLines = substr_count($script->content, "\n") + 1;
+        }
+        return view('scripts.index', ['scripts' => $scripts]);
     }
 
     /**
