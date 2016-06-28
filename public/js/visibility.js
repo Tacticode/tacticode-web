@@ -2,6 +2,8 @@ $(document).ready(function() {
 
     $('#visibility, #character_id', '#team_id').remove();
 
+    $('[data-toggle="tooltip"]').tooltip()
+
     $('a.visibility').click(function() {
 
         var div = $(this).parent().parent();
@@ -49,15 +51,16 @@ $(document).ready(function() {
 
                     $(div).find('a.visibility').toggleClass('btn-success');
                     $(div).find('a.visibility').toggleClass('btn-warning');
-                    visibility = new_visibility;
-                    if (visibility) {
+                    $(div).find('.visibility').val(new_visibility);
+                    console.log(new_visibility);
+                    if (new_visibility) {
 
-                        $(div).find('a.visibility span').text(lang.characters.visible);
+                        $(div).find('a.visibility').attr('data-original-title', lang.characters.visible);
                         $(div).find('a.visibility i').toggleClass('fa-eye');
                     }
                     else {
 
-                        $(div).find('a.visibility span').text(lang.characters.invisible);
+                        $(div).find('a.visibility').attr('data-original-title', lang.characters.invisible);
                         $(div).find('a.visibility i').toggleClass('fa-eye-slash');
                     }
                 }

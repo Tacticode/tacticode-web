@@ -35,12 +35,12 @@
                                 <input class="visibility" type="hidden" value="{{$team->visible}}">
                                 <input class="team_id" type="hidden" value="{{$team->id}}">
                                 @if ($team->visible)
-                                    <a class="btn btn-success visibility clickable">
-                                        <i class="fa fa-eye"></i> <span>@lang('characters.visible')</span>
+                                    <a class="btn btn-success visibility clickable" data-toggle="tooltip" data-placement="top" title="@lang('characters.visible')">
+                                        <i class="fa fa-eye"></i>
                                     </a>
                                 @else
-                                    <a class="btn btn-warning visibility clickable">
-                                        <i class="fa fa-eye-slash"></i> <span>@lang('characters.invisible')</span>
+                                    <a class="btn btn-warning visibility clickable" data-toggle="tooltip" data-placement="top" title="@lang('characters.invisible')">
+                                        <i class="fa fa-eye-slash"></i>
                                     </a>
                                 @endif
                                 <a href="/teams/{{ $team->id }}" class="btn btn-primary">@lang('navigation.more')</a>

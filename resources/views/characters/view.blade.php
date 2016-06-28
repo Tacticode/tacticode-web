@@ -15,12 +15,12 @@
         
         <a class="btn btn-primary" href="/characters/{{$character->id}}/powers">@lang('powers.manage')</a>
         @if ($character->visible)
-            <a class="btn btn-success visibility clickable">
-                <i class="fa fa-eye"></i> <span>@lang('characters.visible')</span>
+            <a class="btn btn-success visibility clickable" data-toggle="tooltip" data-placement="right" title="@lang('characters.visible')">
+                <i class="fa fa-eye"></i>
             </a>
         @else
-            <a class="btn btn-warning visibility clickable">
-                <i class="fa fa-eye-slash"></i> <span>@lang('characters.invisible')</span>
+            <a class="btn btn-warning visibility clickable" data-toggle="tooltip" data-placement="right" title="@lang('characters.invisible')">
+                <i class="fa fa-eye-slash"></i>
             </a>
         @endif
     </h1>
