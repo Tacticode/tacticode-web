@@ -9,6 +9,7 @@ use App\Http\Models\Notification;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Auth;
+use Mail;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -71,6 +72,12 @@ class UsersController extends Controller
         $notification->content = 'Welcome on the site';
         $notification->date = date('Y-m-d H:i:s');
         $notification->save();
+
+        Mail::send('emails.inscription', ['user' => $user], function ($m) use ($user) {
+            $m->from('no-reply@tacticode.net', 'Tacticode');
+
+            $m->to($user->email, $user->login)->subject(\Lang::get('emails.inscription_subject'));
+        });
 
         return redirect('/');
     }
