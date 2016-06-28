@@ -16,6 +16,7 @@ return [
     'character' => 'Character',
     'enemy' => 'Enemy',
     'victory' => 'Victory',
+    'points' => 'Points',
     'noOpponent' => 'No opponent currently available. Please try again later.',
     'doesNotExist' => 'The requested fight does not exist.'
     

@@ -32,6 +32,7 @@
                         <th>@lang('fights.character')</th>
                         <th>@lang('fights.enemy')</th>
                         <th>@lang('fights.victory')</th>
+                        <th>@lang('fights.points')</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,15 @@
                                     @endif
                                 @else
                                     <td>@lang('arena.stillComputing')</span></td>
+                                @endif
+                                @if ($fight->result === null)
+                                    <td>
+                                        -
+                                    </td>
+                                @else
+                                    <td class="{{ $fight->elo_change > 0 ? 'success' : 'danger' }}">
+                                        {{ ($fight->elo_change > 0 ? '+' : '').$fight->elo_change }}
+                                    </td>
                                 @endif
                             @endif
                         </tr>

@@ -80,6 +80,7 @@
                         <th>@lang('fights.date')</th>
                         <th>@lang('fights.enemy')</th>
                         <th>@lang('fights.victory')</th>
+                        <th>@lang('fights.points')</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -109,6 +110,15 @@
                                 @else
                                     <td class="danger">
                                         <span class="glyphicon glyphicon-unchecked" aria-hidden="true">
+                                    </td>
+                                @endif
+                                @if ($fight->result === null)
+                                    <td>
+                                        -
+                                    </td>
+                                @else
+                                    <td class="{{ $fight->pivot->elo_change > 0 ? 'success' : 'danger' }}">
+                                        {{ ($fight->pivot->elo_change > 0 ? '+' : '').$fight->pivot->elo_change }}
                                     </td>
                                 @endif
                             </tr>

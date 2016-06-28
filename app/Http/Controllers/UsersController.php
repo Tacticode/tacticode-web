@@ -32,7 +32,8 @@ class UsersController extends Controller
         $fights = Fight::select([
             'fights.id',
             'fights.result',
-            'fights.created_at'
+            'fights.created_at',
+            'character_fight.elo_change'
         ])->userFights($user->id)->get()->all();
         $charactersIds = $user->character->lists('id')->all();
 

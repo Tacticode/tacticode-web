@@ -164,6 +164,6 @@ class Character extends Model
     */
     public function fight()
     {
-        return $this->belongsToMany('App\Http\Models\Fight')->withTimestamps();
+        return $this->belongsToMany('App\Http\Models\Fight')->withTimestamps()->withPivot('elo_change');
     }
 }
