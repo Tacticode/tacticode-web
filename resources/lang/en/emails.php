@@ -12,5 +12,6 @@ return [
     */
 
     'inscription_title' => 'Welcome on Tacticode!',
+    'reset_password_subject' => 'Pasword reset link'
 
 ];

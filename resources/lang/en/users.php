@@ -19,6 +19,8 @@ return [
     'password' => 'Password',
     'newPassword' => 'New Password',
     'confirmNewPassword' => 'Confirm New Password',
+    'forgotPassword' => 'Forgotten Password',
+    'resetPassword' => 'Reset Password',
     'register' => 'Register',
     'terms' => 'By clicking on the register button, you accept the <a href=":link" target="_blank">terms of use</a>.',
     'updatePassword' => 'Update password',

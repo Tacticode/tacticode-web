@@ -48,6 +48,7 @@
                             </div>
                             <button type="submit" class="btn btn-success">@lang('users.signIn')</button>
                         </form>
+                        <a href="/password/email">@lang('users.forgotPassword')</a>
                     </div>
                 </div>
             @show
