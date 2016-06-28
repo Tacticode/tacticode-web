@@ -67,31 +67,59 @@ class FightsController extends Controller
     /**
     * Add a character to the array for the Battle Engine
     */
-    private function addCharacterToArray(&$arr, $char, $teamId)
+    private function addCharacterToArray(&$arr, $char)
     {
-        $skills = [];
+        $spells = [];
         foreach ($char->node as $node)
         {
             if ($node->power != null)
             {
-                array_push($skills, $node->power->name);                
+                array_push($spells, $node->power->name);                
             }
         }
         $newEnt = [
-            'team' => ($teamId == null ? $char->id : $teamId),
             'id' => $char->id,
             'name' => $char->name,
             'breed' => $char->race->name,
+            'health' => 150,
             'attack' => 1,
             'power' => 1,
-            'defence' => 1,
+            'defense' => 1,
             'resilience' => 1,
             'luck' => 1,
-            'movements' => 4,
-            'skills' => $skills
+            'movement' => 4,
+            'speed' => 2,
+            'spells' => $spells,
+            'script' => $char->script->content,
+            'position' => [0, 0]
         ];
 
-        array_push($arr['fight']['entities'], $newEnt);
+        array_push($arr, $newEnt);
+    }
+
+    /**
+    * Add a team to the array for the Battle Engine
+    */
+    private function addTeamToArray(&$arr, $char, $team)
+    {
+        $team_array = [
+            'id' => ($team === null ? $char->id : $team->id),
+            'name' => ($team === null ? '' : $team->name),
+            'characters' => []
+        ];
+
+        if ($team === null)
+        {
+            $this->addCharacterToArray($team_array['characters'], $char);
+        }
+        else
+        {
+            foreach ($char as $character)
+            {
+                $this->addCharacterToArray($team_array['characters'], $character);
+            }
+        }
+        array_push($arr, $team_array);
     }
 
     /**
@@ -104,10 +132,8 @@ class FightsController extends Controller
         //To finish when battle engine json input is done.
         $json = [
             'map' => json_decode(\Storage::get('maps/sample_map.json')),
-            'fight' => [
-                'fightId' => $fight->id,
-                'entities' => []
-            ]
+            'fightId' => $fight->id,
+            'teams' => []
         ];
 
         $fighters = $fight->team()->groupBy('teams.id')->get();
@@ -116,23 +142,22 @@ class FightsController extends Controller
             $fighters = $fight->character;
             foreach ($fighters as $char)
             {
-                $this->addCharacterToArray($json, $char, null);
+                $this->addTeamToArray($json['teams'], $char, null);
             }
         }
         else
         {
             foreach ($fighters as $team)
             {
-                foreach ($team->character as $char)
-                {
-                    $this->addCharacterToArray($json, $char, $team->id);
-                }
+                $this->addTeamToArray($json['teams'], $team->character, $team);
             }
         }
 
+        /*echo json_encode($json);
+        die;*/
         if (file_exists(Fight::getBattleEnginePath()))
         {
-            $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '\app\fights\\' . $fight->id, 'w');
+            $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '\app\fights\\' . $fight->id . ' 2> ' . storage_path() . '\app\debug.txt', 'w');
             fwrite($ba, json_encode($json));
             pclose($ba);
         }

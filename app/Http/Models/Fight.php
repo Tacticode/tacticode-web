@@ -45,7 +45,7 @@ class Fight extends Model
                 $result = json_decode($content);
                 
                 // As the winner of the battle engine is not valid at the moment, there is no winner if the output fight is from the battle engine
-                $fight->result = (file_exists(Fight::getBattleEnginePath()) ? 0 : $result->winner);
+                $fight->result = $result->winner;//(file_exists(Fight::getBattleEnginePath()) ? 0 : $result->winner);
                 $fight->fight_content = $content;
 
                 if ($fight->save())
@@ -87,7 +87,7 @@ class Fight extends Model
         $result = json_decode($content);
 
         // As the winner of the battle engine is not valid at the moment, there is no winner if the output fight is from the battle engine
-        $fight->result = (file_exists(Fight::getBattleEnginePath()) ? 0 : $result->winner);
+        $fight->result = $result->winner;//(file_exists(Fight::getBattleEnginePath()) ? 0 : $result->winner);
         $fight->fight_content = $content;
 
         if ($fight->save())
