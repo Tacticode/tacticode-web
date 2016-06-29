@@ -133,7 +133,7 @@ class Fight extends Model
         for ($i = 0; $i < 2; ++$i)
         {
             $score = $rating[$i] / ($rating[0] + $rating[1]);
-            $elo = $K * (($fight->result == 0 ? 0.5 : ($fight->result == $fighters[$i]->id ? 1 : 0)) - $score);
+            $elo = round($K * (($fight->result == 0 ? 0.5 : ($fight->result == $fighters[$i]->id ? 1 : 0)) - $score));
             if ($fighters[$i]->elo + $elo < 0)
             {
                 $elo = -$fighters[$i]->elo;                
@@ -232,6 +232,7 @@ class Fight extends Model
                     ->join('characters', 'character_fight.character_id', '=', 'characters.id')
                     ->join('users', 'users.id', '=', 'characters.user_id')
                     ->where('users.id', '=', $userId)
+                    ->where('character_fight.team_id', null)
                     ->groupBy('fights.id');
     }
 }
