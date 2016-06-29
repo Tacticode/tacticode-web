@@ -73,7 +73,7 @@ class UsersController extends Controller
         $notification->date = date('Y-m-d H:i:s');
         $notification->save();
 
-        Mail::send('emails.inscription', ['user' => $user], function ($m) use ($user) {
+        Mail::send(['emails.inscription', 'emails.inscription_plain'], ['user' => $user], function ($m) use ($user) {
             $m->to($user->email, $user->login)->subject(\Lang::get('emails.inscription_subject'));
         });
 
