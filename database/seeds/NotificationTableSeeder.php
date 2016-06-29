@@ -16,5 +16,8 @@ class NotificationTableSeeder extends Seeder
 
         Notification::create(array('user_id' => 1, 'title' => 'Welcome !', 'content' => 'Welcome on the site', 'seen' => 0, 'date' => '2016-04-20 16:43:46'));
         Notification::create(array('user_id' => 2, 'title' => 'Welcome !', 'content' => 'Welcome on the site', 'seen' => 0, 'date' => '2016-04-20 16:43:46'));
+
+        Notification::create(array('user_id' => 3, 'title' => 'Welcome !', 'content' => 'Welcome on the site', 'seen' => 0, 'date' => '2016-04-20 16:43:46'));
+        Notification::create(array('user_id' => 4, 'title' => 'Welcome !', 'content' => 'Welcome on the site', 'seen' => 0, 'date' => '2016-04-20 16:43:46'));
     }
 }
