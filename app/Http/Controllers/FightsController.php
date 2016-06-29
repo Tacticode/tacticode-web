@@ -78,7 +78,7 @@ class FightsController extends Controller
             }
         }
         $newEnt = [
-            'id' => $char->id,
+            'id' => intval($char->id),
             'name' => $char->name,
             'breed' => $char->race->name,
             'health' => 150,
@@ -103,7 +103,7 @@ class FightsController extends Controller
     private function addTeamToArray(&$arr, $char, $team)
     {
         $team_array = [
-            'id' => ($team === null ? $char->id : $team->id),
+            'id' => intval($team === null ? $char->id : $team->id),
             'name' => ($team === null ? '' : $team->name),
             'characters' => []
         ];
@@ -153,11 +153,11 @@ class FightsController extends Controller
             }
         }
 
-        /*echo json_encode($json);
-        die;*/
+        echo json_encode($json);
+        die;
         if (file_exists(Fight::getBattleEnginePath()))
         {
-            $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '\app\fights\\' . $fight->id . ' 2> ' . storage_path() . '\app\debug.txt', 'w');
+            $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '/app/fights/' . $fight->id . ' 2> ' . storage_path() . '/app/debug.txt', 'w');
             fwrite($ba, json_encode($json));
             pclose($ba);
         }
