@@ -153,8 +153,8 @@ class FightsController extends Controller
             }
         }
 
-        echo json_encode($json);
-        die;
+        /*echo json_encode($json);
+        die;*/
         if (file_exists(Fight::getBattleEnginePath()))
         {
             $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '/app/fights/' . $fight->id . ' 2> ' . storage_path() . '/app/debug.txt', 'w');
