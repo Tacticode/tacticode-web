@@ -12,6 +12,7 @@
 	<script src="/arena-viewer/script/fight.js"></script>
 	<script src="/arena-viewer/script/cellinformation.js"></script>
 	<script src="/arena-viewer/script/overlay.js"></script>
+	<script src="/arena-viewer/script/sound.js"></script>
 	<script src="/arena-viewer/script/config.js"></script>
 @endsection
 
