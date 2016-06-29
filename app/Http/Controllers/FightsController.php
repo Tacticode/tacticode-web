@@ -59,7 +59,7 @@ class FightsController extends Controller
 
         if ($fight != null && $fight->fight_content != null)
         {
-            return response()->json(['content' => $fight->fight_content]);
+            return response()->json(['content' => json_decode($fight->fight_content)]);
         }
         return response()->json(['content' => null, 'description' => trans('arena.stillComputing')]);
     }
