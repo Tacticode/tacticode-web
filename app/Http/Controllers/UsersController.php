@@ -74,8 +74,6 @@ class UsersController extends Controller
         $notification->save();
 
         Mail::send('emails.inscription', ['user' => $user], function ($m) use ($user) {
-            $m->from('no-reply@tacticode.net', 'Tacticode');
-
             $m->to($user->email, $user->login)->subject(\Lang::get('emails.inscription_subject'));
         });
 
