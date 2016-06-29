@@ -68,8 +68,8 @@ class UsersController extends Controller
         $notification = new notification;
         $notification->user_id = $user->id;
         $notification->seen = 0;
-        $notification->title = 'Welcome !';
-        $notification->content = 'Welcome on the site';
+        $notification->title = \Lang::get('notifications.welcome_title');
+        $notification->content = \Lang::get('notifications.welcome_content');
         $notification->date = date('Y-m-d H:i:s');
         $notification->save();
 

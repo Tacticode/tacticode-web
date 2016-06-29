@@ -48,6 +48,17 @@ class Team extends Model
     }
 
     /**
+    * A team belong to a user.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    *
+    */
+    public function user()
+    {
+        return $this->belongsTo('App\Http\Models\User');
+    }
+
+    /**
     * A team has multiple characters.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
