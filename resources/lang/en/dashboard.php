@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'title' => 'Dasboard',
+    'title' => 'Dashboard',
     'noCharacters' => 'You don\'t have any character for the moment.',
 
 ];
