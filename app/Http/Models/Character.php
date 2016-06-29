@@ -34,17 +34,15 @@ class Character extends Model
     */
     public static function getStats($id)
     {
-        $datas = Character::where('id', $id)->with(['fight' => function($query) {
-            $query->where('team_id', null)->selectRaw('COUNT(CASE WHEN result = character_id then 1 ELSE NULL END) as win,
-                COUNT(CASE WHEN result != character_id AND result IS NOT NULL AND result > 0 then 1 ELSE NULL END) as loss,
-                COUNT(CASE WHEN result = 0 then 1 ELSE NULL END) as draw,
-                COUNT(CASE WHEN result IS NULL then 1 ELSE NULL END) as pending');
-        }])->first();
+        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->whereRaw('fights.result = character_fight.character_id')->groupBy('fights.id')->get());
+        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->whereRaw('fights.result != character_fight.character_id')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
+        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('result', 0)->groupBy('fights.id')->get());
+        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('result', null)->groupBy('fights.id')->get());
         $ret = [
-            'win' => isset($datas->fight[0]) ? $datas->fight[0]->win : 0,
-            'loss' => isset($datas->fight[0]) ? $datas->fight[0]->loss : 0,
-            'draw' => isset($datas->fight[0]) ? $datas->fight[0]->draw : 0,
-            'pending' => isset($datas->fight[0]) ? $datas->fight[0]->pending : 0
+            'win' => $win,
+            'loss' => $loss,
+            'draw' => $draw,
+            'pending' => $pending
         ];
         return $ret;
     }
@@ -59,18 +57,15 @@ class Character extends Model
     */
     public static function getTeamStats($id)
     {
-        $datas = Character::where('id', $id)->with(['fight' => function($query) {
-            $query->whereNotNull('team_id')->selectRaw('COUNT(CASE WHEN result = team_id then 1 ELSE NULL END) as win,
-                COUNT(CASE WHEN result != team_id AND result IS NOT NULL AND result > 0 then 1 ELSE NULL END) as loss,
-                COUNT(CASE WHEN result = 0 then 1 ELSE NULL END) as draw,
-                COUNT(CASE WHEN result IS NULL then 1 ELSE NULL END) as pending');
-        }])->first();
-
+        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->whereRaw('fights.result = character_fight.team_id')->groupBy('fights.id')->get());
+        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->whereRaw('fights.result != character_fight.team_id')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
+        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('result', 0)->groupBy('fights.id')->get());
+        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('result', null)->groupBy('fights.id')->get());
         $ret = [
-            'win' => isset($datas->fight[0]) ? $datas->fight[0]->win : 0,
-            'loss' => isset($datas->fight[0]) ? $datas->fight[0]->loss : 0,
-            'draw' => isset($datas->fight[0]) ? $datas->fight[0]->draw : 0,
-            'pending' => isset($datas->fight[0]) ? $datas->fight[0]->pending : 0
+            'win' => $win,
+            'loss' => $loss,
+            'draw' => $draw,
+            'pending' => $pending
         ];
         return $ret;
     }
@@ -85,18 +80,15 @@ class Character extends Model
     */
     public static function getGlobalStats($id)
     {
-        $datas = Character::where('id', $id)->with(['fight' => function($query) {
-            $query->selectRaw('COUNT(CASE WHEN result IN(character_id, team_id) then 1 ELSE NULL END) as win,
-                COUNT(CASE WHEN result NOT IN(character_id, team_id) AND result IS NOT NULL AND result > 0 then 1 ELSE NULL END) as loss,
-                COUNT(CASE WHEN result = 0 then 1 ELSE NULL END) as draw,
-                COUNT(CASE WHEN result IS NULL then 1 ELSE NULL END) as pending');
-        }])->first();
-
+        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereRaw('fights.result IN(character_fight.team_id, character_fight.team_id)')->groupBy('fights.id')->get());
+        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereRaw('fights.result NOT IN(character_fight.team_id, character_fight.team_id)')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
+        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('result', 0)->groupBy('fights.id')->get());
+        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('result', null)->groupBy('fights.id')->get());
         $ret = [
-            'win' => isset($datas->fight[0]) ? $datas->fight[0]->win : 0,
-            'loss' => isset($datas->fight[0]) ? $datas->fight[0]->loss : 0,
-            'draw' => isset($datas->fight[0]) ? $datas->fight[0]->draw : 0,
-            'pending' => isset($datas->fight[0]) ? $datas->fight[0]->pending : 0
+            'win' => $win,
+            'loss' => $loss,
+            'draw' => $draw,
+            'pending' => $pending
         ];
         return $ret;
     }
