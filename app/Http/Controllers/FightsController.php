@@ -220,7 +220,7 @@ class FightsController extends Controller
      */
     public function teamFight()
     {
-        return view('arena.teamfight', ['teams' => Auth::user()->team]);
+        return view('arena.teamFight', ['teams' => Auth::user()->team]);
     }
 
     /**
