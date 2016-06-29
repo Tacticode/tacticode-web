@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Character;
 use App\Http\Models\Fight;
+use App\Http\Models\Notification;
 
 class FightsController extends Controller
 {
@@ -59,7 +60,7 @@ class FightsController extends Controller
 
         if ($fight != null && $fight->fight_content != null)
         {
-            return response()->json(['content' => $fight->fight_content]);
+            return response()->json(['content' => json_decode($fight->fight_content)]);
         }
         return response()->json(['content' => null, 'description' => trans('arena.stillComputing')]);
     }
@@ -78,7 +79,7 @@ class FightsController extends Controller
             }
         }
         $newEnt = [
-            'id' => $char->id,
+            'id' => intval($char->id),
             'name' => $char->name,
             'breed' => $char->race->name,
             'health' => 150,
@@ -90,7 +91,7 @@ class FightsController extends Controller
             'movement' => 4,
             'speed' => 2,
             'spells' => $spells,
-            'script' => $char->script->content,
+            'script' => ($char->script != null ? $char->script->content : ''),
             'position' => [0, 0]
         ];
 
@@ -103,7 +104,7 @@ class FightsController extends Controller
     private function addTeamToArray(&$arr, $char, $team)
     {
         $team_array = [
-            'id' => ($team === null ? $char->id : $team->id),
+            'id' => intval($team === null ? $char->id : $team->id),
             'name' => ($team === null ? '' : $team->name),
             'characters' => []
         ];
@@ -157,7 +158,7 @@ class FightsController extends Controller
         die;*/
         if (file_exists(Fight::getBattleEnginePath()))
         {
-            $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '\app\fights\\' . $fight->id . ' 2> ' . storage_path() . '\app\debug.txt', 'w');
+            $ba = popen(Fight::getBattleEnginePath() . ' > ' . storage_path() . '/app/fights/' . $fight->id . ' 2> ' . storage_path() . '/app/debug.txt', 'w');
             fwrite($ba, json_encode($json));
             pclose($ba);
         }
@@ -207,6 +208,14 @@ class FightsController extends Controller
         $fight = Fight::create();
         $fight->character()->sync([$character->id, $opponent->id]);
 
+        $notification = new notification;
+        $notification->user_id = $opponent->user->id;
+        $notification->seen = 0;
+        $notification->title = \Lang::get('notifications.fight_solo_title');
+        $notification->content = \Lang::get('notifications.fight_solo_content', ['character' => $opponent->name, 'enemy' => $character->name]);
+        $notification->date = date('Y-m-d H:i:s');
+        $notification->save();
+
         $this->callBattleEngine($fight);
 
         return redirect('/arena/viewfight/' . $fight->id);
@@ -220,7 +229,7 @@ class FightsController extends Controller
      */
     public function teamFight()
     {
-        return view('arena.teamfight', ['teams' => Auth::user()->team]);
+        return view('arena.teamFight', ['teams' => Auth::user()->team]);
     }
 
     /**
@@ -248,6 +257,14 @@ class FightsController extends Controller
         $fight = Fight::create();
         $fight->character()->attach($team->character->lists('id')->toArray(), ['team_id' => $team->id]);
         $fight->character()->attach($opponent->character->lists('id')->toArray(), ['team_id' => $opponent->id]);
+
+        $notification = new notification;
+        $notification->user_id = $opponent->user->id;
+        $notification->seen = 0;
+        $notification->title = \Lang::get('notifications.fight_team_title');
+        $notification->content = \Lang::get('notifications.fight_team_content', ['team' => $opponent->name, 'enemy' => $team->name]);
+        $notification->date = date('Y-m-d H:i:s');
+        $notification->save();
 
         $this->callBattleEngine($fight);
 

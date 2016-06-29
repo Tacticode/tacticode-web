@@ -34,20 +34,28 @@ class Team extends Model
     */
     public static function getStats($id)
     {
-        $datas = Team::where('id', $id)->with(['fight' => function($query) {
-            $query->whereNotNull('team_id')->selectRaw('COUNT(DISTINCT fights.id, CASE WHEN result = team_id then 1 ELSE NULL END) as win,
-                COUNT(DISTINCT fights.id, CASE WHEN result != team_id AND result IS NOT NULL AND result > 0 then 1 ELSE NULL END) as loss,
-                COUNT(DISTINCT fights.id, CASE WHEN result = 0 then 1 ELSE NULL END) as draw,
-                COUNT(DISTINCT fights.id, CASE WHEN result IS NULL then 1 ELSE NULL END) as pending');
-        }])->first();
-        //dd($datas);
+        $win = count(Team::where('id', $id)->first()->fight()->withPivot('team_id')->whereRaw('fights.result = character_fight.team_id')->groupBy('fights.id')->get());
+        $loss = count(Team::where('id', $id)->first()->fight()->withPivot('team_id')->whereRaw('fights.result != character_fight.team_id')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
+        $draw = count(Team::where('id', $id)->first()->fight()->withPivot('team_id')->where('result', 0)->groupBy('fights.id')->get());
+        $pending = count(Team::where('id', $id)->first()->fight()->withPivot('team_id')->where('result', null)->groupBy('fights.id')->get());
         $ret = [
-            'win' => isset($datas->fight[0]) ? $datas->fight[0]->win : 0,
-            'loss' => isset($datas->fight[0]) ? $datas->fight[0]->loss : 0,
-            'draw' => isset($datas->fight[0]) ? $datas->fight[0]->draw : 0,
-            'pending' => isset($datas->fight[0]) ? $datas->fight[0]->pending : 0
+            'win' => $win,
+            'loss' => $loss,
+            'draw' => $draw,
+            'pending' => $pending
         ];
         return $ret;
+    }
+
+    /**
+    * A team belong to a user.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    *
+    */
+    public function user()
+    {
+        return $this->belongsTo('App\Http\Models\User');
     }
 
     /**

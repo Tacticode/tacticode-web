@@ -68,14 +68,12 @@ class UsersController extends Controller
         $notification = new notification;
         $notification->user_id = $user->id;
         $notification->seen = 0;
-        $notification->title = 'Welcome !';
-        $notification->content = 'Welcome on the site';
+        $notification->title = \Lang::get('notifications.welcome_title');
+        $notification->content = \Lang::get('notifications.welcome_content');
         $notification->date = date('Y-m-d H:i:s');
         $notification->save();
 
-        Mail::send('emails.inscription', ['user' => $user], function ($m) use ($user) {
-            $m->from('no-reply@tacticode.net', 'Tacticode');
-
+        Mail::send(['emails.inscription', 'emails.inscription_plain'], ['user' => $user], function ($m) use ($user) {
             $m->to($user->email, $user->login)->subject(\Lang::get('emails.inscription_subject'));
         });
 

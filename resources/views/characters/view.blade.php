@@ -11,7 +11,7 @@
         <input class="visibility" type="hidden" value="{{$character->visible}}">
         <input class="character_id" type="hidden" value="{{$character->id}}">
 
-        {{ $character->name }}
+        {{ $character->name }} ({{ $character->race->name }})
         
         <a class="btn btn-primary" href="/characters/{{$character->id}}/powers">@lang('powers.manage')</a>
         @if ($character->visible)
@@ -37,16 +37,6 @@
                     {!! Form::text('name', $character->name, ['class' => 'form-control']) !!}
                     <div class="help-block">
                         @foreach ($errors->get('name') as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="form-group @if ($errors->has('race')) has-error @endif">
-                    {!! Form::label('race', trans('characters.race')) !!}
-                    {!! Form::select('race', $races, $character->race_id, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
-                    <div class="help-block">
-                        @foreach ($errors->get('race') as $error)
                             <div>{{ $error }}</div>
                         @endforeach
                     </div>
