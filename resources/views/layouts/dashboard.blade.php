@@ -2,6 +2,10 @@
     {{--*/ $nav = null /*--}}
 @endif
 
+@if (!isset($flashs))
+    {{--*/ $flashs = null /*--}}
+@endif
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,6 +43,7 @@
         <link rel="stylesheet" href="/css/dashboard.css">
         <link rel="stylesheet" href="/css/style.css">
 
+        <script src="/js/flashes.js"></script>
         <script src="/js/token.js"></script>
         <script src="/js/notification.js"></script>
     </head>
@@ -64,6 +69,18 @@
                 <?php ++$nb_new_message; ?>
             @endif
         @endforeach
+
+        <div id="flashes">
+            @foreach (Flashes::get() as $flash)
+                @if ($flash['type'] == 'warning')
+                    <div class="warning">{{$flash['message']}}</div>
+                @elseif ($flash['type'] == 'notice')
+                    <div class="notice">{{$flash['message']}}</div>
+                @else
+                    <div class="error">{{$flash['message']}}</div>
+                @endif
+            @endforeach
+        </div>
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             @section('navbar')

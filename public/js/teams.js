@@ -10,17 +10,17 @@ var teams = {
 		var length = $('.characters .form-group').length;
 		if (length >= 5) {
 
-			$.growl({message: lang.teams.maxCharacters(5), style: "warning", title: ""});
+			flashes.warning(lang.teams.maxCharacters(5));
 			return false;
 		}
 		if (this.charactersListLength == 0) {
 
-			$.growl({message: lang.teams.noCharacters, style: "warning", title: ""});
+			flashes.warning(lang.teams.noCharacters);
 			return false;
 		}
 		if (length >= this.charactersListLength) {
 
-			$.growl({message: lang.teams.notEnoughCharacters(this.charactersListLength), style: "warning", title: ""});
+			flashes.warning(lang.teams.notEnoughCharacters(this.charactersListLength));
 			return false;
 		}
 		return true;
@@ -98,7 +98,7 @@ var teams = {
 			var value = $(this).val();
 			if (value > 0 && ids.indexOf(value) != -1) {
 
-				$.growl({message: lang.teams.cantDuplicateCharacter, style: "error", title: ""});
+				flashes.error(lang.teams.cantDuplicateCharacter);
 				e.preventDefault();
 				return false;
 			}

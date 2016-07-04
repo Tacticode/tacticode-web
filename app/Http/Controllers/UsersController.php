@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Flashes;
+
 class UsersController extends Controller
 {
     public function __construct()
@@ -39,6 +41,9 @@ class UsersController extends Controller
         $charactersIds = $user->character->lists('id')->all();
 
         $data = compact('user', 'fights', 'charactersIds');
+
+        Flashes::push('notice', 'Test de flash');
+
         return view('dashboard', $data);
     }
 
