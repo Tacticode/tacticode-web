@@ -210,3 +210,43 @@ table tr.new {
 
 	text-align: center;
 }
+
+#solo-fight-button {
+
+	display: block;
+	width: 176px;
+	height: 178px;
+	margin-right: auto;
+	margin-left: auto;
+	background: url("../images/fight_buttons.png") 0px 0px no-repeat;
+}
+
+#solo-fight-button:hover {
+
+	background: url("../images/fight_buttons.png") -176px 0px no-repeat;
+}
+
+#solo-fight-button:active {
+
+	background: url("../images/fight_buttons.png") -352px 0px no-repeat;
+}
+
+#team-fight-button {
+
+	display: block;
+	width: 176px;
+	height: 178px;
+	margin-right: auto;
+	margin-left: auto;
+	background: url("../images/fight_buttons.png") 0px -178px no-repeat;
+}
+
+#team-fight-button:hover {
+
+	background: url("../images/fight_buttons.png") -176px -178px no-repeat;
+}
+
+#team-fight-button:active {
+
+	background: url("../images/fight_buttons.png") -352px -178px no-repeat;
+}

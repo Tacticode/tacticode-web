@@ -6,10 +6,10 @@
 
     <div class="row arena">
         <div class="col-md-6 fight-type">
-            <a class="btn btn-success" href="arena/solofight">@lang('arena.soloFight')</a>
+            <a id="solo-fight-button" href="arena/solofight"></a>
         </div>
         <div class="col-md-6 fight-type">
-            <a class="btn btn-success" href="arena/teamfight">@lang('arena.teamFight')</a>
+            <a id="team-fight-button" href="arena/teamfight"></a>
         </div>
     </div>
 @endsection
