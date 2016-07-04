@@ -357,7 +357,7 @@ function init() {
 				addRace(node.id, node.race.name, node.pos_x, node.pos_y);
 			else if (node.power)
 			{
-				if (node.power.spell)
+				if (node.power.spell == 1)
 					addPower(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);
 				else
 					addPassive(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);			
@@ -386,7 +386,4 @@ function init() {
 	});
 }
 
-$(document).ready(function() {
-
-	init();
-});
+$(document).ready(init);
