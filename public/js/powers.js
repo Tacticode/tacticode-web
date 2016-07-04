@@ -71,6 +71,70 @@ Link.prototype.draw = function(ctx) {
 	ctx.stroke();
 }
 
+function getAdjacentNodes(circle) {
+
+	var connections = [];
+	for (var linkId in links) {
+
+		if (links[linkId].circle1.id == circle.id)
+			connections.push(links[linkId].circle2);
+		else if (links[linkId].circle2.id == circle.id)
+			connections.push(links[linkId].circle1);
+	}
+	return connections;
+}
+
+function in_array_node(node, node_array) {
+
+	for (var i in node_array) {
+		if (node.id == node_array[i].id)
+			return true;
+	}
+	return false;
+}
+
+function checkPathStart(node, initialNodes) {
+
+	if (node.type == 'race' && node.selected == true)
+		return true;
+	var adjacentNodes = getAdjacentNodes(node);
+	for (var i in adjacentNodes) {
+		if ((adjacentNodes[i].bought || (adjacentNodes[i].type == 'race' && adjacentNodes[i].selected == true)) && !in_array_node(adjacentNodes[i], initialNodes)) {
+			initialNodes.push(node);
+			if (checkPathStart(adjacentNodes[i], initialNodes))
+				return true;
+			initialNodes.pop();
+		}
+	};
+	return false;
+}
+
+function isSalable(circle) {
+
+	if (!circle.bought)
+		return false;
+	var adjacentNodes = getAdjacentNodes(circle);
+	for (var i in adjacentNodes) {
+
+		var node = adjacentNodes[i];
+		if (node.bought && !checkPathStart(node, [circle], false))
+			return false;
+	}
+	return true;
+}
+
+function updateNodes() {
+
+	for (var i in circles) {
+
+		var circle = circles[i];
+		if (isSalable(circle))
+			circle.salable = true;
+		else
+			circle.salable = false;
+	}
+}
+
 function addRace(id, name, x, y) {
 
 	circles[id] = new Circle(id, x, y, 20, name, "#C25959", "#D49692", 'race');
@@ -169,7 +233,6 @@ function frontBuyPower(circle) {
 
 	powerLeft--;
 	circle.bought = true;
-	circle.salable = true;
 	var connections = [];
 	for (var linkId in links) {
 		
@@ -187,13 +250,7 @@ function frontBuyPower(circle) {
 				connections.push(links[linkId].circle1);
 		}
 	}
-	for (var i in connections) {
-
-		if (connections.length > 1)
-			connections[i].salable = true;
-		else
-			connections[i].salable = false;
-	}
+	updateNodes();
 	drawAll();
 }
 
@@ -247,18 +304,15 @@ function frontSellPower(circle) {
 
 				if (!links[linkId].circle1.bought)
 					links[linkId].circle1.available = false;
-				else
-					links[linkId].circle1.salable = true;
 			}
 			if (links[linkId].circle2.id != circle.id && links[linkId].circle2.type == 'power') {
 			
 				if (!links[linkId].circle2.bought)
 					links[linkId].circle2.available = false;
-				else
-					links[linkId].circle2.salable = true;
 			}
 		}
 	}
+	updateNodes();
 	drawAll();
 }
 
@@ -378,6 +432,7 @@ function init() {
 				frontBuyPower(circle);
 		}
 
+		updateNodes();
 		drawAll();
 
 		c.addEventListener('mousemove', mousemovement, false);
