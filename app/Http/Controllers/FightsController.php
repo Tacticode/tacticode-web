@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Character;
 use App\Http\Models\Fight;
+use App\Http\Models\Stat;
 use App\Http\Models\Notification;
 
 class FightsController extends Controller
@@ -70,6 +71,7 @@ class FightsController extends Controller
     */
     private function addCharacterToArray(&$arr, $char)
     {
+        $stats = Stat::getMax();
         $spells = [];
         foreach ($char->node as $node)
         {
@@ -82,14 +84,14 @@ class FightsController extends Controller
             'id' => intval($char->id),
             'name' => $char->name,
             'breed' => $char->race->name,
-            'health' => 150,
-            'attack' => 1,
-            'power' => 1,
-            'defense' => 1,
-            'resilience' => 1,
-            'luck' => 1,
-            'movement' => 4,
-            'speed' => 2,
+            'health' => $stats['HP'],
+            'attack' => $stats['STRENGTH'],
+            'power' => $stats['INTELLIGENCE'],
+            'defense' => $stats['DEFENCE'],
+            'resilience' => $stats['RESILIENCE'],
+            'luck' => $stats['LUCK'],
+            'movement' => $stats['MOVEMENT'],
+            'speed' => $stats['SPEED'],
             'spells' => $spells,
             'script' => ($char->script != null ? $char->script->content : ''),
             'position' => [0, 0]

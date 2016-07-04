@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Character;
+use App\Http\Models\Stat;
 use App\Http\Models\Node;
 use App\Http\Models\Power;
 use App\Http\Models\Race;
@@ -27,8 +28,7 @@ class PowersController extends Controller
         {
             return redirect('/characters');
         }
-
-        return view('powers.manage', ['character' => $character]);
+        return view('powers.manage', ['character' => $character, 'totalPowers' => Stat::getMax()['TALENT']]);
     }
 
     public function powersInfos($id) {
@@ -53,7 +53,7 @@ class PowersController extends Controller
         }
 
         $nodes = $character->node;
-        if ($nodes->count() >= 8)
+        if ($nodes->count() >= Stat::getMax()['TALENT'])
         {
             return response()->json(['result' => 'failure', 'description' => trans('powers.noTalentPointLeft')]);
         }
