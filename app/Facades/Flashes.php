@@ -38,6 +38,8 @@ class Flashes extends Facade
     	$flashes = Session::get('flashes');
     	if ($delete)
     		Session::set('flashes', []);
+        if (!is_array($flashes))
+            $flashes == [];
     	return $flashes;
     }
 }
