@@ -88,9 +88,9 @@ class PowersController extends Controller
         }
         foreach (Node::getAdjacentNodes($node) as $adj_node)
         {
-            if (in_array($adj_node->id, $nodes_id))
+            if (in_array($adj_node->id, $nodes_id) && $this->checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id])))
             {
-                return $this->checkPathStart($adj_node, array_diff($nodes_id, [$adj_node->id]));
+                return true;
             }
         }
         return false;

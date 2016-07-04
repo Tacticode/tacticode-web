@@ -20,6 +20,7 @@ class PowerTableSeeder extends Seeder
         Power::create(array('name' => 'DEFENCE', 'description' => 'Gain additional defence.', 'spell' => false));
         Power::create(array('name' => 'RESILIENCE', 'description' => 'Gain additional resilience.', 'spell' => false));
         Power::create(array('name' => 'LUCK', 'description' => 'Gain additional luck.', 'spell' => false));
+        Power::create(array('name' => 'SPEED', 'description' => 'Gain additional speed.', 'spell' => false));
         Power::create(array('name' => 'MOVEMENT', 'description' => 'Gain and additional movement point.', 'spell' => false));
 
         Power::create(array('name' => 'NIGHTMARE', 'description' => 'Applies a debuff on the taget, which takes magical damages each time it moves.', 'spell' => true));
