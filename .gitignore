@@ -5,3 +5,4 @@ Homestead.json
 .env
 storage/database.sqlite
 *.stackdump
+composer.lock
