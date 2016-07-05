@@ -42,8 +42,6 @@ class UsersController extends Controller
 
         $data = compact('user', 'fights', 'charactersIds');
 
-        Flashes::push('notice', 'Test de flash');
-
         return view('dashboard', $data);
     }
 

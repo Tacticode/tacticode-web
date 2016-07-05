@@ -21,7 +21,8 @@ class AdministrationController extends Controller
     {
         if (Auth::user()->group->name != 'ADMIN')
         {
-            return \Redirect::back()->withError(['error', trans('administration.denied')]);
+            Flashes::push('error', trans('administration.denied'));
+            return \Redirect::back();
         }
         $users = User::all();
         return view('administration.index', compact('users'));
@@ -31,7 +32,8 @@ class AdministrationController extends Controller
     {
         if (Auth::user()->group->name != 'ADMIN')
         {
-            return \Redirect::back()->withError(['error', trans('administration.denied')]);
+            Flashes::push('error', trans('administration.denied'));
+            return \Redirect::back();
         }
         if (\Session::get('loggedFrom', -1) == -1)
         {
@@ -56,7 +58,8 @@ class AdministrationController extends Controller
     {
         if (Auth::user()->group->name != 'ADMIN')
         {
-            return \Redirect::back()->withError(['error', trans('administration.denied')]);
+            Flashes::push('error', trans('administration.denied'));
+            return \Redirect::back();
         }
         if ($id != Auth::user()->id)
         {
@@ -71,7 +74,8 @@ class AdministrationController extends Controller
     {
         if (Auth::user()->group->name != 'ADMIN')
         {
-            return \Redirect::back()->withError(['error', trans('administration.denied')]);
+            Flashes::push('error', trans('administration.denied'));
+            return \Redirect::back();
         }
         $user = User::findOrFail($id);
         $user->banned = false;

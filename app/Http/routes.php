@@ -99,3 +99,7 @@ Route::get('/administration/logas/{id}', 'AdministrationController@logAs');
 Route::get('/administration/logback', 'AdministrationController@logBack');
 Route::get('/administration/bann/{id}', 'AdministrationController@bann');
 Route::get('/administration/unbann/{id}', 'AdministrationController@unbann');
+
+Route::get('/tools/nodebuilder', 'Tools\NodeBuilderController@index');
+Route::get('/tools/nodebuilder/getTalentTree', 'Tools\NodeBuilderController@getTalentTree');
+Route::post('/tools/nodebuilder/saveTalentTree', 'Tools\NodeBuilderController@saveTalentTree');
