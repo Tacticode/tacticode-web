@@ -1,4 +1,6 @@
 *
 !maps
 !maps/*
+!talent_tree
+!talent_tree/*
 !.gitignore

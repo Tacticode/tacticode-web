@@ -55,7 +55,8 @@ class NodeBuilderController extends Controller
         {
             return response()->json(['result' => 'failure', 'description' => 'Incorrect json']);
         }
-        \DB::statement("SET foreign_key_checks=0");
+        try{\DB::statement("SET foreign_key_checks=0");}
+        catch (\Exception $e){}
         \DB::delete('DELETE FROM character_node WHERE node_id > 4');
         Node::truncate();
         Path::truncate();
@@ -75,7 +76,8 @@ class NodeBuilderController extends Controller
             $element->node_to = $path->node_to + 1;
             $element->save();
         }
-        \DB::statement("SET foreign_key_checks=1");
+        try{\DB::statement("SET foreign_key_checks=1");}
+        catch (\Exception $e){}
         return response()->json(['result' => 'success', 'description' => 'Database updated']);
     }
 }

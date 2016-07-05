@@ -5,7 +5,7 @@ var characterid = document.getElementById('characterid').value;
 var raceid = document.getElementById('raceid').value;
 var text = document.getElementById('selectedCircle');
 var textDesc = document.getElementById('selectedCircleDesc');
-var powerLeft = 7;
+var powerLeft = document.getElementById('totalPowers').value;
 var c = document.getElementById("powers");
 var ctx = c.getContext("2d");
 var circles = [];
@@ -274,7 +274,7 @@ function buyPower(circle) {
 
 			if (data.result != 'success') {
 				frontSellPower(circle);
-				alert(lang.powers.cantBuy);
+				alert(data.description);
 			} else {
 
 				frontBuyPower(circle);
@@ -333,7 +333,7 @@ function sellPower(circle) {
 
 			if (data.result != 'success') {
 				frontBuyPower(circle);
-				alert(lang.powers.cantSell);
+				alert(data.description);
 			} else {
 
 				frontSellPower(circle);
@@ -385,7 +385,7 @@ function resetPowers() {
 		var link = links[i];
 		link.available = false;
 	}
-	powerLeft = 7;
+	powerLeft = document.getElementById('totalPowers').value;
 	selectRace(raceid);
 	drawAll();
 }

@@ -53,7 +53,7 @@ class PowersController extends Controller
         }
 
         $nodes = $character->node;
-        if ($nodes->count() >= Stat::getMax()['TALENT'])
+        if ($nodes->count() - 1 >= Stat::getMax()['TALENT'])
         {
             return response()->json(['result' => 'failure', 'description' => trans('powers.noTalentPointLeft')]);
         }

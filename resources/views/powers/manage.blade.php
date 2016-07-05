@@ -10,9 +10,10 @@
 
     <input type="hidden" id="characterid" value="{{ $character->id }}">
     <input type="hidden" id="raceid" value="{{ $character->race_id }}">
+    <input type="hidden" id="totalPowers" value="{{ $totalPowers }}">
 
     <div class="row">
-        <div>@lang('powers.left', ['number' => 8]) <button class="btn btn-danger" onclick="resetPowers()">@lang('powers.resetAll')</button></div>
+        <div>@lang('powers.left', ['number' => '-']) <button class="btn btn-danger" onclick="resetPowers()">@lang('powers.resetAll')</button></div>
         <canvas id="powers" width="800" height="600" style="border:1px solid #000000;">
             @lang('powers.noCanvas')
         </canvas>
