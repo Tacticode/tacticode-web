@@ -132,9 +132,9 @@ class FightsController extends Controller
     */
     public function callBattleEngine($fight)
     {
-        //To finish when battle engine json input is done.
+        $maps = \Storage::allFiles('maps');
         $json = [
-            'map' => json_decode(\Storage::get('maps/sample_map.json')),
+            'map' => json_decode(\Storage::get($maps[mt_rand(0, count($maps) - 1)])),
             'fightId' => $fight->id,
             'teams' => []
         ];
