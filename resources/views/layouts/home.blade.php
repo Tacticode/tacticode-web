@@ -47,8 +47,8 @@
                                 <input type="password" placeholder="@lang('users.password')" class="form-control" name="password">
                             </div>
                             <button type="submit" class="btn btn-success">@lang('users.signIn')</button>
+                            <a href="/password/email" class="btn btn-warning">@lang('users.forgotPassword')</a>
                         </form>
-                        <a href="/password/email">@lang('users.forgotPassword')</a>
                     </div>
                 </div>
             @show
