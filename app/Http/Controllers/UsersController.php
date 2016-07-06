@@ -80,6 +80,7 @@ class UsersController extends Controller
             $m->to($user->email, $user->login)->subject(\Lang::get('emails.inscription_subject'));
         });
 
+        Flashes::push('notice', trans('users.accountCreated'));
         return redirect('/');
     }
 
@@ -136,6 +137,7 @@ class UsersController extends Controller
         if ($data['email'] != $user->email)
             $user->email = $data['email'];
         $user->save();
+        Flashes::push('notice', trans('users.updateSuccess'));
         return redirect('/user');
     }
 
@@ -152,6 +154,7 @@ class UsersController extends Controller
         
         $user->password = $data['new-password'];
         $user->save();
+        Flashes::push('notice', trans('users.passwordUpdateSuccess'));
         return redirect('/user');
     }
 

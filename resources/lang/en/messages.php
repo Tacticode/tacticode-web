@@ -16,6 +16,8 @@ return [
     'confirmDelete' => 'Are you sure you want to delete this message?',
     'add' => 'Write a new message',
     'send' => 'Send',
+    'sendSuccess' => 'Message sent',
+    'deleteSuccess' => 'Message deleted',
     'read' => 'Read',
     'to' => 'To',
     'from' => 'From',

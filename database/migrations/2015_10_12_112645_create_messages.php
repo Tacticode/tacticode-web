@@ -16,7 +16,6 @@ class CreateMessages extends Migration
             $table->increments('id');
             $table->longtext('content');
             $table->string('object', 255);
-            $table->datetime('date');
             $table->timestamps();
         });
     }

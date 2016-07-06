@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Flashes;
 
 use App\Http\Models\User;
 

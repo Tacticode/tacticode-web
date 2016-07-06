@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\User;
 use App\Http\Models\Message;
 use Auth;
+use Flashes;
 
 use App\Http\Requests\MessageRequest;
 use Illuminate\Http\Request;
@@ -102,6 +103,7 @@ class MessagesController extends Controller
         }
         $message->user()->sync($users);
 
+        Flashes::push('notice', trans('messages.sendSuccess'));
         return redirect()->action('MessagesController@index');
     }
 
@@ -119,6 +121,7 @@ class MessagesController extends Controller
         $message->pivot->deleted = 1;
         Auth::user()->message()->updateExistingPivot($message->id, ['deleted' => 1], false);
 
+        Flashes::push('notice', trans('messages.deleteSuccess'));
         return redirect('/messages');
     }
 

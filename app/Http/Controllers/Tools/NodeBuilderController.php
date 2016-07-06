@@ -26,7 +26,7 @@ class NodeBuilderController extends Controller
         if (Auth::user()->group->name != 'ADMIN')
         {
             Flashes::push('error', trans('administration.denied'));
-            return \Redirect::back();
+            return redirect('/');
         }
 
     	return view('tools.nodebuilder', ['powers' => Power::all()]);

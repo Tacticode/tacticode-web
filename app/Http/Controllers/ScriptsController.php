@@ -67,6 +67,7 @@ class ScriptsController extends Controller
 
         Character::where('script_id', $id)->update(array('script_id' => null));
         $script->delete();
+        Flashes::push('notice', trans('scripts.deleteSuccess'));
         return redirect('/scripts');
     }
 

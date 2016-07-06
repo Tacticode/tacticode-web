@@ -155,7 +155,7 @@
                             <li class="@if ($nav == 'arena') active @endif"><a href="/arena">
                                 <span class="fa fa-gavel"></span>@lang('menu.arena')
                             </a></li>
-                            @if (Auth::user()->group->name == 'ADMIN')
+                            @if (false/*Auth::user()->group->name == 'ADMIN'*/)
                                 <li class="@if ($nav == 'adventure') active @endif"><a href="/adventure">
                                     <span class="fa fa-key"></span>@lang('menu.adventure')
                                 </a></li>
@@ -164,7 +164,7 @@
                                 <span class="fa fa-line-chart"></span>@lang('menu.leaderboard')
                             </a></li>
                             @if (Auth::user()->group->name == 'ADMIN')
-                                <li class="@if ($nav == 'admin') active @endif"><a href="/administration">
+                                <li class="@if ($nav == 'administration') active @endif"><a href="/administration">
                                     <span class="fa fa-eye"></span>@lang('menu.administration')
                                 </a></li>
                             @endif

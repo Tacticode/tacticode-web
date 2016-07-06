@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Team;
 use Auth;
+use Flashes;
 
 use App\Http\Requests\TeamRequest;
 use Illuminate\Http\Request;
@@ -86,6 +87,7 @@ class TeamsController extends Controller
         }
 
         $team->save();
+        Flashes::push('notice', trans('teams.updateSuccess'));
         return redirect()->action('TeamsController@index');
     }
 
@@ -131,6 +133,7 @@ class TeamsController extends Controller
             $team->character()->sync($characterIds);
         }
 
+        Flashes::push('notice', trans('teams.addSuccess'));
         return redirect('/teams');
     }
 
@@ -148,6 +151,7 @@ class TeamsController extends Controller
         $team->character()->detach();
         $team->delete();
 
+        Flashes::push('notice', trans('teams.deleteSuccess'));
         return redirect('/teams');
     }
 

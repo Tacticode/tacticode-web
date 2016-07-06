@@ -8,6 +8,7 @@ use App\Http\Models\Script;
 use App\Http\Models\Race;
 use App\Http\Models\Node;
 use Auth;
+use Flashes;
 
 use App\Http\Requests\CharacterRequest;
 use Illuminate\Http\Request;
@@ -74,6 +75,7 @@ class CharactersController extends Controller
         }
 
         $character->delete();
+        Flashes::push('notice', trans('characters.deleteSuccess'));
         return redirect('/characters');
     }
 
@@ -98,6 +100,7 @@ class CharactersController extends Controller
         if ($req['script'] != $character->script_id)
             $character->script_id = $req['script'] != 0 ? $req['script'] : null;
         $character->save();
+        Flashes::push('notice', trans('characters.editSuccess'));
         return redirect()->action('CharactersController@view', [$id]);
     }
 
@@ -138,6 +141,7 @@ class CharactersController extends Controller
         $node = Node::where('race_id', $req['race'])->first();
         $character->node()->sync([$node->id]);
 
+        Flashes::push('notice', trans('characters.addSuccess'));
         return redirect('/characters');
     }
 
