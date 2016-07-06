@@ -11,6 +11,8 @@ use App\Http\Requests\ScriptRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Flashes;
+
 class ScriptsController extends Controller
 {
     public function __construct()
@@ -89,6 +91,7 @@ class ScriptsController extends Controller
         if ($req['content'] != $script->content)
             $script->content = $req['content'];
         $script->save();
+        Flashes::push('notice', trans('scripts.updated'));
         return redirect()->action('ScriptsController@view', [$id]);
     }
 

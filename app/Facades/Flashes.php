@@ -26,7 +26,7 @@ class Flashes extends Facade
     protected static function push($type, $message) {
 
         $flashes = Session::get('flashes');
-        if (!is_array($flahes))
+        if (!is_array($flashes))
             $flashes = [];
         $flashes[] = ['type' => $type, 'message' => $message];
     	Session::set('flashes', $flashes);
