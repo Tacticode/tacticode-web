@@ -25,7 +25,11 @@ class Flashes extends Facade
      */
     protected static function push($type, $message) {
 
-    	Session::push('flashes', ['type' => $type, 'message' => $message]);
+        $flashes = Session::get('flashes');
+        if (!is_array($flahes))
+            $flashes = [];
+        $flashes[] = ['type' => $type, 'message' => $message];
+    	Session::set('flashes', $flashes);
     }
 
     /**
@@ -39,7 +43,7 @@ class Flashes extends Facade
     	if ($delete)
     		Session::set('flashes', []);
         if (!is_array($flashes))
-            $flashes == [];
+            $flashes = [];
     	return $flashes;
     }
 }
