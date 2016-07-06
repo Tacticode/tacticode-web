@@ -18,11 +18,29 @@
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <script src="/js/bootstrap.min.js"></script>
 
+        <!-- jQuery Growl -->
+        <link rel="stylesheet" href="/css/jquery.growl.css">
+        <script src="/js/jquery.growl.js"></script>
+
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/welcome.css">
+
+        <script src="/js/flashes.js"></script>
     </head>
 
     <body>
+
+        <div id="flashes">
+            @foreach (Flashes::get() as $flash)
+                @if ($flash['type'] == 'warning')
+                    <div class="warning">{{$flash['message']}}</div>
+                @elseif ($flash['type'] == 'notice')
+                    <div class="notice">{{$flash['message']}}</div>
+                @else
+                    <div class="error">{{$flash['message']}}</div>
+                @endif
+            @endforeach
+        </div>
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             @section('navbar')
