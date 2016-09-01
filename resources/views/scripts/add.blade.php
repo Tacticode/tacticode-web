@@ -14,7 +14,7 @@
 @section('content')
     <h1 class="page-header">
         @lang('scripts.add')
-        <a href="http://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a>
+        <a href="https://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a>
     </h1>
 
     {!! Form::open() !!}

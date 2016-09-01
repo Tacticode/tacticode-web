@@ -15,7 +15,7 @@
 
         <h1 class="page-header">
             <span class="clickable">{{ $script->name }}</span>
-            <a href="http://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a></h1>
+            <a href="https://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a></h1>
         <div class="page-header row" style="display: none">
             <div class="col-md-4">
                 {!! Form::text('name', $script->name, ['class' => 'form-control', 'placeholder' => trans('scripts.name')]) !!}
