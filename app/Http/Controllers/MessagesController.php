@@ -58,7 +58,7 @@ class MessagesController extends Controller
         $message = null;
         if ($id && !($message = Auth::user()->message->find($id)))
             return redirect('/messages');
-        $users = User::lists('login');
+        $users = User::where('id', '!=', Auth::user()->id)->lists('login');
         return view('messages.add', ['users' => json_encode($users), 'message' => $message]);
     }
 
@@ -101,9 +101,12 @@ class MessagesController extends Controller
                 }
             }
         }
-        $message->user()->sync($users);
-
-        Flashes::push('notice', trans('messages.sendSuccess'));
+        if (count($users) <= 1)
+            Flashes::push('notice', trans('messages.noReceiver'));
+        else {
+            $message->user()->sync($users);
+            Flashes::push('notice', trans('messages.sendSuccess'));
+        }
         return redirect()->action('MessagesController@index');
     }
 
