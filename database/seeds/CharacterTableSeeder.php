@@ -33,12 +33,12 @@ class CharacterTableSeeder extends Seeder
         $character8->node()->sync([4]);
 
         $characterEip1 = Character::create(array('name' => 'Lab', 'race_id' => 2, 'user_id' => 3, 'script_id' => 3, 'visible' => 1));
-        $characterEip1->node()->sync([1]);
+        $characterEip1->node()->sync([2]);
         $characterEip2 = Character::create(array('name' => 'EIP', 'race_id' => 3, 'user_id' => 3, 'script_id' => 4, 'visible' => 1));
-        $characterEip2->node()->sync([2]);
+        $characterEip2->node()->sync([3]);
         $characterAdmin1 = Character::create(array('name' => 'Jean', 'race_id' => 4, 'user_id' => 4, 'script_id' => 5, 'visible' => 1));
-        $characterAdmin1->node()->sync([1]);
+        $characterAdmin1->node()->sync([4]);
         $characterAdmin2 = Character::create(array('name' => 'Michelle', 'race_id' => 1, 'user_id' => 4, 'script_id' => 6, 'visible' => 1));
-        $characterAdmin2->node()->sync([2]);
+        $characterAdmin2->node()->sync([1]);
     }
 }

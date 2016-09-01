@@ -139,7 +139,7 @@ class Fight extends Model
                 $elo = -$fighters[$i]->elo;                
             }
             $fighters[$i]->elo += $elo;
-            $fighters[$i]->fight()->updateExistingPivot($fight->id, ['elo_change' => $elo]);
+            $fighters[$i]->fight()->updateExistingPivot($fight->id, ['elo_change' => $elo, 'elo_result' => $fighters[$i]->elo]);
             $fighters[$i]->save();
         }
     }

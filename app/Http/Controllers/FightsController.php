@@ -171,7 +171,11 @@ class FightsController extends Controller
             {
                 $fighters = $fight->character;
             }
-            \Storage::put('fights/'.$fight->id, '{"winner":'.(rand(0,1) != 0 ? $fighters[0]->id : $fighters[1]->id).'}');
+            $fake_result = [
+                'map' => $json['map'],
+                'winner' => (rand(0,1) != 0 ? $fighters[0]->id : $fighters[1]->id)
+            ];
+            \Storage::put('fights/'.$fight->id, json_encode($fake_result));
         }
     }
 

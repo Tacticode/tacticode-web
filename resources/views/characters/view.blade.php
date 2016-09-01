@@ -108,7 +108,7 @@
                                     </td>
                                 @else
                                     <td class="{{ $fight->pivot->elo_change > 0 ? 'success' : 'danger' }}">
-                                        {{ ($fight->pivot->elo_change > 0 ? '+' : '').$fight->pivot->elo_change }}
+                                        {{ ($fight->pivot->elo_change > 0 ? '+' : '').$fight->pivot->elo_change }} ({{ $fight->pivot->elo_result }})
                                     </td>
                                 @endif
                             </tr>

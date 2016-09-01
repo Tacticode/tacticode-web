@@ -36,7 +36,8 @@ class UsersController extends Controller
             'fights.id',
             'fights.result',
             'fights.created_at',
-            'character_fight.elo_change'
+            'character_fight.elo_change',
+            'character_fight.elo_result'
         ])->userFights($user->id)->get()->all();
         $charactersIds = $user->character->lists('id')->all();
 

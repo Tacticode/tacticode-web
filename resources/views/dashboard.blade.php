@@ -65,7 +65,7 @@
                                     </td>
                                 @else
                                     <td class="{{ $fight->elo_change > 0 ? 'success' : 'danger' }}">
-                                        {{ ($fight->elo_change > 0 ? '+' : '').$fight->elo_change }}
+                                        {{ ($fight->elo_change > 0 ? '+' : '').$fight->elo_change }} ({{ $fight->elo_result }})
                                     </td>
                                 @endif
                             @endif
