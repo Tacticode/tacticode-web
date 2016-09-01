@@ -14,14 +14,24 @@
 
                 <input type="hidden" name="token" value="{{ $token }}">
 
-                <div class="form-group">
+                <div class="form-group @if ($errors->has('email')) has-error @endif">
                     {!! Form::label('email', trans('users.email')) !!}
                     <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                    <span class="help-block" id="login-error">
+                        @if ($errors->has('email'))
+                            {{$errors->first('email')}}
+                        @endif
+                    </span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group @if ($errors->has('password')) has-error @endif">
                     {!! Form::label('password', trans('users.newPassword')) !!}
                     <input type="password" class="form-control" name="password">
+                    <span class="help-block" id="login-error">
+                        @if ($errors->has('password'))
+                            {{$errors->first('password')}}
+                        @endif
+                    </span>
                 </div>
 
                 <div class="form-group">
