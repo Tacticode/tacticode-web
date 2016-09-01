@@ -124,7 +124,7 @@
                 </tbody>
             </table>
         @else
-            <i>@lang('characters.noFights')</i>
+            <i>@lang('teams.noFights')</i>
         @endif
     </div>
 @endsection
