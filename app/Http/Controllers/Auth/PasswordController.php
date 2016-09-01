@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 
 class PasswordController extends Controller
 {
@@ -30,6 +31,12 @@ class PasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function beforePostEmail(Request $request) {
+
+        \Flashes::push('notice', trans('passwords.mailSent'));
+        return $this->postEmail($request);
     }
 
     protected function resetPassword($user, $password)
