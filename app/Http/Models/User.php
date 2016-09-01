@@ -62,6 +62,7 @@ class User extends Model implements AuthenticatableContract,
         ->lists('elo', 'users.id')->toArray();
         $teams = User::join('teams', 'teams.user_id', '=', 'users.id')
         ->selectRaw('users.id, SUM(teams.elo) as elo')
+        ->groupBy('users.id')
         ->lists('elo', 'users.id')->toArray();
 
         $global = [];
@@ -69,12 +70,12 @@ class User extends Model implements AuthenticatableContract,
         $team = [];
         foreach ($users as $id)
         {
-            $solo[$id] = (isset($characters[$id]) ? $characters[$id] : 0);
-            $team[$id] = (isset($teams[$id]) ? $teams[$id] : 0);
+            $solo[$id] = intval(isset($characters[$id]) ? $characters[$id] : 0);
+            $team[$id] = intval(isset($teams[$id]) ? $teams[$id] : 0);
             $global[$id] = $solo[$id] + $team[$id];
         }
-        arsort($characters);
-        arsort($teams);
+        arsort($solo);
+        arsort($team);
         arsort($global);
         return ['solo' => $solo, 'team' => $team, 'global' => $global];
     }

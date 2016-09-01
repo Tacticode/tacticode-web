@@ -40,8 +40,9 @@ class UsersController extends Controller
             'character_fight.elo_result'
         ])->userFights($user->id)->get()->all();
         $charactersIds = $user->character->lists('id')->all();
+        $teamsIds = $user->team->lists('id')->all();
 
-        $data = compact('user', 'fights', 'charactersIds');
+        $data = compact('user', 'fights', 'charactersIds', 'teamsIds');
 
         return view('dashboard', $data);
     }

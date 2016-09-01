@@ -11,8 +11,8 @@
             @if ($users[$key-1]->id == Auth::user()->id)
             <tr class="info">
               <td>{{ array_search($key, array_keys($elo)) + 1 }}</td>
-              <td>{{ $users[$key-1]->login }}</td>
-              <td>{{ $e }}</td>
+              <td><strong>{{ $users[$key-1]->login }}</strong></td>
+              <td><strong>{{ $e }}</strong></td>
               <td><a class="btn btn-primary" href="/user">@lang('leaderboard.myProfile')</a></td>
             </tr>
             @else

@@ -77,6 +77,6 @@ class Team extends Model
     */
     public function fight()
     {
-        return $this->belongsToMany('App\Http\Models\Fight', 'character_fight')->withTimestamps();
+        return $this->belongsToMany('App\Http\Models\Fight', 'character_fight')->withTimestamps()->withPivot(['elo_change', 'elo_result'])->groupBy('fights.id');
     }
 }
