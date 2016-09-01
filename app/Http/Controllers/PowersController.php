@@ -39,7 +39,13 @@ class PowersController extends Controller
             return response()->json(['result' => 'failure', 'description' => trans('characters.doesNotBelongToTheUser')]);
         }
 
-        return response()->json(['nodes' => Node::with('race', 'power')->get(), 'paths' => Path::all(), 'bought' => $character->node]);
+        $nodes = Node::with('race', 'power')->get()->toArray();
+        foreach ($nodes as &$node) {
+            if (isset($node['power']))
+                $node['power']['name'] = \Lang::get('powers.power_' . $node['power']['name']);
+        }
+
+        return response()->json(['nodes' => $nodes, 'paths' => Path::all(), 'bought' => $character->node]);
     }
 
     public function buyNode(Request $request)

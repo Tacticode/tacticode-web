@@ -12,7 +12,10 @@
 
 
 @section('content')
-    <h1 class="page-header">@lang('scripts.add')</h1>
+    <h1 class="page-header">
+        @lang('scripts.add')
+        <a href="http://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a>
+    </h1>
 
     {!! Form::open() !!}
 
@@ -33,7 +36,7 @@
                 @endforeach
             </div>
         </div>
-    	<textarea id="codemirror" style="display:none" name="content"></textarea>
+    	<textarea id="codemirror" style="display:none" name="content">{{$default}}</textarea>
 
     	<div class="spacer"></div>
 

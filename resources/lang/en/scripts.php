@@ -18,6 +18,7 @@ return [
     'updated' => 'Script updated!',
     'deleteSuccess' => 'Script deleted',
     'confirmDelete' => 'Are you sure you want to delete this script ?',
-    'noScripts' => 'You have no scripts at this time. Do you want to <a href=":link">add one</a>?'
+    'noScripts' => 'You have no scripts at this time. Do you want to <a href=":link">add one</a>?',
+    'documentation' => 'Documentation'
 
 ];

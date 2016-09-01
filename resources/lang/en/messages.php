@@ -17,6 +17,7 @@ return [
     'add' => 'Write a new message',
     'send' => 'Send',
     'sendSuccess' => 'Message sent',
+    'noReceiver' => 'No receiver',
     'deleteSuccess' => 'Message deleted',
     'read' => 'Read',
     'to' => 'To',

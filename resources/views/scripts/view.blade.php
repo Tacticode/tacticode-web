@@ -13,7 +13,9 @@
 @section('content')
     {!! Form::open(['url' => '/scripts/' . $script->id]) !!}
 
-        <h1 class="clickable page-header">{{ $script->name }}</h1>
+        <h1 class="page-header">
+            <span class="clickable">{{ $script->name }}</span>
+            <a href="http://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a></h1>
         <div class="page-header row" style="display: none">
             <div class="col-md-4">
                 {!! Form::text('name', $script->name, ['class' => 'form-control', 'placeholder' => trans('scripts.name')]) !!}
@@ -39,10 +41,10 @@
     			matchBrackets: true
 			});
 
-            $('h1').click(function() {
+            $('h1 span').click(function() {
 
                 $(".page-header").show();
-                $('h1').hide();
+                $('h1 span').hide();
             });
     	});
     </script>
