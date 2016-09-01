@@ -26,6 +26,7 @@ return [
     'deleteSuccess' => 'Team successfully deleted',
     'updateSuccess' => 'Team updated',
     'noTeams' => 'You have no team at this time. Do you want to <a href=":link">add one</a>?',
+    'noFights' => 'This team hasn\'t made any fight in team mode',
     'doesNotBelongToTheUser' => 'The team does not belong to the user.',
     'character' => 'Character',
     'removeCharacter' => 'Remove character',
