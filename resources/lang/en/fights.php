@@ -13,7 +13,8 @@ return [
 
     'history' => 'Fighting history',
     'date' => 'Date',
-    'character' => 'Character',
+    'type' => 'Type',
+    'character' => 'Fighter',
     'enemy' => 'Enemy',
     'victory' => 'Victory',
     'points' => 'Points',

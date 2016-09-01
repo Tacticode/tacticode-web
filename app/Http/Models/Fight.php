@@ -217,7 +217,7 @@ class Fight extends Model
     */
     public function team()
     {
-        return $this->belongsToMany('App\Http\Models\Team', 'character_fight')->withTimestamps();
+        return $this->belongsToMany('App\Http\Models\Team', 'character_fight')->withTimestamps()->groupBy('team_id');
     }
 
     /**
@@ -232,7 +232,6 @@ class Fight extends Model
                     ->join('characters', 'character_fight.character_id', '=', 'characters.id')
                     ->join('users', 'users.id', '=', 'characters.user_id')
                     ->where('users.id', '=', $userId)
-                    ->where('character_fight.team_id', null)
                     ->groupBy('fights.id');
     }
 }
