@@ -1,0 +1,9 @@
+var turn = 0;
+function onTurn() {
+  ++turn;
+  var movementPoints = getCurrentEntity().movement;
+  if (movementPoints > 0) {
+    var me = getCurrentEntity();
+    moveToCell(me.x + 1, me.y);
+  }
+}

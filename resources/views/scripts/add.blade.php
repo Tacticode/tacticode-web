@@ -36,7 +36,7 @@
                 @endforeach
             </div>
         </div>
-    	<textarea id="codemirror" style="display:none" name="content"></textarea>
+    	<textarea id="codemirror" style="display:none" name="content">{{$default}}</textarea>
 
     	<div class="spacer"></div>
 

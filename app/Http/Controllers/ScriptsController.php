@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Models\Script;
 use App\Http\Models\Character;
 use Auth;
+use File;
 
 use App\Http\Requests\ScriptRequest;
 use App\Http\Requests;
@@ -103,7 +104,8 @@ class ScriptsController extends Controller
      */
     public function create()
     {
-        return view('scripts.add');
+        $default = File::get(storage_path() . '/scripts/default.script');
+        return view('scripts.add', ['default' => $default]);
     }
 
     /**
