@@ -88,9 +88,9 @@
                                 <td>{{$fight->created_at->format('d M Y - H:i:s')}}</td>
                                 <td>
                                     @if ($fight->team[0]['id'] == $team->id)
-                                        <a href="/teams/view/{{$fight->team[1]['id']}}">{{$fight->team[1]['name']}}</a>
+                                        <a href="/teams/{{$fight->team[1]['id']}}">{{$fight->team[1]['name']}}</a>
                                     @else
-                                        <a href="/teams/view/{{$fight->team[0]['id']}}">{{$fight->team[0]['name']}}</a>
+                                        <a href="/teams/{{$fight->team[0]['id']}}">{{$fight->team[0]['name']}}</a>
                                     @endif
                                 </td>
                                 @if ($fight->result == $team->id)
