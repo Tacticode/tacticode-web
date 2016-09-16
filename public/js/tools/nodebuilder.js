@@ -633,3 +633,56 @@ function importTree()
 	drawAll();
 
 }
+
+function exportSeeds()
+{
+	var schema = toArray();
+
+	var nodes = "===== NODES =====\n"
+	+ "<?php\n\n"
+	+ "use Illuminate\Database\Seeder;\n"
+	+ "use App\Http\Models\Node;\n\n"
+	+ "class NodeTableSeeder extends Seeder\n"
+	+ "{\n"
+	+ "\t/**\n"
+	+ "\t * Run the database seeds.\n"
+	+ "\t *\n"
+	+ "\t * @return void\n"
+	+ "\t */\n"
+	+ "\tpublic function run()\n"
+	+ "\t{\n"
+	+ "\t\tDB::table('nodes')->delete();\n\n";
+
+    for (var i in schema.nodes)
+    {
+    	var node = schema.nodes[i];
+    	nodes += "\t\tNode::create(array('race_id' => " + (node.type == 'race' ? node.powerId : 'null') + ", 'power_id' => " + (node.type == 'power' ? node.powerId : 'null') + ", 'pos_x' => " + node.x + ", 'pos_y' => " + node.y + "));\n";
+    }
+
+    nodes += "\t}\n}\n";
+
+    var paths = "\n===== PATHS =====\n"
+    + "<?php\n\n"
+    + "use Illuminate\Database\Seeder;\n"
+    + "use App\Http\Models\Path;\n\n"
+    + "class PathTableSeeder extends Seeder\n"
+    + "{\n"
+    + "\t/**\n"
+    + "\t * Run the database seeds.\n"
+    + "\t *\n"
+    + "\t * @return void\n"
+    + "\t */\n"
+    + "\tpublic function run()\n"
+    + "\t{\n"
+    + "\t\tDB::table('paths')->delete();\n\n";
+
+    for (var i in schema.paths)
+    {
+    	var path = schema.paths[i];
+    	paths += "\t\tPath::create(array('node_from' => " + (path.node_from + 1) + ", 'node_to' => " + (path.node_to + 1) + "));\n";
+    }
+
+    paths += "\t}\n}\n";
+
+	window.open("data:text/text," + encodeURIComponent(nodes + paths), "_blank");
+}

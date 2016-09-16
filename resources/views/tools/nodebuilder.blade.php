@@ -32,6 +32,7 @@
         </div>
         <div class="col-md-3">
             <button id="export" class="btn btn-primary" onclick="exportTree();">Export Tree</button>
+            <button id="export_seed" class="btn btn-success" onclick="exportSeeds();">Export Seeds</button>
             <textarea id="export_result" rows="10" cols="35" disabled="true"></textarea>
             <button id="import" class="btn btn-primary" onclick="importTree();">Import Tree</button>
             <textarea id="import_data" rows="10" cols="35"></textarea>
