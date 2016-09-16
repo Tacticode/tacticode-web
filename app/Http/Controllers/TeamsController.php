@@ -40,15 +40,21 @@ class TeamsController extends Controller
      */
     public function view($id)
     {
-        if (!($team = Auth::user()->team->find($id)))
-            return redirect('/teams');
+        if (!($team = Team::find($id)))
+        {
+            Flashes::push('error', trans('teams.doesNotExist'));
+            return redirect('/teams');            
+        }
 
         $datas = [
             'team' => $team,
             'characters' => Auth::user()->character->lists('name', 'id')->all()
         ];
 
-        return view('teams.view', $datas);
+        if (Auth::user()->team->find($id))
+            return view('teams.view', $datas);
+        else
+            return view('teams.access', $datas);
     }
 
     /**

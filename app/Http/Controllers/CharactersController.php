@@ -44,9 +44,10 @@ class CharactersController extends Controller
      */
     public function view($id)
     {
-        $character = Auth::user()->character->find($id);
+        $character = Character::find($id);
         if ($character == null)
         {
+            Flashes::push('error', trans('characters.doesNotExist'));
             return redirect('/characters');
         }
         $datas = [
@@ -57,7 +58,10 @@ class CharactersController extends Controller
         $datas['scripts'][0] = trans('characters.noScript');
         ksort($datas['scripts']);
 
-        return view('characters.view', $datas);
+        if (Auth::user()->character->find($id))
+            return view('characters.view', $datas);
+        else
+            return view('characters.access', $datas);
     }
 
     /**

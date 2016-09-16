@@ -31,5 +31,7 @@ return [
     'character' => 'Character',
     'removeCharacter' => 'Remove character',
     'noTeamId' => 'The team id variable is not set.',
+    'noCharacters' => 'This team does not have any character.',
+    'doesNotExist' => 'The team you tried to access does not exist',
 
 ];
