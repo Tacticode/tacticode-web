@@ -6,3 +6,4 @@ Homestead.json
 storage/database.sqlite
 *.stackdump
 composer.lock
+*.old
