@@ -640,8 +640,8 @@ function exportSeeds()
 
 	var nodes = "===== NODES =====\n"
 	+ "<?php\n\n"
-	+ "use Illuminate\Database\Seeder;\n"
-	+ "use App\Http\Models\Node;\n\n"
+	+ "use Illuminate\\Database\\Seeder;\n"
+	+ "use App\\Http\\Models\\Node;\n\n"
 	+ "class NodeTableSeeder extends Seeder\n"
 	+ "{\n"
 	+ "\t/**\n"
@@ -663,8 +663,8 @@ function exportSeeds()
 
     var paths = "\n===== PATHS =====\n"
     + "<?php\n\n"
-    + "use Illuminate\Database\Seeder;\n"
-    + "use App\Http\Models\Path;\n\n"
+    + "use Illuminate\\Database\\Seeder;\n"
+    + "use App\\Http\\Models\\Path;\n\n"
     + "class PathTableSeeder extends Seeder\n"
     + "{\n"
     + "\t/**\n"
