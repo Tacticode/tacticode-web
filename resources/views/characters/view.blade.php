@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <h2 class="sub-header">@lang('fights.history')</h2>
+    <h2 class="sub-header">@lang('fights.history') ({{$character->elo}} elo)</h2>
     <div class="table-responsive">
         @if (count($character->fight))
             <table class="table table-striped">
