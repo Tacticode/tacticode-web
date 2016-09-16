@@ -34,6 +34,7 @@ return [
     'noVisibility' => 'The visibility variable is not set.',
     'noCharacterId' => 'The character id variable is not set.',
     'visible' => 'Visible',
-    'invisible' => 'Invisible'
+    'invisible' => 'Invisible',
+    'doesNotExist' => 'The character you tried to access does not exist.',
 
 ];
