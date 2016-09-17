@@ -16,8 +16,8 @@ var mouse = {x: 0, y: 0};
 function Circle(id, x, y, radius, name, strokeStyle, fillStyle, type, description) {
 
 	this.id = id;
-	this.x = x;
-	this.y = y;
+	this.x = Number(x);
+	this.y = Number(y);
 	this.radius = radius;
 	this.name = name;
 	this.strokeStyle = strokeStyle;
