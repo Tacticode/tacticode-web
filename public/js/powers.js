@@ -41,10 +41,7 @@ Circle.prototype.draw = function(ctx) {
 	ctx.fill();
 	ctx.stroke();
 	ctx.font = "15px Arial";
-	if (this.selected || this.bought || (this.hover && this.type == 'power' && this.available))
-		ctx.fillStyle = "white";
-	else
-		ctx.fillStyle = this.strokeStyle;
+	ctx.fillStyle = "white";
 	var text = this.name.substr(0, 1);
 	var measure = ctx.measureText(text);
 	ctx.fillText(text, this.x - (measure.width / 2), this.y + 7);
