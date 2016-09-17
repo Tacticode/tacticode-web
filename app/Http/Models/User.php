@@ -110,7 +110,18 @@ class User extends Model implements AuthenticatableContract,
     */
     public function notification()
     {
-        return $this->hasMany('App\Http\Models\Notification');
+        return $this->hasMany('App\Http\Models\Notification')->orderBy('date', 'desc');
+    }
+
+    /**
+    * Return recents notifications
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function recentNotification()
+    {
+        return $this->hasMany('App\Http\Models\Notification')->orderBy('date', 'desc')->limit(5);
     }
 
     /**

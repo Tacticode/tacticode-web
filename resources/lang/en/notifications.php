@@ -11,6 +11,10 @@ return [
     |
     */
 
+    'title' => 'Notifications',
+    'no_notifications' => 'No notifications',
+    'see_all' => 'See all notifications',
+
     'welcome_title' => 'Welcome !',
     'welcome_content' => 'Welcome on the site',
     'fight_solo_title' => 'New Solo Fight !',
