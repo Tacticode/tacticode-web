@@ -44,7 +44,7 @@ Circle.prototype.draw = function(ctx) {
 	ctx.fillStyle = "white";
 	var text = this.name.substr(0, 1);
 	var measure = ctx.measureText(text);
-	ctx.fillText(text, this.x - (measure.width / 2), this.y + 7);
+	ctx.fillText(text, this.x - (measure.width / 2), this.y + 6);
 }
 
 function Link(id1, id2) {
@@ -155,6 +155,12 @@ function addPassive(id, name, description, x, y) {
 
 	circles[id] = new Circle(id, x, y, 10, name, "#7FAD76", "#9DD492", 'power', description);
 }
+
+function addStatistique(id, name, description, x, y) {
+
+	circles[id] = new Circle(id, x, y, 10, name, "#B380FF", "#D1B3FF", 'power', description);
+}
+
 
 function addLink(id1, id2) {
 
@@ -452,10 +458,12 @@ function init() {
 				addRace(node.id, node.race.name, node.pos_x, node.pos_y);
 			else if (node.power)
 			{
-				if (node.power.spell == 1)
+				if (node.power.type == 1)
+					addPassive(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);
+				else if (node.power.type == 2)
 					addPower(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);
 				else
-					addPassive(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);			
+					addStatistique(node.id, node.power.name, node.power.description, node.pos_x, node.pos_y);			
 			}
 		}
 

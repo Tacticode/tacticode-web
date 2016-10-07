@@ -18,7 +18,7 @@ class Power extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'spell'];
+    protected $fillable = ['name', 'description', 'type'];
 
     /**
     * A power has many nodes.

@@ -75,7 +75,7 @@ class FightsController extends Controller
         $spells = [];
         foreach ($char->node as $node)
         {
-            if ($node->power != null && $node->power->spell == 1)
+            if ($node->power != null && $node->power->type > 0)
             {
                 array_push($spells, $node->power->name);                
             }
