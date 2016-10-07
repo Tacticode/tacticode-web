@@ -23,7 +23,7 @@
             <button id="delete" class="btn btn-primary" onclick="changeMode(3);">Delete Node (d)</button>
             <select id="powers" class="btn btn-secondary-outline">
                 @foreach ($powers as $power)
-                    <option value="{{$power->id}}" data-description="{{$power->description}}" data-spell="{{$power->spell}}">{{$power->name}}</option>
+                    <option value="{{$power->id}}" data-description="{{$power->description}}" data-type="{{$power->type}}">{{$power->name}}</option>
                 @endforeach
             </select>
             <button id="paint" class="btn btn-primary" onclick="changeMode(4);">Paint Node (p)</button>

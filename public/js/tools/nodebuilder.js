@@ -45,16 +45,19 @@ function init() {
 			}
 			else if (node.power)
 			{
-				if (node.power.spell == 1)
+				if (node.power.type == 1)
+				{
+					addPassive(node.power.id, node.pos_x, node.pos_y);
+				}
+				else if (node.power.type == 2)
 				{
 					addPower(node.power.id, node.pos_x, node.pos_y);
-					circles[circles.length - 1].nodeId = node.id;
 				}
 				else
 				{
-					addPassive(node.power.id, node.pos_x, node.pos_y);
-					circles[circles.length - 1].nodeId = node.id;
+					addStatistique(node.power.id, node.pos_x, node.pos_y);
 				}
+				circles[circles.length - 1].nodeId = node.id;
 			}
 		}
 
@@ -139,19 +142,24 @@ Link.prototype.draw = function(ctx) {
 	ctx.stroke();
 }
 
-function addRace(raceId, x, y) {
-
+function addRace(raceId, x, y)
+{
 	circles.push(new Circle(x, y, 20, raceId, "#C25959", "#D49692", 'race'));
 }
 
-function addPower(powerId, x, y) {
-
+function addPower(powerId, x, y)
+{
 	circles.push(new Circle(x, y, 10, powerId, "#2E6dA4", "#4482B7", 'power'));
 }
 
-function addPassive(powerId, x, y) {
-
+function addPassive(powerId, x, y)
+{
 	circles.push(new Circle(x, y, 10, powerId, "#7FAD76", "#9DD492", 'power'));
+}
+
+function addStatistique(powerId, x, y)
+{
+	circles.push(new Circle(x, y, 10, powerId, "#B380FF", "#D1B3FF", 'power'));
 }
 
 function addNode(x, y)
@@ -169,6 +177,12 @@ function paintPassive(circle)
 {
 	circle.strokeStyle = "#7FAD76";
 	circle.fillStyle = "#9DD492";
+}
+
+function paintStatistique(circle)
+{
+	circle.strokeStyle = "#B380FF";
+	circle.fillStyle = "#D1B3FF";
 }
 
 function paintClear(circle)
@@ -341,13 +355,17 @@ function paintNode(e)
 		if (isInCircle(x, y, circle) && circle.type != 'race')
 		{
 			painted = true;
-			if (power.data('spell') == 1)
+			if (power.data('type') == 1)
+			{
+				paintPassive(circle);
+			}
+			else if (power.data('type') == 2)
 			{
 				paintPower(circle);
 			}
 			else
 			{
-				paintPassive(circle);
+				paintStatistique(circle);
 			}
 			circle.powerId = power.val();
 		}
@@ -359,13 +377,17 @@ function paintNode(e)
 			x = roundTo(x, strictMove);
 			y = roundTo(y, strictMove);
 		}
-		if (power.data('spell') == 1)
+		if (power.data('type') == 1)
 		{
-			addPower(power.val(), x, y);
+			addPassive(power.val(), node.x, node.y);
+		}
+		else if (power.data('type') == 2)
+		{
+			addPower(power.val(), node.x, node.y);
 		}
 		else
 		{
-			addPassive(power.val(), x, y);
+			addStatistique(power.val(), node.x, node.y);
 		}
 	}
 
@@ -609,14 +631,18 @@ function importTree()
 			if (node.powerId > 0)
 			{
 				var power = $('#powers option[value='+node.powerId+']');
-				if (power.data('spell'))
+				if (power.data('type') == 1)
+				{
+					addPassive(node.powerId, node.x, node.y);
+				}
+				else if (power.data('type') == 2)
 				{
 					addPower(node.powerId, node.x, node.y);
 				}
 				else
 				{
-					addPassive(node.powerId, node.x, node.y);
-				}				
+					addStatistique(node.powerId, node.x, node.y);
+				}
 			}
 			else
 			{
