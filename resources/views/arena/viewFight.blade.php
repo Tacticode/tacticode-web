@@ -4,16 +4,8 @@
 @section('page-scripts')
 	<script src="/arena-viewer/lib/pixi-3.0.9.js"></script>
 	<script src="/arena-viewer/lib/jquery-2.2.0.js"></script>
-	<script src="/arena-viewer/script/tacticode.js"></script>
-	<script src="/arena-viewer/script/map.js"></script>
-	<script src="/arena-viewer/script/projectile.js"></script>
-	<script src="/arena-viewer/script/entity.js"></script>
-	<script src="/arena-viewer/script/customTexture.js"></script>
-	<script src="/arena-viewer/script/fight.js"></script>
-	<script src="/arena-viewer/script/cellinformation.js"></script>
-	<script src="/arena-viewer/script/overlay.js"></script>
-	<script src="/arena-viewer/script/sound.js"></script>
-	<script src="/arena-viewer/script/config.js"></script>
+	<script src="/arena-viewer/script/arena-viewer.js"></script>>
+	<script src="/arena-viewer/script/config.js"></script>>
 @endsection
 
 @section('content')
