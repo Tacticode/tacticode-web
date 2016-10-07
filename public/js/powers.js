@@ -212,13 +212,22 @@ function drawText() {
 		textX += diff;
 		textDescX += diff;
 	}
-	ctx.fillRect(rectX, mouse.y - 70, measureDesc.width + 30, height);
+	var rectY = mouse.y - 70;
+	var textY = mouse.y - 50;
+	var textDescY = mouse.y - 35;
+	if (rectY < 15) {
+		var diff = 15 - rectY;
+		rectY += diff;
+		textY += diff;
+		textDescY += diff;
+	}
+	ctx.fillRect(rectX, rectY, measureDesc.width + 30, height);
 	ctx.font = "15px Arial";
 	ctx.fillStyle = "black";
-	ctx.fillText(text, textX, mouse.y - 50);
+	ctx.fillText(text, textX, textY);
 	ctx.font = "italic 15px Arial";
 	if (textDesc)
-		ctx.fillText(textDesc, textDescX, mouse.y - 35);
+		ctx.fillText(textDesc, textDescX, textDescY);
 }
 
 function drawAll() {
