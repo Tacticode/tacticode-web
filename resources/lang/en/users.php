@@ -27,6 +27,9 @@ return [
     'loginOrPasswordInvalid' => 'Login or password invalid.',
     'accountCreated' => 'Account created with success',
     'updateSuccess' => 'Informations successfully updated',
-    'passwordUpdateSuccess' => 'Password successfully updated'
+    'passwordUpdateSuccess' => 'Password successfully updated',
+    'noCharacter' => 'This user does not have any character',
+    'noTeam' => 'This user does not have any team',
+    'noFight' => 'This user does not have any fighting history'
 
 ];
