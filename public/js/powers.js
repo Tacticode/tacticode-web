@@ -3,14 +3,15 @@
 var token = document.getElementById('token').value;
 var characterid = document.getElementById('characterid').value;
 var raceid = document.getElementById('raceid').value;
-var text = document.getElementById('selectedCircle');
-var textDesc = document.getElementById('selectedCircleDesc');
+var text = '';
+var textDesc = '';
 var powerLeft = document.getElementById('totalPowers').value;
 var c = document.getElementById("powers");
 var ctx = c.getContext("2d");
 var circles = [];
 var links = [];
 var isLoading = false;
+var mouse = {x: 0, y: 0};
 
 function Circle(id, x, y, radius, name, strokeStyle, fillStyle, type, description) {
 
@@ -39,6 +40,11 @@ Circle.prototype.draw = function(ctx) {
 	ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
 	ctx.fill();
 	ctx.stroke();
+	ctx.font = "15px Arial";
+	ctx.fillStyle = "white";
+	var text = this.name.substr(0, 1);
+	var measure = ctx.measureText(text);
+	ctx.fillText(text, this.x - (measure.width / 2), this.y + 7);
 }
 
 function Link(id1, id2) {
@@ -175,6 +181,40 @@ function selectRace(race) {
 	}
 }
 
+function drawText() {
+	
+	if (!text && !textDesc)
+		return;
+	var measure = ctx.measureText(text);
+	var measureDesc = ctx.measureText(textDesc);
+	ctx.fillStyle = "#9E9E9E";
+	var height = 47;
+	if (!textDesc)
+		height -= 18;
+	var rectX = mouse.x - (measureDesc.width / 2) + 20;
+	var textX = mouse.x - (measure.width / 2) + 35;
+	var textDescX = mouse.x - (measureDesc.width / 2) + 35;
+	if (rectX + measureDesc.width + 30 > 800) {
+		var diff = rectX + measureDesc.width + 30 - 800 + 15;
+		rectX -= diff;
+		textX -= diff;
+		textDescX -= diff;
+	}
+	if (rectX < 15) {
+		var diff = 15 - rectX;
+		rectX += diff;
+		textX += diff;
+		textDescX += diff;
+	}
+	ctx.fillRect(rectX, mouse.y - 70, measureDesc.width + 30, height);
+	ctx.font = "15px Arial";
+	ctx.fillStyle = "black";
+	ctx.fillText(text, textX, mouse.y - 50);
+	ctx.font = "italic 15px Arial";
+	if (textDesc)
+		ctx.fillText(textDesc, textDescX, mouse.y - 35);
+}
+
 function drawAll() {
 
 	ctx.clearRect(0, 0, c.width, c.height);
@@ -186,6 +226,7 @@ function drawAll() {
 	}
 	if (isLoading)
 		loading();
+	drawText();
 	document.getElementById('powerLeft').textContent = powerLeft;
 }
 
@@ -196,23 +237,23 @@ function isInCircle(x, y, circle) {
 
 function mousemovement(e) {
 
-	var x = e.offsetX;
-	var y = e.offsetY;
+	mouse.x = e.offsetX;
+	mouse.y = e.offsetY;
 	for (var i in circles) {
 
 		var circle = circles[i];
-		if (!circle.hover && isInCircle(x, y, circle)) {
+		if (!circle.hover && isInCircle(mouse.x, mouse.y, circle)) {
 			
 			circle.hover = true;
-			text.textContent = circle.name;
-			textDesc.textContent = circle.description;
+			text = circle.name;
+			textDesc = circle.description;
 			if (circle.type == 'power' && circle.available && (!circle.bought || circle.salable))
 				document.body.style.cursor = 'pointer';
-		} else if (circle.hover && !isInCircle(x, y, circle)) {
+		} else if (circle.hover && !isInCircle(mouse.x, mouse.y, circle)) {
 			
 			circle.hover = false;
-			text.textContent = '';
-			textDesc.textContent = '';
+			text = '';
+			textDesc = '';
 			if (circle.type == 'power')
 				document.body.style.cursor = 'initial';
 		}

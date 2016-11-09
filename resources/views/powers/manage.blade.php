@@ -17,7 +17,5 @@
         <canvas id="powers" width="800" height="600" style="border:1px solid #000000;">
             @lang('powers.noCanvas')
         </canvas>
-        <div><span id="selectedCircle"></span></div>
-        <div><i id="selectedCircleDesc"></i></div>
     </div>
 @endsection

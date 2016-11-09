@@ -107,13 +107,16 @@
                                     @endif
                                 </a>
                                 <ul class="dropdown-menu">
-                                    @foreach (Auth::User()->notification as $notification)
+                                    @foreach (Auth::User()->recentNotification as $notification)
                                         <li>
                                             <i class="date">{{$notification->date}}</i>
                                             <h3>{{$notification->title}}</h3>
                                             <p>{{$notification->content}}</p>
                                         </li>
                                     @endforeach
+                                    <li>
+                                        <p><a href="/notifications/all">@lang('notifications.see_all')</a></p>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>

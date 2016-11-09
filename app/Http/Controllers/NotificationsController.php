@@ -24,14 +24,23 @@ class NotificationsController extends Controller
      */
     public function see()
     {
-        $notifications = Auth::User()->notification;
+        $notifications = Auth::User()->notification->where('seen', 0);
 
-        foreach ($notifications as $notification) {
-            
-            if ($notification->seen == 0)
-                $notification->update(['seen' => 1]);
-        }
+        foreach ($notifications as $notification)
+            $notification->update(['seen' => 1]);
 
         return response()->json(['result' => 'success']);
+    }
+
+    /**
+     * View all notifications
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all()
+    {
+        $notifications = Auth::User()->notification;
+
+        return view('notifications.all', compact(['notifications']));
     }
 }
