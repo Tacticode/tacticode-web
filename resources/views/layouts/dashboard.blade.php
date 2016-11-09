@@ -42,10 +42,12 @@
 
         <link rel="stylesheet" href="/css/dashboard.css">
         <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/tactichat.css">
 
         <script src="/js/flashes.js"></script>
         <script src="/js/token.js"></script>
         <script src="/js/notification.js"></script>
+        <script src="/js/tactichat.js"></script>
     </head>
 
     <body>
@@ -179,6 +181,8 @@
                 </div>
             </div>
         </div>
+
+        @include('tactichat')
 
         <!-- Page scripts -->
         @section('page-scripts')

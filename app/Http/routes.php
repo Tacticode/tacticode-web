@@ -52,6 +52,10 @@ Route::post('/messages/add/', 'MessagesController@store');
 Route::post('/messages/add/{id}', 'MessagesController@store');
 Route::get('/messages/{id}', 'MessagesController@view');
 
+Route::get('/tactichat/lasts', 'ChatsController@lastMessages');
+Route::post('/tactichat/write/{lastMessage}', 'ChatsController@write');
+Route::get('/tactichat/lastfrom/{lastMessage}', 'ChatsController@lastFrom');
+
 Route::get('/leaderboard', 'UsersController@leaderboard');
 
 Route::get('/characters', 'CharactersController@index');
