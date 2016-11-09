@@ -1,0 +1,88 @@
+#tactichat-button {
+
+	position: fixed;
+	right: 0;
+	top: 100px;
+	width: 50px;
+	height: 50px;
+	background: #484848;
+	z-index: 2001;
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	padding-top: 5px;
+	transition: background 0.3s;
+}
+
+#tactichat-button:hover {
+
+	background: #2f2f2f;
+	cursor: pointer;
+}
+
+#tactichat {
+
+	background: #484848;
+	width: 300px;
+	position: fixed;
+	z-index: 2000;
+	height: 100%;
+	top: 0;
+	right: -300px;
+}
+
+#tactichat-header {
+
+	width: 100%;
+	height: 60px;
+	border-bottom: #777777 solid 1px;
+	color: white;
+	text-align: right;
+	padding-right: 10px;
+	padding-top: 20px;
+	font-size: 15px;
+}
+
+#tactichat-close {
+
+	cursor: pointer;
+}
+
+#tactichat-messages {
+
+	padding: 10px;
+	overflow-y: auto;
+	height: calc(100% - 90px);
+}
+
+.tactichat-message {
+
+	color: white;
+}
+
+.tactichat-message .tactichat-author {
+
+	color: #cccccc;
+}
+
+.tactichat-message .tactichat-author:after {
+
+	content: " : ";
+}
+
+#tactichat-write {
+
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+
+#tactichat-write input {
+
+	width: 100%;
+	border: none;
+	height: 30px;
+	padding: 5px;
+	border-left: #484848 solid 1px;
+	border-right: #484848 solid 1px;
+}
