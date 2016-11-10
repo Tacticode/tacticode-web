@@ -2,7 +2,7 @@
 @extends('layouts.dashboard')
 
 @section('page-scripts')
-    <script src="/js/powers.js"></script>
+    <script src="/js/powers.js?ver=1"></script>
 @endsection
 
 @section('content')
