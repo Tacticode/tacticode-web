@@ -52,6 +52,8 @@
 
 	padding: 10px;
 	overflow-y: auto;
+	overflow-x: hidden;
+    word-wrap: break-word;
 	height: calc(100% - 90px);
 }
 
