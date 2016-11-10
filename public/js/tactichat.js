@@ -4,6 +4,10 @@ var tactichat = {
 	token: '',
 	interval: null,
 
+	htmlEncode: function(value){
+	  return $('<div/>').text(value).html();
+	},
+
 	show: function() {
 
 		$('#tactichat-button').animate({'right': -50});
@@ -22,8 +26,8 @@ var tactichat = {
 	newMessage: function(author, message) {
 
 		$('<div>', {class: 'tactichat-message'})
-		.append($('<span>', {class: 'tactichat-author', text: author}))
-		.append(message)
+		.append($('<span>', {class: 'tactichat-author', text: tactichat.htmlEncode(author)}))
+		.append(tactichat.htmlEncode(message))
 		.appendTo($('#tactichat-messages'));
 	},
 
@@ -31,8 +35,6 @@ var tactichat = {
 
 		if (event.keyCode !== 13 || !tactichat.interval)
 			return;
-
-		console.log(tactichat.interval);
 
 		var message = $('#tactichat-write input').val();
 		$('#tactichat-write input').val('');
