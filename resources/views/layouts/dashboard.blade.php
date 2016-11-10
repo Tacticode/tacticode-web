@@ -45,18 +45,11 @@
         <link rel="stylesheet" href="/css/tactichat.css?ver=1">
 
         <script src="/js/flashes.js"></script>
-        <script src="/js/token.js"></script>
         <script src="/js/notification.js"></script>
-        <script src="/js/tactichat.js?ver=1"></script>
+        <script src="/js/tactichat.js?ver=2"></script>
     </head>
 
     <body>
-
-        <?php
-            $encrypter = app('Illuminate\Encryption\Encrypter');
-            $encrypted_token = $encrypter->encrypt(csrf_token()) 
-        ?>
-        <input id="token" type="hidden" value="{{$encrypted_token}}">
 
         <?php $nb_new_notifications = 0; ?>
         @foreach (Auth::User()->notification as $notification)
