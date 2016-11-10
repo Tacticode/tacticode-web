@@ -47,7 +47,7 @@
         <script src="/js/flashes.js"></script>
         <script src="/js/token.js"></script>
         <script src="/js/notification.js"></script>
-        <script src="/js/tactichat.js"></script>
+        <script src="/js/tactichat.js?ver=1"></script>
     </head>
 
     <body>
