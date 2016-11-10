@@ -42,7 +42,7 @@
 
         <link rel="stylesheet" href="/css/dashboard.css">
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="/css/tactichat.css">
+        <link rel="stylesheet" href="/css/tactichat.css?ver=1">
 
         <script src="/js/flashes.js"></script>
         <script src="/js/token.js"></script>
