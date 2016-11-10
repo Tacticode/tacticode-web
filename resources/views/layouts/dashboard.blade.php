@@ -47,7 +47,7 @@
         <script src="/js/flashes.js"></script>
         <script src="/js/token.js"></script>
         <script src="/js/notification.js"></script>
-        <script src="/js/tactichat.js"></script>
+        <script src="/js/tactichat.js?ver=1"></script>
     </head>
 
     <body>
@@ -129,7 +129,7 @@
                                 @endif
                             </a></li>
                             @if (Auth::user()->group->name == 'ADMIN')
-                                <li class="@if ($nav == 'help') active @endif"><a href="#">@lang('menu.help')</a></li>
+                                <li class="@if ($nav == 'help') active @endif"><a href="https://docs.tacticode.net/" target="_blank">@lang('menu.help')</a></li>
                                 <li class="@if ($nav == 'chat') active @endif"><a href="#">@lang('menu.chat')</a></li>
                                 <li class="@if ($nav == 'forum') active @endif"><a href="http://forum.tacticode.net" target="_blank">@lang('menu.forum')</a></li>
                             @endif
