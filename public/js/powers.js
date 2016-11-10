@@ -1,6 +1,5 @@
 'use strict';
 
-var token = document.getElementById('token').value;
 var characterid = document.getElementById('characterid').value;
 var raceid = document.getElementById('raceid').value;
 var text = '';
@@ -317,24 +316,21 @@ function buyPower(circle) {
 
 	loading();
 
-	$.ajax({
-		type: 'post',
-		url: '/characters/buynode',
-		headers: {'X-XSRF-TOKEN' : token},
-		data: {
-			'character_id': characterid,
-			'node_id': circle.id
-		}, success: function(data) {
+	var data = {
+		'character_id': characterid,
+		'node_id': circle.id
+	};
 
-			isLoading = false;
+	$.post('/characters/buynode', data, function(data) {
 
-			if (data.result != 'success') {
-				frontSellPower(circle);
-				alert(data.description);
-			} else {
+		isLoading = false;
 
-				frontBuyPower(circle);
-			}
+		if (data.result != 'success') {
+			frontSellPower(circle);
+			alert(data.description);
+		} else {
+
+			frontBuyPower(circle);
 		}
 	}, 'json');
 }
@@ -376,24 +372,21 @@ function sellPower(circle) {
 
 	loading();
 
-	$.ajax({
-		type: 'post',
-		url: '/characters/sellnode',
-		headers: {'X-XSRF-TOKEN' : token},
-		data: {
-			'character_id': characterid,
-			'node_id': circle.id
-		}, success: function(data) {
+	var data = {
+		'character_id': characterid,
+		'node_id': circle.id
+	};
 
-			isLoading = false;
+	$.post('/characters/sellnode', data, function(data) {
 
-			if (data.result != 'success') {
-				frontBuyPower(circle);
-				alert(data.description);
-			} else {
+		isLoading = false;
 
-				frontSellPower(circle);
-			}
+		if (data.result != 'success') {
+			frontBuyPower(circle);
+			alert(data.description);
+		} else {
+
+			frontSellPower(circle);
 		}
 	}, 'json');
 }
@@ -421,12 +414,7 @@ function resetPowers() {
 	if (!(confirm(lang.sure)))
 		return;
 
-	$.ajax({
-		type: 'post',
-		url: '/characters/resetpower',
-		headers: {'X-XSRF-TOKEN' : token},
-		data: {'character_id': characterid}
-	});
+	$.post('/characters/resetpower', {'character_id': characterid});
 
 	for (var i in circles) {
 

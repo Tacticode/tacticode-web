@@ -41,7 +41,6 @@ $(document).ready(function() {
         $.ajax({
             type: 'post',
             url: url,
-            headers: {'X-XSRF-TOKEN' : token},
             data: data,
             success: function(data) {
 

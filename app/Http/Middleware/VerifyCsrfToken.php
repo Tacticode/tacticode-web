@@ -12,6 +12,11 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        'tactichat/*',
+        'characters/resetpower',
+        'characters/buynode',
+        'characters/sellnode',
+        'characters/setvisibility',
+        'teams/setvisibility'
     ];
 }

@@ -1,8 +1,8 @@
 var tactichat = {
 
 	lastMessage: 0,
-	token: '',
 	interval: null,
+	open: false,
 
 	htmlEncode: function(value){
 	  return $('<div/>').text(value).html();
@@ -10,6 +10,8 @@ var tactichat = {
 
 	show: function() {
 
+		tactichat.open = true;
+		tactichat.launchInterval();
 		$('#tactichat-button').animate({'right': -50});
 		$('#tactichat').animate({'right': 0});
 		$('nav').animate({'padding-right': 300});
@@ -21,6 +23,8 @@ var tactichat = {
 		$('#tactichat-button').animate({'right': 0});
 		$('#tactichat').animate({'right': -300});
 		$('nav').animate({'padding-right': 0});
+		tactichat.stopInterval();
+		tactichat.open = false;
 	},
 
 	newMessage: function(author, message) {
@@ -39,17 +43,10 @@ var tactichat = {
 		var message = $('#tactichat-write input').val();
 		$('#tactichat-write input').val('');
 
-		clearInterval(tactichat.interval);
-		tactichat.interval = null;
+		tactichat.stopInterval();
 
-		$.ajax({
-			type: 'post',
-			url: '/tactichat/write/' + tactichat.lastMessage,
-			headers: {'X-XSRF-TOKEN' : token},
-			data: {
-				'message': message
-			}
-		}).then(function(messages) {
+		$.post('/tactichat/write/' + tactichat.lastMessage, {'message': message})
+		.then(function(messages) {
 			tactichat.treatMessageList(messages);
 		}).fail(function() {
 			tactichat.launchInterval();
@@ -67,11 +64,17 @@ var tactichat = {
 
 	launchInterval: function() {
 
-		if (tactichat.interval === null) {
+		if (tactichat.interval === null && tactichat.open === true) {
 			tactichat.interval = setInterval(function() {
 				$.get('/tactichat/lastfrom/' + tactichat.lastMessage).then(tactichat.treatMessageList);
 			}, 1500);
 		}
+	},
+
+	stopInterval: function() {
+
+		clearInterval(tactichat.interval);
+		tactichat.interval = null;
 	},
 
 	init: function() {
@@ -81,8 +84,6 @@ var tactichat = {
 		$('#tactichat-write input').keypress(tactichat.write);
 
 		$.get('/tactichat/lasts').then(tactichat.treatMessageList);
-
-		tactichat.token = $('#token').val();
 	}
 };
 
