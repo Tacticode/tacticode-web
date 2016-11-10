@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="page-header">{{ $team->name }} - {{$team->user->login}}</h1>
+    <h1 class="page-header">{{ $team->name }} - <a href="/user/{{$team->user->id}}">{{ $team->user->login }}</a></h1>
 
     <div class="row placeholders">
         @if (count($team->character))
