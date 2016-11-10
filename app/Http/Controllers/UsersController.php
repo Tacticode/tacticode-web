@@ -99,7 +99,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -109,7 +109,19 @@ class UsersController extends Controller
         if (!($user = User::find($id)))
             return redirect('/');
 
-        return view('user.view', ['user' => $user]);
+        $fights = Fight::select([
+            'fights.id',
+            'fights.result',
+            'fights.created_at',
+            'character_fight.elo_change',
+            'character_fight.elo_result'
+        ])->userFights($user->id)->get()->all();
+        $charactersIds = $user->character->lists('id')->all();
+        $teamsIds = $user->team->lists('id')->all();
+
+        $data = compact('user', 'fights', 'charactersIds', 'teamsIds');
+
+        return view('user.view', $data);
     }
 
     /**

@@ -3,7 +3,7 @@
 @section('content')
 
     <h1 class="page-header">
-        {{ $character->name }} ({{ $character->race->name }}) - {{ $character->user->login }}
+        {{ $character->name }} ({{ $character->race->name }}) - <a href="/user/{{$character->user->id}}">{{ $character->user->login }}</a>
     </h1>
 
     <div class="row">

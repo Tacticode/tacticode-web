@@ -20,7 +20,7 @@
                   <td>{{ array_search($key, array_keys($elo)) + 1 }}</td>
                   <td>{{ $users[$key-1]->login }}</td>
                   <td>{{ $e }}</td>
-                  <td><a class="btn btn-primary" href="/users/{{ $users[$key-1]->id }}">@lang('navigation.view')</a></td>
+                  <td><a class="btn btn-primary" href="/user/{{ $users[$key-1]->id }}">@lang('navigation.view')</a></td>
               </tr>
             @endif
         @endforeach

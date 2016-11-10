@@ -37,7 +37,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 Route::get('/user', 'UsersController@edit');
-Route::get('/users/{id}', 'UsersController@show');
+Route::get('/user/{id}', 'UsersController@show');
 Route::post('/user', 'UsersController@update');
 Route::post('/changepassword', 'UsersController@updatePassword');
 
