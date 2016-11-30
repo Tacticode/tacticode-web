@@ -57,10 +57,10 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Titre du tuto - @lang('tutorial.step') 1 / 12</h4>
+                <h4 class="modal-title">{{$tutorial['title']}} - @lang('tutorial.step') {{$tutorial['step']}} / {{$tutorial['totalStep']}}</h4>
               </div>
               <div class="modal-body">
-                <p>Contenu du tuto :)</p>
+                <p>{{$tutorial['message']}}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">@lang('tutorial.close')</button>
