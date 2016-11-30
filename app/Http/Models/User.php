@@ -167,4 +167,15 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Http\Models\Dungeon');
     }
+
+    /**
+    * A user has one tutorial.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    *
+    */
+    public function tutorial()
+    {
+        return $this->hasOne('App\Http\Models\Tutorial');
+    }
 }
