@@ -44,12 +44,30 @@
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/tactichat.css?ver=1">
 
+        <script src="/js/tuto.js"></script>
         <script src="/js/flashes.js"></script>
         <script src="/js/notification.js"></script>
         <script src="/js/tactichat.js?ver=2"></script>
     </head>
 
     <body>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="tuto-modal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Titre du tuto - @lang('tutorial.step') 1 / 12</h4>
+              </div>
+              <div class="modal-body">
+                <p>Contenu du tuto :)</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('tutorial.close')</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <?php $nb_new_notifications = 0; ?>
         @foreach (Auth::User()->notification as $notification)
@@ -114,6 +132,9 @@
                                     </li>
                                 </ul>
                             </li>
+                            @if (true)
+                                <li><a class="clickable" data-toggle="modal" data-target="#tuto-modal">Tutorial</a></li>
+                            @endif
                             <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>
                             <li class="@if ($nav == 'messages') active @endif"><a href="/messages">
                                 @lang('menu.messages')
@@ -123,7 +144,6 @@
                             </a></li>
                             @if (Auth::user()->group->name == 'ADMIN')
                                 <li class="@if ($nav == 'help') active @endif"><a href="https://docs.tacticode.net/" target="_blank">@lang('menu.help')</a></li>
-                                <li class="@if ($nav == 'chat') active @endif"><a href="#">@lang('menu.chat')</a></li>
                                 <li class="@if ($nav == 'forum') active @endif"><a href="http://forum.tacticode.net" target="_blank">@lang('menu.forum')</a></li>
                             @endif
                             <li><a href="/logout" class="logout">@lang('menu.logout')</a></li>
