@@ -13,7 +13,7 @@ class AddTutoToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('tutorials_id')->default(0)->after('password');
+            $table->integer('tutorial_id')->default(0)->after('password');
         });
     }
 
@@ -25,7 +25,7 @@ class AddTutoToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('tutorials_id');
+            $table->dropColumn('tutorial_id');
         });
     }
 }

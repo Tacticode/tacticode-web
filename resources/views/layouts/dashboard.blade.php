@@ -52,6 +52,8 @@
 
     <body>
 
+        @if (isset($tutorial) && Session::get('showTuto'))
+        {{ Session::set('showTuto', false) }}
         <div class="modal fade" tabindex="-1" role="dialog" id="tuto-modal">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -68,6 +70,7 @@
             </div>
           </div>
         </div>
+        @endif
 
         <?php $nb_new_notifications = 0; ?>
         @foreach (Auth::User()->notification as $notification)

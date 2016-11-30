@@ -16,6 +16,7 @@ class CreateTutorials extends Migration
             $table->increments('id');
             $table->string('title', 255);
             $table->text('message');
+            $table->timestamps();
         });
     }
 

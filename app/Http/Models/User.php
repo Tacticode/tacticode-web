@@ -176,6 +176,6 @@ class User extends Model implements AuthenticatableContract,
     */
     public function tutorial()
     {
-        return $this->hasOne('App\Http\Models\Tutorial');
+        return $this->belongsTo('App\Http\Models\Tutorial');
     }
 }

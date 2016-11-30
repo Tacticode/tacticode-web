@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,13 @@ class Tutorial extends Model
      * @var string
      */
     protected $table = 'tutorials';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['title', 'message'];
 
     /**
     * A tutorial has many users.

@@ -28,6 +28,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CharacterTableSeeder::class);
         $this->call(TeamTableSeeder::class);
         $this->call(NotificationTableSeeder::class);
+
+        $this->call(TutorialTableSeeder::class);
+
         Model::reguard();
     }
 }

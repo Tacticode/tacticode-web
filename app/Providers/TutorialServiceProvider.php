@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Models\Tutorial;
+
 use Illuminate\Support\ServiceProvider;
 
 class TutorialServiceProvider extends ServiceProvider
@@ -13,13 +15,36 @@ class TutorialServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $tutorial = [
-            'title' => 'Welcome!',
-            'message' => 'Welcome, go create your first character lol',
-            'step' => 1,
-            'totalStep' => 12
-        ];
-        \View::share('tutorial', $tutorial);
+        if (!\Session::has('showTuto'))
+            \Session::set('showTuto', true);
+
+        view()->composer('layouts.dashboard', function($view) {
+
+            $user = auth()->user();
+            $max = Tutorial::count();
+            if ($user->tutorial_id < 0)
+                return;
+
+            $function = "tuto" . $user->tutorial_id;
+            if ($this->$function($user))
+            {
+                $user->tutorial_id += 1;
+                if ($user->tutorial_id > $max)
+                    $user->tutorial_id = -1;
+                $user->save();
+                \Session::set('showTuto', true);
+            }
+            if (isset($user->tutorial->id))
+            {
+                $tutorial = [
+                    'title' => $user->tutorial->title,
+                    'message' => $user->tutorial->message,
+                    'step' => $user->tutorial->id,
+                    'totalStep' => $max
+                ];
+                $view->with('tutorial', $tutorial);                
+            }
+        });
     }
 
     /**
@@ -31,4 +56,24 @@ class TutorialServiceProvider extends ServiceProvider
     {
         //
     }
+
+    /**
+     * Start of the tutorial
+     *
+     * @return boolean
+     */
+    public function tuto0($user)
+    {
+        return true;
+    }
+
+    /**
+     * Step1 of the tutorial
+     *
+     * @return boolean
+     */
+    public function tuto1($user)
+    {
+        return false;
+    }  
 }
