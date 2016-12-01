@@ -24,7 +24,9 @@
                         <tr>
                             <td><a href="/arena/viewfight/{{$fight->id}}">{{$fight->created_at->format('d M Y - H:i:s')}}</a></td>
                             <td>
-                                @if ($fight->team[0]['id'] == $team->id)
+                                @if (count($fight->team) <= 1)
+                                    UNKNWON
+                                @elif ($fight->team[0]['id'] == $team->id)
                                     <a href="/teams/{{$fight->team[1]['id']}}">{{$fight->team[1]['name']}}</a>
                                 @else
                                     <a href="/teams/{{$fight->team[0]['id']}}">{{$fight->team[0]['name']}}</a>
