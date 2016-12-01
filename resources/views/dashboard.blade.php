@@ -45,7 +45,7 @@
                                 @if (count($fight->team) == 0)
                                     <td>UNKNOWN</td>
                                     <td>UNKNOWN</td>
-                                @elif (count($fight->team) == 1)
+                                @elseif (count($fight->team) == 1)
                                     @if (in_array($fight->team[0]->id, $teamsIds))
                                         <td><a href="/teams/{{$fight->team[0]->id}}">{{$fight->team[0]->name}}</a></td>
                                         <td>UNKNOWN</td>
@@ -53,7 +53,7 @@
                                         <td>UNKNOWN</td>
                                         <td><a href="/teams/{{$fight->team[0]->id}}">{{$fight->team[0]->name}}</a></td>
                                     @endif
-                                @elif (in_array($fight->team[0]->id, $teamsIds))
+                                @elseif (in_array($fight->team[0]->id, $teamsIds))
                                     <td><a href="/teams/{{$fight->team[0]->id}}">{{$fight->team[0]->name}}</a></td>
                                     <td><a href="/teams/{{$fight->team[1]->id}}">{{$fight->team[1]->name}}</a></td>
                                 @else
@@ -65,7 +65,7 @@
                                 @if (count($fight->character) == 0)
                                     <td>UNKNOWN</td>
                                     <td>UNKNOWN</td>
-                                @elif (count($fight->character) == 1)
+                                @elseif (count($fight->character) == 1)
                                     @if (in_array($fight->character[0]->id, $charactersIds))
                                         <td><a href="/characters/{{$fight->character[0]->id}}">{{$fight->character[0]->name}}</a></td>
                                         <td>UNKNOWN</td>
@@ -73,7 +73,7 @@
                                         <td>UNKNOWN</td>
                                         <td><a href="/characters/{{$fight->character[0]->id}}">{{$fight->character[0]->name}}</a></td>
                                     @endif
-                                @elif (in_array($fight->character[0]->id, $charactersIds))
+                                @elseif (in_array($fight->character[0]->id, $charactersIds))
                                     <td><a href="/characters/{{$fight->character[0]->id}}">{{$fight->character[0]->name}}</a></td>
                                     <td><a href="/characters/{{$fight->character[1]->id}}">{{$fight->character[1]->name}}</a></td>
                                 @else

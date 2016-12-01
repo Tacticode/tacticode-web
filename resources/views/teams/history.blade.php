@@ -26,7 +26,7 @@
                             <td>
                                 @if (count($fight->team) <= 1)
                                     UNKNWON
-                                @elif ($fight->team[0]['id'] == $team->id)
+                                @elseif ($fight->team[0]['id'] == $team->id)
                                     <a href="/teams/{{$fight->team[1]['id']}}">{{$fight->team[1]['name']}}</a>
                                 @else
                                     <a href="/teams/{{$fight->team[0]['id']}}">{{$fight->team[0]['name']}}</a>
