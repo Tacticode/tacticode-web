@@ -42,6 +42,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         \Session::set('loggedFrom', -1);
+        \Session::forget('showTuto');
         return redirect('/');
     }
 }
