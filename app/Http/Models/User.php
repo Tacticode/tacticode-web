@@ -103,6 +103,17 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+    * A user has many chats.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function chat()
+    {
+        return $this->hasMany('App\Http\Models\Chat');
+    }
+
+    /**
     * A user has many notifications.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -166,5 +177,16 @@ class User extends Model implements AuthenticatableContract,
     public function dungeon()
     {
         return $this->hasMany('App\Http\Models\Dungeon');
+    }
+
+    /**
+    * A user has one tutorial.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    *
+    */
+    public function tutorial()
+    {
+        return $this->belongsTo('App\Http\Models\Tutorial');
     }
 }
