@@ -52,24 +52,29 @@
 
     <body>
 
-        @if (isset($tutorial) && Session::get('showTuto'))
-        {{ Session::set('showTuto', false) }}
-        <div class="modal fade" tabindex="-1" role="dialog" id="tuto-modal">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{{$tutorial['title']}} - @lang('tutorial.step') {{$tutorial['step']}} / {{$tutorial['totalStep']}}</h4>
-              </div>
-              <div class="modal-body">
-                <p>{{$tutorial['message']}}</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('tutorial.close')</button>
+        @if (isset($tutorial))
+        
+            @if (Session::get('showTuto'))
+                <input type="hidden" id="showTuto" value="true">
+                {{ Session::set('showTuto', false) }}
+            @endif
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="tuto-modal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{$tutorial['title']}} - @lang('tutorial.step') {{$tutorial['step']}} / {{$tutorial['totalStep']}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>{!!$tutorial['message']!!}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('tutorial.close')</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
         @endif
 
         <?php $nb_new_notifications = 0; ?>
@@ -135,7 +140,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            @if (true)
+                            @if (isset($tutorial))
                                 <li><a class="clickable" data-toggle="modal" data-target="#tuto-modal">Tutorial</a></li>
                             @endif
                             <li class="@if ($nav == 'user') active @endif"><a href="/user">{{ucfirst(Auth::user()->login)}}</a></li>

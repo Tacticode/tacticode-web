@@ -1,7 +1,11 @@
 var tuto = {
 	init: function() {
 
-		$('#tuto-modal').modal();
+		if ($('#showTuto').val()) {
+			
+			$('#showTuto').remove();
+			$('#tuto-modal').modal();
+		}
 	}
 }
 

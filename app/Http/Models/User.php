@@ -103,6 +103,17 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+    * A user has many chats.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    *
+    */
+    public function chat()
+    {
+        return $this->hasMany('App\Http\Models\Chat');
+    }
+
+    /**
     * A user has many notifications.
     *
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
