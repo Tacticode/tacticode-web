@@ -11,28 +11,18 @@
 @endsection
 
 @section('content')
-
-    <h1 class="page-header">
-        <span class="clickable">{{ $script->name }}</span>
-        <a href="https://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a>
-    </h1>
-
-    <div style="margin-bottom:20px;">
-        <input type="hidden" id="_token" value="{{ csrf_token() }}" />
-        <a href="" style="display:none;" target="_blank" id="redirect"></a>
-        {!! Form::select('character_id', $characters) !!}
-        {!! Form::button('Test Script', array('class' => 'btn btn-success', 'id' => 'test_fight')) !!}
-    </div>
      
     {!! Form::open(['url' => '/scripts/' . $script->id]) !!}
 
-        <div class="page-header row" style="display: none">
-            <div class="col-md-4">
+        <h1 class="page-header">
+            <div id="name_field" class="col-md-4" style="display: none;">
                 {!! Form::text('name', $script->name, ['class' => 'form-control', 'placeholder' => trans('scripts.name')]) !!}
             </div>
-        </div>
+            <span class="clickable">{{ $script->name }}</span>
+            <a href="https://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a>
+        </h1>
 
-    	<textarea id="codemirror" style="display:none" name="content">{{ $script->content }}</textarea>
+    	<textarea id="codemirror" style="display:none" name="content">{{ (old('content') != null ? old('content') : $script->content) }}</textarea>
 
     	<div class="spacer"></div>
 
@@ -41,6 +31,13 @@
         </div>
 
     {!! Form::close() !!}
+
+    <div style="margin-bottom:10px;">
+        <input type="hidden" id="_token" value="{{ csrf_token() }}" />
+        <a href="" style="display:none;" target="_blank" id="redirect"></a>
+        {!! Form::select('character_id', $characters) !!}
+        {!! Form::button('Test Script', array('class' => 'btn btn-warning', 'id' => 'test_fight')) !!}
+    </div>
 
     <script>
     	$(document).ready(function() {
@@ -54,7 +51,7 @@
 
             $('h1 span').click(function() {
 
-                $(".page-header").show();
+                $("#name_field").show();
                 $('h1 span').hide();
             });
 

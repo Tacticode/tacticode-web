@@ -99,6 +99,7 @@ class ScriptsController extends Controller
         if ($req['content'] != $script->content)
             $script->content = $req['content'];
         $script->save();
+        
         Flashes::push('notice', trans('scripts.updated'));
         return redirect()->action('ScriptsController@view', [$id]);
     }
