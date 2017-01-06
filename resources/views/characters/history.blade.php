@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 @foreach ($character->fight as $fight)
-                    @if (!$fight->character[0]['team_id'])
+                    @if ($fight->type == 0 && !$fight->character[0]['team_id'])
                         <tr>
                             <td><a href="/arena/viewfight/{{$fight->id}}">{{$fight->created_at->format('d M Y - H:i:s')}}</a></td>
                             <td>

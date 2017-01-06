@@ -139,7 +139,7 @@ class FightsController extends Controller
     {
         $bot_array = [
             'id' => 0,
-            'name' => 'Botty\'s team',
+            'name' => '',
             'characters' => [[
                 'id' => 0,
                 'name' => 'Botty',

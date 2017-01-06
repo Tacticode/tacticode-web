@@ -14,11 +14,17 @@
      
     {!! Form::open(['url' => '/scripts/' . $script->id]) !!}
 
-        <h1 class="page-header">
-            <div id="name_field" class="col-md-4" style="display: none;">
+        <h1 class="page-header" style="overflow: auto;">
+            <div id="name-group" class="col-md-4 has-feedback @if ($errors->has('name')) has-error @endif" style="{{ (old('name') == null ? 'display: none;' : '') }}">
                 {!! Form::text('name', $script->name, ['class' => 'form-control', 'placeholder' => trans('scripts.name')]) !!}
+                <div class="help-block" id="name-error" style="font-size: 14px;">
+                    @if ($errors->has('name'))
+                        {{$errors->first('name')}}
+                    @endif
+                </div>
             </div>
-            <span class="clickable">{{ $script->name }}</span>
+
+            <span class="clickable" style="{{ (old('name') != null ? 'display: none;' : '') }}">{{ $script->name }}</span>
             <a href="https://api.tacticode.net" target="_blank" class="btn btn-primary">@lang('scripts.documentation')</a>
         </h1>
 
@@ -51,7 +57,7 @@
 
             $('h1 span').click(function() {
 
-                $("#name_field").show();
+                $("#name-group").show();
                 $('h1 span').hide();
             });
 
