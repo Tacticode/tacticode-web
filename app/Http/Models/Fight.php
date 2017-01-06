@@ -50,9 +50,8 @@ class Fight extends Model
                 }
                 else
                 {
-                    // As the winner of the battle engine is not valid at the moment, there is no winner if the output fight is from the battle engine
-                    $fight->result = $result->winner;//(file_exists(Fight::getBattleEnginePath()) ? 0 : $result->winner);
-                    $fight->fight_content = $content;                    
+                    $fight->result = $result->winner;
+                    $fight->fight_content = $content;
                 }
 
                 if ($fight->save())
@@ -120,6 +119,8 @@ class Fight extends Model
     */
     public static function computeElo($fight)
     {
+        if ($fight->type != 0)
+            return ;
         //formula: https://metinmediamath.wordpress.com/2013/11/27/how-to-calculate-the-elo-rating-including-example/
         $fighters = $fight->team()->groupBy('teams.id')->get();
         if (!$fighters->count())

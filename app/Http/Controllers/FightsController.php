@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Auth;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Character;
 use App\Http\Models\Fight;
@@ -69,7 +71,7 @@ class FightsController extends Controller
     /**
     * Add a character to the array for the Battle Engine
     */
-    private function addCharacterToArray(&$arr, $char)
+    private function addCharacterToArray(&$arr, $char, $test_script)
     {
         $stats = Stat::getMax();
         $spells = [];
@@ -79,6 +81,11 @@ class FightsController extends Controller
             {
                 array_push($spells, $node->power->name);                
             }
+        }
+        $script = ($char->script != null ? $char->script->content : '');
+        if ($test_script != null)
+        {
+            $script = $test_script;
         }
         $newEnt = [
             'id' => intval($char->id),
@@ -93,7 +100,7 @@ class FightsController extends Controller
             'movement' => $stats['MOVEMENT'],
             'speed' => $stats['SPEED'],
             'spells' => $spells,
-            'script' => ($char->script != null ? $char->script->content : ''),
+            'script' => $script,
             'position' => [0, 0]
         ];
 
@@ -103,7 +110,7 @@ class FightsController extends Controller
     /**
     * Add a team to the array for the Battle Engine
     */
-    private function addTeamToArray(&$arr, $char, $team)
+    private function addTeamToArray(&$arr, $char, $team, $script = null)
     {
         $team_array = [
             'id' => intval($team === null ? $char->id : $team->id),
@@ -113,16 +120,45 @@ class FightsController extends Controller
 
         if ($team === null)
         {
-            $this->addCharacterToArray($team_array['characters'], $char);
+            $this->addCharacterToArray($team_array['characters'], $char, $script);
         }
         else
         {
             foreach ($char as $character)
             {
-                $this->addCharacterToArray($team_array['characters'], $character);
+                $this->addCharacterToArray($team_array['characters'], $character, $script);
             }
         }
         array_push($arr, $team_array);
+    }
+
+    /**
+    * Add the test bot to the array for the Battle Engine
+    */
+    private function addTestBotToArray(&$arr)
+    {
+        $bot_array = [
+            'id' => 0,
+            'name' => 'Botty\'s team',
+            'characters' => [[
+                'id' => 0,
+                'name' => 'Botty',
+                'breed' => 'Human',
+                'health' => 200,
+                'attack' => 20,
+                'power' => 20,
+                'defense' => 20,
+                'resilience' => 20,
+                'luck' => 20,
+                'movement' => 5,
+                'speed' => 20,
+                'spells' => ['METEOR', 'GHOST_ARROW', 'HOLY_HAND'],
+                'script' => '',
+                'position' => [0, 0]
+            ]]
+        ];
+
+        return $bot_array;
     }
 
     /**
@@ -130,7 +166,7 @@ class FightsController extends Controller
     *
     * @var \App\Http\Models\Fight
     */
-    public function callBattleEngine($fight)
+    public function callBattleEngine($fight, $test_script = null)
     {
         $maps = \Storage::allFiles('maps');
         $json = [
@@ -145,7 +181,11 @@ class FightsController extends Controller
             $fighters = $fight->character;
             foreach ($fighters as $char)
             {
-                $this->addTeamToArray($json['teams'], $char, null);
+                $this->addTeamToArray($json['teams'], $char, null, $test_script);
+            }
+            if ($fight->type == 1 && count($json['teams']) == 1)
+            {
+                $this->addTestBotToArray($json['teams']);
             }
         }
         else
@@ -173,7 +213,7 @@ class FightsController extends Controller
             }
             $fake_result = [
                 'map' => $json['map'],
-                'winner' => (rand(0,1) != 0 ? $fighters[0]->id : $fighters[1]->id)
+                'winner' => (count($fighters) > 1 ? (rand(0,1) != 0 ? $fighters[0]->id : $fighters[1]->id) : $fighters[0]->id)
             ];
             \Storage::put('fights/'.$fight->id, json_encode($fake_result));
         }
@@ -275,5 +315,33 @@ class FightsController extends Controller
         $this->callBattleEngine($fight);
 
         return redirect('/arena/viewfight/' . $fight->id);
+    }
+
+    /**
+     * Create a test fight. The request contain the character Id and the script.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function launchTestFight(Request $request)
+    {
+        $req = $request->all();
+        if (!isset($req['character_id']) || !isset($req['character_script']))
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('fights.errorRequest')]);
+        }
+        $character = Auth::user()->character->find($req['character_id']);
+        if ($character == null)
+        {
+            return response()->json(['result' => 'failure', 'description' => trans('characters.doesNotBelongToTheUser')]);
+        }
+
+        $fight = Fight::create();
+        $fight->type = 1;
+        $fight->save();
+        $fight->character()->sync([$character->id]);
+
+        $this->callBattleEngine($fight, $req['character_script']);
+
+        return response()->json(['result' => 'success', 'url' => \Request::root() . '/arena/viewfight/' . $fight->id]);
     }
 }

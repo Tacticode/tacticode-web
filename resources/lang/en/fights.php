@@ -19,6 +19,7 @@ return [
     'victory' => 'Victory',
     'points' => 'Points',
     'noOpponent' => 'No opponent currently available. Please try again later.',
-    'doesNotExist' => 'The requested fight does not exist.'
+    'doesNotExist' => 'The requested fight does not exist.',
+    'errorRequest' => 'Missing informations in the request.'
     
 ];

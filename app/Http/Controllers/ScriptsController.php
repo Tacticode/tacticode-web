@@ -49,7 +49,13 @@ class ScriptsController extends Controller
             return redirect('/scripts');
         }
 
-        return view('scripts.view', ['script' => $script]);
+        $characters_data = Auth::user()->character;
+        $characters = [];
+        foreach ($characters_data as &$character) {
+            $characters[$character->id] = $character->name;
+        }
+
+        return view('scripts.view', ['script' => $script, 'characters' => $characters]);
     }
 
     /**

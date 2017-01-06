@@ -85,6 +85,7 @@ Route::get('/arena/solofight', 'FightsController@soloFight');
 Route::get('/arena/solofight/{characterId}', 'FightsController@launchSoloFight');
 Route::get('/arena/teamfight', 'FightsController@teamFight');
 Route::get('/arena/teamfight/{teamId}', 'FightsController@launchTeamFight');
+Route::post('/arena/testfight', 'FightsController@launchTestFight');
 Route::get('/arena/viewfight/{fightId}', 'FightsController@viewFight');
 Route::get('/arena/contentfight/{fightId}', 'FightsController@contentFight');
 
