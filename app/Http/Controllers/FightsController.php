@@ -153,12 +153,12 @@ class FightsController extends Controller
                 'movement' => 5,
                 'speed' => 20,
                 'spells' => ['METEOR', 'GHOST_ARROW', 'HOLY_HAND'],
-                'script' => '',
+                'script' => \Storage::get('scripts/ai.script'),
                 'position' => [0, 0]
             ]]
         ];
 
-        return $bot_array;
+        array_push($arr, $bot_array);
     }
 
     /**

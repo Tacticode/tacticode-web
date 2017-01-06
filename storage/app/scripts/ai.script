@@ -1,0 +1,73 @@
+function calcDistance(a, b) {
+	return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+}
+
+function getNearestEnemy() {
+	var me = getCurrentEntity();
+	var entities = getEntities();
+	var bestEnemy = null;
+	var bestDistance = 9999;
+	for (var i = 0; i < entities.length; ++i) {
+		var e = entities[i];
+		if (e.team != me.team && e.health > 0) {
+			var distance = calcDistance(me, e);
+			if (distance < bestDistance) {
+				bestEnemy = e;
+				bestDistance = distance;
+			}
+		}
+	}
+	return bestEnemy;
+}
+
+function moveToEntity(e) {
+	var me = getCurrentEntity();
+	var movementPoints = me.movement;
+	for (var i = 0; i < movementPoints; ++i) {
+		if (me.x > e.x + 1) {
+			moveToCell(me.x - 1, me.y);
+		}
+		if (me.x < e.x - 1) {
+			moveToCell(me.x + 1, me.y);
+		}
+		if (me.y > e.y + 1) {
+			moveToCell(me.x, me.y - 1);
+		}
+		if (me.y < e.y - 1) {
+			moveToCell(me.x, me.y + 1);
+		}
+		me = getCurrentEntity();
+	}
+}
+
+function castSpellOnEnemy(e) {
+	var me = getCurrentEntity();
+	var distance = calcDistance(me, e);
+	if (distance > 2) {
+		return cast("METEOR", e.x, e.y);
+	} else {
+		return cast("GHOST_ARROW", e.x, e.y);
+	}
+}
+
+function attackAnEnemy() {
+	var e = getNearestEnemy();
+	var casted = false;
+	if (e) {
+		if (castSpellOnEnemy(e)) return true;
+		moveToEntity(e);
+		if (castSpellOnEnemy(e)) return true;
+	}
+	return false;
+}
+
+function justHealMe() {
+	var me = getCurrentEntity();
+	return cast("HOLY_HAND", me.x, me.y);
+}
+
+function onTurn() {
+	if (!attackAnEnemy()) {
+		justHealMe();
+	}
+}
