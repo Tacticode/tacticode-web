@@ -4,7 +4,7 @@
 @section('page-scripts')
 	<script src="/arena-viewer/lib/pixi-3.0.9.js"></script>
 	<!--<script src="/arena-viewer/lib/jquery-2.2.0.js"></script>-->
-	<script src="/arena-viewer/script/arena-viewer.js"></script>>
+	<script src="/arena-viewer/script/arena-viewer.js?ver=2017-01-02"></script>>
 	<script src="/arena-viewer/script/config.js"></script>>
 @endsection
 

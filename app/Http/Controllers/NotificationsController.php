@@ -24,7 +24,7 @@ class NotificationsController extends Controller
      */
     public function see()
     {
-        $notifications = Auth::User()->notification->where('seen', 0);
+        $notifications = Auth::User()->notification->where('seen', '0');
 
         foreach ($notifications as $notification)
             $notification->update(['seen' => 1]);
