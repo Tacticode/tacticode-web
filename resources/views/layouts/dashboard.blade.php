@@ -150,10 +150,8 @@
                                     <span class="badge">{{$nb_new_message}}</span>
                                 @endif
                             </a></li>
-                            @if (Auth::user()->group->name == 'ADMIN')
-                                <li class="@if ($nav == 'help') active @endif"><a href="https://docs.tacticode.net/" target="_blank">@lang('menu.help')</a></li>
-                                <li class="@if ($nav == 'forum') active @endif"><a href="http://forum.tacticode.net" target="_blank">@lang('menu.forum')</a></li>
-                            @endif
+                            <li class="@if ($nav == 'help') active @endif"><a href="https://docs.tacticode.net/" target="_blank">@lang('menu.help')</a></li>
+                            <li class="@if ($nav == 'forum') active @endif"><a href="http://forum.tacticode.net" target="_blank">@lang('menu.forum')</a></li>
                             <li><a href="/logout" class="logout">@lang('menu.logout')</a></li>
                         </ul>
                     </div>
