@@ -34,10 +34,10 @@ class Character extends Model
     */
     public static function getStats($id)
     {
-        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->whereRaw('fights.result = character_fight.character_id')->groupBy('fights.id')->get());
-        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->whereRaw('fights.result != character_fight.character_id')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
-        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('result', 0)->groupBy('fights.id')->get());
-        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('result', null)->groupBy('fights.id')->get());
+        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('type', 0)->whereRaw('fights.result = character_fight.character_id')->groupBy('fights.id')->get());
+        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('type', 0)->whereRaw('fights.result != character_fight.character_id')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
+        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('type', 0)->where('result', 0)->groupBy('fights.id')->get());
+        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('team_id', null)->where('type', 0)->where('result', null)->groupBy('fights.id')->get());
         $ret = [
             'win' => $win,
             'loss' => $loss,
@@ -57,10 +57,10 @@ class Character extends Model
     */
     public static function getTeamStats($id)
     {
-        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->whereRaw('fights.result = character_fight.team_id')->groupBy('fights.id')->get());
-        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->whereRaw('fights.result != character_fight.team_id')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
-        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('result', 0)->groupBy('fights.id')->get());
-        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('result', null)->groupBy('fights.id')->get());
+        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('type', 0)->whereRaw('fights.result = character_fight.team_id')->groupBy('fights.id')->get());
+        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('type', 0)->whereRaw('fights.result != character_fight.team_id')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
+        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('type', 0)->where('result', 0)->groupBy('fights.id')->get());
+        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereNotNull('team_id')->where('type', 0)->where('result', null)->groupBy('fights.id')->get());
         $ret = [
             'win' => $win,
             'loss' => $loss,
@@ -80,10 +80,10 @@ class Character extends Model
     */
     public static function getGlobalStats($id)
     {
-        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereRaw('fights.result IN(character_fight.team_id, character_fight.team_id)')->groupBy('fights.id')->get());
-        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->whereRaw('fights.result NOT IN(character_fight.team_id, character_fight.team_id)')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
-        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('result', 0)->groupBy('fights.id')->get());
-        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('result', null)->groupBy('fights.id')->get());
+        $win = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('type', 0)->whereRaw('fights.result IN(character_fight.team_id, character_fight.team_id)')->groupBy('fights.id')->get());
+        $loss = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('type', 0)->whereRaw('fights.result NOT IN(character_fight.team_id, character_fight.team_id)')->whereNotNull('result')->where('result', '>', 0)->groupBy('fights.id')->get());
+        $draw = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('type', 0)->where('result', 0)->groupBy('fights.id')->get());
+        $pending = count(Character::where('id', $id)->first()->fight()->withPivot('team_id')->where('type', 0)->where('result', null)->groupBy('fights.id')->get());
         $ret = [
             'win' => $win,
             'loss' => $loss,
