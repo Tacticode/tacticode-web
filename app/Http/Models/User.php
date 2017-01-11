@@ -81,6 +81,104 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+    * Get the solo fights statistics of a specified user 
+    *
+    * @param integer
+    *
+    * @return array
+    *
+    */
+    public static function getSoloStats($id)
+    {
+        $win = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->where('team_id', null)
+                    ->where('type', 0)
+                    ->whereRaw('fights.result = character_fight.character_id')
+                    ->groupBy('fights.id')->get());
+        $loss = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->where('team_id', null)
+                    ->where('type', 0)
+                    ->whereRaw('fights.result != character_fight.character_id')
+                    ->whereNotNull('result')
+                    ->where('result', '>', 0)
+                    ->groupBy('fights.id')->get());
+        $draw = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->where('team_id', null)
+                    ->where('type', 0)
+                    ->where('result', 0)
+                    ->groupBy('fights.id')->get());
+        $pending = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->where('team_id', null)
+                    ->where('type', 0)
+                    ->where('result', null)
+                    ->groupBy('fights.id')->get());
+        $ret = [
+            'win' => $win,
+            'loss' => $loss,
+            'draw' => $draw,
+            'pending' => $pending
+        ];
+        return $ret;
+    }
+
+    /**
+    * Get the team fights statistics of a specified user 
+    *
+    * @param integer
+    *
+    * @return array
+    *
+    */
+    public static function getTeamStats($id)
+    {
+        $win = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->whereNotNull('team_id')
+                    ->where('type', 0)
+                    ->whereRaw('fights.result = character_fight.team_id')
+                    ->groupBy('fights.id')->get());
+        $loss = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->whereNotNull('team_id')
+                    ->where('type', 0)
+                    ->whereRaw('fights.result != character_fight.team_id')
+                    ->whereNotNull('result')
+                    ->where('result', '>', 0)
+                    ->groupBy('fights.id')->get());
+        $draw = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->whereNotNull('team_id')
+                    ->where('type', 0)
+                    ->where('result', 0)
+                    ->groupBy('fights.id')->get());
+        $pending = count(Character::where('user_id', $id)
+                    ->join('character_fight', 'character_fight.character_id', '=', 'characters.id')
+                    ->join('fights', 'character_fight.fight_id', '=', 'fights.id')
+                    ->whereNotNull('team_id')
+                    ->where('type', 0)
+                    ->where('result', null)
+                    ->groupBy('fights.id')->get());
+        $ret = [
+            'win' => $win,
+            'loss' => $loss,
+            'draw' => $draw,
+            'pending' => $pending
+        ];
+        return $ret;
+    }
+
+    /**
     * An user is in a group.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

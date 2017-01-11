@@ -222,7 +222,7 @@ class Fight extends Model
     }
 
     /**
-    * Get all the fight of a users
+    * Get all the fight of an user
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
     *

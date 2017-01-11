@@ -99,6 +99,19 @@ class UsersController extends Controller
     }
 
     /**
+     * Show the statistics.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function statistics()
+    {
+        $user = \Auth::user();
+        $soloFights = User::getSoloStats($user->id);
+        $teamFights = User::getTeamStats($user->id);
+        return view('statistics.index', compact('soloFights', 'teamFights'));
+    }
+
+    /**
      * Display the specified user.
      *
      * @param  int  $id

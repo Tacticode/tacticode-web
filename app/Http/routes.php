@@ -58,6 +58,8 @@ Route::get('/tactichat/lastfrom/{lastMessage}', 'ChatsController@lastFrom');
 
 Route::get('/leaderboard', 'UsersController@leaderboard');
 
+Route::get('/statistics', 'UsersController@statistics');
+
 Route::get('/characters', 'CharactersController@index');
 Route::get('/characters/add', 'CharactersController@create');
 Route::post('/characters/add', 'CharactersController@store');
