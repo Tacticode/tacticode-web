@@ -42,7 +42,7 @@ class FightsController extends Controller
         }
 
         //we pass the list of user character to show them differently
-        $userCharactersIds = Auth::user()->character->lists('id');
+        $userCharactersIds = Auth::user()->character->pluck('id');
         
         $data = compact('fight', 'userCharactersIds');
 
@@ -261,8 +261,8 @@ class FightsController extends Controller
         $team->save();
         
         $fight = Fight::create();
-        $fight->character()->attach($team->character->lists('id')->toArray(), ['team_id' => $team->id]);
-        $fight->character()->attach($opponent->character->lists('id')->toArray(), ['team_id' => $opponent->id]);
+        $fight->character()->attach($team->character->pluck('id')->toArray(), ['team_id' => $team->id]);
+        $fight->character()->attach($opponent->character->pluck('id')->toArray(), ['team_id' => $opponent->id]);
 
         $notification = new notification;
         $notification->user_id = $opponent->user->id;

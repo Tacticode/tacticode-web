@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Http\Request;
 
-class PasswordController extends Controller
+class ResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -21,29 +20,20 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
-    protected $redirectTo = '/dashboard';
+    /**
+     * Where to redirect users after resetting their password.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/home';
 
     /**
-     * Create a new password controller instance.
+     * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
         $this->middleware('guest');
-    }
-
-    public function beforePostEmail(Request $request) {
-
-        \Flashes::push('notice', trans('passwords.mailSent'));
-        return $this->postEmail($request);
-    }
-
-    protected function resetPassword($user, $password)
-    {
-        $user->password = $password;
-        $user->save();
-
-        \Auth::login($user);
     }
 }

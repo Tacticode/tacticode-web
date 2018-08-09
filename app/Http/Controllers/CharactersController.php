@@ -51,8 +51,8 @@ class CharactersController extends Controller
             return redirect('/characters');
         }
         $datas = [
-            'races' => Race::lists('name', 'id'),
-            'scripts' => Auth::user()->script->lists('name', 'id')->all(),
+            'races' => Race::pluck('name', 'id'),
+            'scripts' => Auth::user()->script->pluck('name', 'id')->all(),
             'character' => $character
         ];
         $datas['scripts'][0] = trans('characters.noScript');
@@ -116,8 +116,8 @@ class CharactersController extends Controller
     public function create()
     {
         $datas = [
-            'races' => Race::lists('name', 'id'),
-            'scripts' => Auth::user()->script->lists('name', 'id')->all()
+            'races' => Race::pluck('name', 'id'),
+            'scripts' => Auth::user()->script->pluck('name', 'id')->all()
         ];
         $datas['scripts'][0] = trans('characters.noScript');
         ksort($datas['scripts']);

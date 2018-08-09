@@ -20,7 +20,7 @@ class TutorialServiceProvider extends ServiceProvider
         view()->composer('layouts.dashboard', function($view) {
 
             if (!\Session::has('showTuto'))
-                \Session::set('showTuto', false);
+                \Session::put('showTuto', false);
 
             $user = \Auth::user();
             if ($user->tutorial_id < 0)
@@ -35,7 +35,7 @@ class TutorialServiceProvider extends ServiceProvider
                 if ($user->tutorial_id > $max)
                     $user->tutorial_id = -1;
                 $user->save();
-                \Session::set('showTuto', true);
+                \Session::put('showTuto', true);
             }
             if (isset($user->tutorial->id))
             {

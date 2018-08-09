@@ -38,7 +38,7 @@ class AdministrationController extends Controller
         }
         if (\Session::get('loggedFrom', -1) == -1)
         {
-            \Session::set('loggedFrom', Auth::user()->id);            
+            \Session::put('loggedFrom', Auth::user()->id);            
         }
         Auth::loginUsingId($id);
         return redirect('dashboard');
@@ -51,7 +51,7 @@ class AdministrationController extends Controller
         {
             Auth::loginUsingId($id);
         }
-        \Session::set('loggedFrom', -1);
+        \Session::put('loggedFrom', -1);
         return redirect('/administration');
     }
 

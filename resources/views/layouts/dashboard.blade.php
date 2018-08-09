@@ -1,9 +1,9 @@
 @if (!isset($nav))
-    {{--*/ $nav = null /*--}}
+    @php ($nav = null)
 @endif
 
 @if (!isset($flashs))
-    {{--*/ $flashs = null /*--}}
+    @php ($flashs = null)
 @endif
 
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
         
             @if (Session::get('showTuto'))
                 <input type="hidden" id="showTuto" value="true">
-                {{ Session::set('showTuto', false) }}
+                {{ Session::put('showTuto', false) }}
             @endif
 
             <div class="modal fade" tabindex="-1" role="dialog" id="tuto-modal">

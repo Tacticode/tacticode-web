@@ -48,7 +48,7 @@ class TeamsController extends Controller
 
         $datas = [
             'team' => $team,
-            'characters' => Auth::user()->character->lists('name', 'id')->all()
+            'characters' => Auth::user()->character->pluck('name', 'id')->all()
         ];
 
         if (Auth::user()->team->find($id))
@@ -76,7 +76,7 @@ class TeamsController extends Controller
         if (isset($req['characters']))
         {
 
-            $playersCharacters = Auth::user()->character->lists('id')->all();
+            $playersCharacters = Auth::user()->character->pluck('id')->all();
 
             $characterIds = [];
             foreach ($req['characters'] as $character)
@@ -104,7 +104,7 @@ class TeamsController extends Controller
      */
     public function create()
     {
-        $datas = ['characters' => Auth::user()->character->lists('name', 'id')->all()];
+        $datas = ['characters' => Auth::user()->character->pluck('name', 'id')->all()];
         return view('teams.add', $datas);
     }
 
@@ -127,7 +127,7 @@ class TeamsController extends Controller
         if (isset($req['characters']))
         {
 
-            $playersCharacters = Auth::user()->character->lists('id')->all();
+            $playersCharacters = Auth::user()->character->pluck('id')->all();
 
             $characterIds = [];
             foreach ($req['characters'] as $character)

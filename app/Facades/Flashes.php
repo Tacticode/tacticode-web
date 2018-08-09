@@ -29,7 +29,7 @@ class Flashes extends Facade
         if (!is_array($flashes))
             $flashes = [];
         $flashes[] = ['type' => $type, 'message' => $message];
-    	Session::set('flashes', $flashes);
+    	Session::put('flashes', $flashes);
     }
 
     /**
@@ -41,7 +41,7 @@ class Flashes extends Facade
 
     	$flashes = Session::get('flashes');
     	if ($delete)
-    		Session::set('flashes', []);
+    		Session::put('flashes', []);
         if (!is_array($flashes))
             $flashes = [];
     	return $flashes;

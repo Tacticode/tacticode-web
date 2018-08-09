@@ -39,8 +39,8 @@ class UsersController extends Controller
             'character_fight.elo_change',
             'character_fight.elo_result'
         ])->userFights($user->id)->get()->all();
-        $charactersIds = $user->character->lists('id')->all();
-        $teamsIds = $user->team->lists('id')->all();
+        $charactersIds = $user->character->pluck('id')->all();
+        $teamsIds = $user->team->pluck('id')->all();
 
         $data = compact('user', 'fights', 'charactersIds', 'teamsIds');
 
@@ -116,8 +116,8 @@ class UsersController extends Controller
             'character_fight.elo_change',
             'character_fight.elo_result'
         ])->userFights($user->id)->get()->all();
-        $charactersIds = $user->character->lists('id')->all();
-        $teamsIds = $user->team->lists('id')->all();
+        $charactersIds = $user->character->pluck('id')->all();
+        $teamsIds = $user->team->pluck('id')->all();
 
         $data = compact('user', 'fights', 'charactersIds', 'teamsIds');
 

@@ -58,7 +58,7 @@ class MessagesController extends Controller
         $message = null;
         if ($id && !($message = Auth::user()->message->find($id)))
             return redirect('/messages');
-        $users = User::where('id', '!=', Auth::user()->id)->lists('login');
+        $users = User::where('id', '!=', Auth::user()->id)->pluck('login');
         return view('messages.add', ['users' => json_encode($users), 'message' => $message]);
     }
 
