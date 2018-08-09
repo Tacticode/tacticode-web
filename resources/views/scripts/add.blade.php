@@ -36,7 +36,11 @@
                 @endforeach
             </div>
         </div>
-    	<textarea id="codemirror" style="display:none" name="content">{{$default}}</textarea>
+        @if (old('content'))
+    	   <textarea id="codemirror" style="display:none" name="content">{{old('content')}}</textarea>
+        @else
+            <textarea id="codemirror" style="display:none" name="content">{{$default}}</textarea>
+        @endif
 
     	<div class="spacer"></div>
 
